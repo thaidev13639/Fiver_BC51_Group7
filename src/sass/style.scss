@@ -1,4 +1,9 @@
+@import "./Home/base";
+
 @import "../sass/header";
 @import "../sass/login";
 @import "../sass/register";
 @import "../sass/headerAdmin";
+
+@import "./Home/headerHome";
+@import "./Home/footerHome";
