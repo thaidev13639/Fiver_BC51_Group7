@@ -1,0 +1,116 @@
+.navbar {
+  padding: 0.5rem 5rem !important ;
+  border-bottom: 1px solid rgb(0 0 0 / 14%);
+  .left-header-home {
+    .name-home {
+      font-size: 30px;
+      font-weight: bold;
+      line-height: 1.5;
+      position: relative;
+      font-family: "Montserrat Alternates", sans-serif;
+    }
+    .logo-home {
+      font-size: 15px;
+      color: green;
+      line-height: 3rem;
+    }
+    .form-control {
+      &:focus {
+        box-shadow: none !important;
+      }
+    }
+    .btn-search-home {
+      background-color: #1dbf73;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 5px;
+      border: 1px solid #1dbf73;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      &:hover {
+        background-color: #25a76a;
+      }
+    }
+  }
+  .right-header-home {
+    ul {
+      li {
+        color: #74767e;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+        margin: 0 10px;
+        a {
+          transition: all 0.3s ease-in-out;
+        }
+        &:hover {
+          a {
+            color: #1dbf73 !important;
+          }
+        }
+      }
+    }
+    .btn-join-home {
+      margin-left: 1rem !important;
+      font-family: "Montserrat Alternates", sans-serif;
+      background-color: white;
+      color: #28a745;
+      transition: all 0.3s ease-in-out;
+      &:hover {
+        background-color: #28a745;
+        color: white;
+      }
+    }
+  }
+}
+.content-nav-home {
+  padding: 0.5rem 4rem !important;
+  background-color: #f8f9fa;
+  ul {
+    li {
+      list-style: none;
+      margin-left: 15px;
+      a {
+        color: #62646a;
+        text-decoration: none;
+      }
+      &::after {
+        content: "";
+        display: block;
+        width: 0%;
+        height: 3px;
+        background-color: #1dbf73;
+        transition: all 0.4s ease-in-out;
+      }
+      &:hover {
+        a {
+          color: #1dbf73;
+        }
+      }
+    }
+    li:hover::after {
+      width: 100%;
+    }
+  }
+}
+.listContent-nav-home {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+@media screen and (max-width: 719px) {
+  .content-nav-home {
+    display: none;
+  }
+}
+// @media screen and (max-width: 990px) {
+//   .navbar-nav {
+//     display: block;
+//     position: absolute;
+//     top: 0;
+//     left: 50%;
+//     background-color: red;
+//     height: 100vh;
+//   }
+// }
