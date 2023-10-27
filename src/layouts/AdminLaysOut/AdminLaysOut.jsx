@@ -59,7 +59,7 @@ export default function AdminLaysOut() {
         </div>
         <Menu
           onClick={({ key }) => {
-         
+
           }}
           theme="dark"
           defaultSelectedKeys={["1"]}
@@ -69,6 +69,7 @@ export default function AdminLaysOut() {
       </Sider>
       <Layout style={{ backgroundColor: "#cbf6e1" }}>
         <Header
+          className="header-admin-fixed"
           style={{
             padding: 0,
             background: colorBgContainer,
