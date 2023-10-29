@@ -1,0 +1,35 @@
+.brands-home {
+  background-color: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  div {
+    width: 5%;
+    margin: 0 15px;
+    span {
+      color: #c2c2c5;
+    }
+    img {
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .brands-home {
+    justify-content: space-evenly;
+    .content-brands-home {
+      display: none;
+    }
+  }
+}
+@media screen and (max-width: 600px) {
+  .brands-home{
+    div{
+      width: 8%;
+    }
+  }
+}
+

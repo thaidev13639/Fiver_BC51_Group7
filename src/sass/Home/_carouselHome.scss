@@ -1,0 +1,96 @@
+.carousel-home {
+  position: relative;
+  img {
+    width: 100%;
+    min-height: 680px;
+    display: block;
+    object-fit: cover;
+  }
+  .content-carousel-home {
+    position: absolute;
+    z-index: 100;
+    top: 30%;
+    left: 10%;
+    width: 45%;
+    h1 {
+      color: white;
+      font-size: 3rem;
+      padding-right: 20%;
+      font-weight: 600;
+      margin-bottom: 35px;
+    }
+    .form-inline {
+      margin-bottom: 35px !important;
+      input {
+        width: 60%;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+      button {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        background-color: #198754;
+        &:hover {
+          background-color: #25a76a;
+          border: 1px solid #25a76a;
+        }
+      }
+    }
+    .choice-carousel-home {
+      font-size: 14px;
+      color: white;
+      span {
+        font-weight: 600;
+        line-height: 27px;
+        margin-right: 12px;
+      }
+      button {
+        margin-right: 10px;
+        background-color: #ff000005;
+        color: white;
+        padding: 5px 15px;
+        border-radius: 20px;
+        border: 1px solid white;
+        transition: all 0.5s;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 27px;
+        &:hover {
+          background-color: white;
+          color: black;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 720px) {
+  .carousel-home {
+    img {
+      width: 200%;
+      min-height: 400px;
+    }
+    .content-carousel-home {
+      width: 90%;
+
+      h1 {
+        font-size: 1.5rem;
+      }
+    }
+    .choice-carousel-home {
+      display: none;
+    }
+  }
+}
+@media screen and (max-width: 1000px) {
+  .carousel-home {
+    img {
+      min-height: 500px;
+    }
+    .content-carousel-home {
+      top: 25%;
+      h1 {
+        font-size: 2rem;
+      }
+    }
+  }
+}

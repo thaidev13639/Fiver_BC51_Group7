@@ -1,0 +1,22 @@
+.service-home {
+  padding: 20px 8%;
+  margin: 50px 0;
+  .content-swraper {
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  img {
+    width: 100%;
+    object-fit: cover;
+  }
+}
+.slick-slide {
+  padding: 0 7px;
+}
+
+.slick-prev {
+  left: -30px;
+}
+.slick-next {
+  right: -30px;
+}
