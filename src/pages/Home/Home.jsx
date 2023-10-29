@@ -51,7 +51,7 @@ export default function Home() {
                 </Swiper>
             </div>
             <div className='brands-home'>
-                <div style={{ width: "10%", margin: "-36px" }}><span>Trusted by:</span></div>
+                <div className='content-brands-home' style={{ width: "10%", margin: "-36px" }}><span>Trusted by:</span></div>
                 <div>
                     <img src={require('../../images/imgHome/fb.png')} alt="logo" className="carousel-logo" />
                 </div>
