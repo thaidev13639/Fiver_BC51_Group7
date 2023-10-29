@@ -5,6 +5,8 @@ import LoginLayout from "../layouts/LoginLayout/LoginLayout";
 import AdminUser from "../pages/Admin/AdminUser/AdminUser";
 import HomeLayout from "../layouts/HomeLayout/HomeLayouts";
 import Home from "../pages/Home/Home";
+import Login from "../components/Login/Login";
+import NoAuthGuard from "../guards/NoAuthGuard";
 
 export default function Router() {
   const routing = useRoutes([
@@ -30,8 +32,17 @@ export default function Router() {
     },
     {
       path: "/form",
-      element: <LoginLayout />,
-
+      element: (
+       <NoAuthGuard> 
+          <LoginLayout />
+          </NoAuthGuard>
+      ),
+      children: [
+        {
+          path: "/form/login",
+          element: <Login />,
+        },
+      ],
     },
   ]);
 

@@ -16,7 +16,7 @@ export default function AdminGuard(props) {
         duration: 2,
       });
     } else {
-      if (stateUser.userInfo.maLoaiNguoiDung === "QuanTri") {
+      if (stateUser.userInfo.role === "ADMIN") {
         notification.success({
           message: `Wellcome back!! ${stateUser.userInfo.hoTen}`,
           placement: "topLeft",

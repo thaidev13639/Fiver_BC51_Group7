@@ -3,14 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { userSvervice } from "../../services/user";
 import { notification } from "antd";
 import { useDispatch } from "react-redux";
-import { loginAction } from "../../store/actions/loginAction";
 import { EyeOutlined } from "@ant-design/icons";
 import "../../css/style.css";
+import { loginAction } from "../../redux-toolkit/reducer/userReducer";
+
 
 export default function Login() {
   const [account, setAcount] = useState({
-    taiKhoan: "",
-    matKhau: "",
+    email: "",
+    password: "",
   });
   const [pasword, setPassword] = useState("password");
   const navigate = useNavigate();
@@ -40,7 +41,7 @@ export default function Login() {
         duration: 2,
       });
 
-      dispatch(loginAction(user.data.content));
+      dispatch(loginAction.SET_INFO_USER(user.data.content));
       localStorage.setItem("INFO_ACCOUNT", JSON.stringify(user.data.content));
       navigate("/");
 
@@ -62,10 +63,10 @@ export default function Login() {
           <div className="field-login">
             <input
               onChange={handleChange}
-              name="taiKhoan"
+              name="email"
               type="text"
               className="input-field-login"
-              placeholder="Username"
+              placeholder="Email"
               autoComplete="off"
             />
           </div>
@@ -73,7 +74,7 @@ export default function Login() {
           <div className="field-login">
             <input
               onChange={handleChange}
-              name="matKhau"
+              name="password"
               type={pasword}
               className="input-field-login"
               placeholder="Password"
