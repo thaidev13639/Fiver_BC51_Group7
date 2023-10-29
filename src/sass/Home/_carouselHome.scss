@@ -63,3 +63,34 @@
     }
   }
 }
+@media screen and (max-width: 720px) {
+  .carousel-home {
+    img {
+      width: 200%;
+      min-height: 400px;
+    }
+    .content-carousel-home {
+      width: 90%;
+
+      h1 {
+        font-size: 1.5rem;
+      }
+    }
+    .choice-carousel-home {
+      display: none;
+    }
+  }
+}
+@media screen and (max-width: 1000px) {
+  .carousel-home {
+    img {
+      min-height: 500px;
+    }
+    .content-carousel-home {
+      top: 25%;
+      h1 {
+        font-size: 2rem;
+      }
+    }
+  }
+}

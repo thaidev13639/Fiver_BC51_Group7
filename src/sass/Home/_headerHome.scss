@@ -1,5 +1,5 @@
-.navbar {
-  padding: 0.5rem 5rem !important ;
+.navbar-page-home {
+  padding: 0.5rem 2.5rem !important ;
   border-bottom: 1px solid rgb(0 0 0 / 14%);
   .left-header-home {
     .name-home {
@@ -13,6 +13,9 @@
       font-size: 15px;
       color: green;
       line-height: 3rem;
+    }
+    .form-inline {
+      flex-wrap: nowrap;
     }
     .form-control {
       &:focus {
@@ -102,6 +105,39 @@
 @media screen and (max-width: 719px) {
   .content-nav-home {
     display: none;
+  }
+  .navbar {
+    .right-header-home {
+      display: none !important;
+    }
+  }
+}
+@media screen and (max-width: 1100px) {
+  .right-header-home {
+    ul {
+      li {
+        font-size: 13px !important;
+      }
+    }
+  }
+}
+@media screen and (max-width: 990px) {
+  .right-header-home {
+    ul {
+      .li-1 {
+        display: none;
+      }
+    }
+  }
+}
+@media screen and (max-width: 570px) {
+  .navbar-page-home {
+    flex-wrap: nowrap !important;
+    .left-header-home {
+      button {
+        display: none !important;
+      }
+    }
   }
 }
 // @media screen and (max-width: 990px) {
