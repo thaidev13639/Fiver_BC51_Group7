@@ -1,8 +1,8 @@
 import { Outlet, useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../css/style.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import avatar from "../../images/img_avatar.png";
+import iconavatar from "../../images/img_avatar.png";
 import { faClapperboard } from "@fortawesome/free-solid-svg-icons";
 import {
   DesktopOutlined,
@@ -12,6 +12,7 @@ import {
 } from "@ant-design/icons";
 import { Layout, Menu, notification, theme } from "antd";
 import { useDispatch, useSelector } from "react-redux";
+import { loginAction } from "../../redux-toolkit/reducer/userReducer";
 // import { loginAction } from "../../store/actions/loginAction";
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -19,7 +20,36 @@ export default function AdminLaysOut() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [collapsed, setCollapsed] = useState(false);
+  const [src, setSrc] = useState("");
   const accountState = useSelector((state) => state.userReducer);
+
+  console.log(accountState);
+  useEffect(() => {
+   
+      //await accountState
+      if (accountState) {
+        // Sử dụng hình khác
+        setSrc(accountState?.userInfo?.user?.avatar);
+        
+      } else {
+        // Lấy data api tu redux
+        setSrc(iconavatar);
+        // ...
+      }
+  
+   }, [accountState])
+  
+  // const iconAvatar = () =>{
+  //   //await accountState
+  //   if (accountState === "") {
+  //     // Sử dụng hình khác
+  //     setSrc(iconavatar);
+  //   } else {
+  //     // Lấy data api
+  //     setSrc(accountState?.userInfo?.user?.avatar);
+  //     // ...
+  //   }
+  // }
 
   const {
     token: { colorBgContainer },
@@ -43,6 +73,7 @@ export default function AdminLaysOut() {
     getItem("Logout", "logout", <FileOutlined />),
   ];
 
+ 
   return (
     <Layout
       style={{
@@ -58,13 +89,27 @@ export default function AdminLaysOut() {
           <FontAwesomeIcon className="icon" icon={faClapperboard} />
         </div>
         <Menu
-          onClick={({ key }) => {
-
-          }}
-          theme="dark"
-          defaultSelectedKeys={["1"]}
-          mode="inline"
-          items={items}
+         onClick={({ key }) => {
+          if (key === "logout") {
+            const result = window.confirm("Bạn Muốn Đăng Xuất??");
+            if (result) {
+              dispatch(loginAction.SET_INFO_USER(null));
+              localStorage.removeItem("INFO_ACCOUNT");
+              notification.success({
+                message: "Đăng Xuất Thành Công",
+                placement: "topLeft",
+                duration: 2,
+              });
+              navigate("/");
+            }
+          } else {
+            navigate(key);
+          }
+        }}
+        theme="dark"
+       defaultSelectedKeys={["1"]}
+        mode="inline"
+        items={items}
         />
       </Sider>
       <Layout style={{ backgroundColor: "#cbf6e1" }}>
@@ -78,8 +123,9 @@ export default function AdminLaysOut() {
           <div className="header-admin container">
             <div className="user-logo">
               <div className="chip" style={{ cursor: "pointer" }} onClick={() => navigate(`/admin/user-detail/${accountState?.userInfo?.taiKhoan}`)}>
-                <img src={avatar} alt="Person" width={96} height={96} />
-                {accountState?.userInfo?.hoTen}
+                {/* <img src= {accountState.userInfo.user.avatar} alt="Person" width={96} height={96} /> */}
+                <img src={src} alt="Person" width={96} height={96} />
+                {accountState?.userInfo?.user?.name}
               </div>
             </div>
           </div>

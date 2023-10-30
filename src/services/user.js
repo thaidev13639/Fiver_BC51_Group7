@@ -10,6 +10,21 @@ class UserService {
     });
   };
 
+  fetchGetListUserApi = (TenNguoiDung) => { 
+    if (TenNguoiDung !== "") {
+      return requestApi({
+        url: `/users/search/${TenNguoiDung}`,
+        method: "GET",
+      });
+    }else {
+      return requestApi({
+        url: `/users`,
+        method: "GET",
+      });
+    }
+  };
+
+
 }
 
-export const userSvervice = new UserService();
+export const userService = new UserService();

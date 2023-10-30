@@ -16,9 +16,9 @@ export default function AdminGuard(props) {
         duration: 2,
       });
     } else {
-      if (stateUser.userInfo.role === "ADMIN") {
+      if (stateUser.userInfo.user.role === "ADMIN") {
         notification.success({
-          message: `Wellcome back!! ${stateUser.userInfo.hoTen}`,
+          message: `Wellcome back!! ${stateUser.userInfo.user.name}`,
           placement: "topLeft",
           duration: 1.5,
         });
@@ -31,6 +31,6 @@ export default function AdminGuard(props) {
         navigate("/");
       }
     }
-  }, []);
+  }, [navigate,stateUser.userInfo]);
   return <>{props.children}</>;
 }

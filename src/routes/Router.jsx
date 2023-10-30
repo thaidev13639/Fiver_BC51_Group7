@@ -7,6 +7,7 @@ import HomeLayout from "../layouts/HomeLayout/HomeLayouts";
 import Home from "../pages/Home/Home";
 import Login from "../components/Login/Login";
 import NoAuthGuard from "../guards/NoAuthGuard";
+import AdminGuard from "../guards/AdminGuard";
 
 export default function Router() {
   const routing = useRoutes([
@@ -22,7 +23,11 @@ export default function Router() {
     },
     {
       path: "/admin",
-      element: <AdminLaysOut />,
+      element: (
+        <AdminGuard>
+          <AdminLaysOut />
+          </AdminGuard>
+      ),
       children: [
         {
           path: "/admin",

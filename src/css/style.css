@@ -7,6 +7,7 @@
 #root {
   font-family: "Montserrat", sans-serif;
   font-size: 16px;
+  overflow: hidden;
 }
 
 /* HEADER */
@@ -19,7 +20,7 @@
 
 .navbar-brand:hover span,
 .navbar-brand:hover i {
-  color: rgb(255, 3, 3);
+  color: rgb(19, 114, 21);
 }
 
 .search input[type=search] {
@@ -495,26 +496,29 @@ label .input-erorr {
   margin-bottom: 20%;
 }
 
-.navbar {
-  padding: 0.5rem 5rem !important;
+.navbar-page-home {
+  padding: 0.5rem 2.5rem !important;
   border-bottom: 1px solid rgba(0, 0, 0, 0.14);
 }
-.navbar .left-header-home .name-home {
+.navbar-page-home .left-header-home .name-home {
   font-size: 30px;
   font-weight: bold;
   line-height: 1.5;
   position: relative;
   font-family: "Montserrat Alternates", sans-serif;
 }
-.navbar .left-header-home .logo-home {
+.navbar-page-home .left-header-home .logo-home {
   font-size: 15px;
   color: green;
   line-height: 3rem;
 }
-.navbar .left-header-home .form-control:focus {
+.navbar-page-home .left-header-home .form-inline {
+  flex-wrap: nowrap;
+}
+.navbar-page-home .left-header-home .form-control:focus {
   box-shadow: none !important;
 }
-.navbar .left-header-home .btn-search-home {
+.navbar-page-home .left-header-home .btn-search-home {
   background-color: #1dbf73;
   color: white;
   padding: 6px 12px;
@@ -523,30 +527,30 @@ label .input-erorr {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
-.navbar .left-header-home .btn-search-home:hover {
+.navbar-page-home .left-header-home .btn-search-home:hover {
   background-color: #25a76a;
 }
-.navbar .right-header-home ul li {
+.navbar-page-home .right-header-home ul li {
   color: #74767e;
   cursor: pointer;
   font-size: 16px;
   font-weight: 600;
   margin: 0 10px;
 }
-.navbar .right-header-home ul li a {
+.navbar-page-home .right-header-home ul li a {
   transition: all 0.3s ease-in-out;
 }
-.navbar .right-header-home ul li:hover a {
+.navbar-page-home .right-header-home ul li:hover a {
   color: #1dbf73 !important;
 }
-.navbar .right-header-home .btn-join-home {
+.navbar-page-home .right-header-home .btn-join-home {
   margin-left: 1rem !important;
   font-family: "Montserrat Alternates", sans-serif;
   background-color: white;
   color: #28a745;
   transition: all 0.3s ease-in-out;
 }
-.navbar .right-header-home .btn-join-home:hover {
+.navbar-page-home .right-header-home .btn-join-home:hover {
   background-color: #28a745;
   color: white;
 }
@@ -588,6 +592,27 @@ label .input-erorr {
 @media screen and (max-width: 719px) {
   .content-nav-home {
     display: none;
+  }
+  .navbar .right-header-home {
+    display: none !important;
+  }
+}
+@media screen and (max-width: 1100px) {
+  .right-header-home ul li {
+    font-size: 13px !important;
+  }
+}
+@media screen and (max-width: 990px) {
+  .right-header-home ul .li-1 {
+    display: none;
+  }
+}
+@media screen and (max-width: 570px) {
+  .navbar-page-home {
+    flex-wrap: nowrap !important;
+  }
+  .navbar-page-home .left-header-home button {
+    display: none !important;
   }
 }
 .footer_row-home .footer_top-home {
@@ -704,4 +729,162 @@ label .input-erorr {
 }
 .footer_bottom-home .right .settings .settings_locale .logo-user {
   vertical-align: 10px;
+}
+
+.carousel-home {
+  position: relative;
+}
+.carousel-home img {
+  width: 100%;
+  min-height: 680px;
+  display: block;
+  object-fit: cover;
+}
+.carousel-home .content-carousel-home {
+  position: absolute;
+  z-index: 100;
+  top: 30%;
+  left: 10%;
+  width: 45%;
+}
+.carousel-home .content-carousel-home h1 {
+  color: white;
+  font-size: 3rem;
+  padding-right: 20%;
+  font-weight: 600;
+  margin-bottom: 35px;
+}
+.carousel-home .content-carousel-home .form-inline {
+  margin-bottom: 35px !important;
+}
+.carousel-home .content-carousel-home .form-inline input {
+  width: 60%;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.carousel-home .content-carousel-home .form-inline button {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  background-color: #198754;
+}
+.carousel-home .content-carousel-home .form-inline button:hover {
+  background-color: #25a76a;
+  border: 1px solid #25a76a;
+}
+.carousel-home .content-carousel-home .choice-carousel-home {
+  font-size: 14px;
+  color: white;
+}
+.carousel-home .content-carousel-home .choice-carousel-home span {
+  font-weight: 600;
+  line-height: 27px;
+  margin-right: 12px;
+}
+.carousel-home .content-carousel-home .choice-carousel-home button {
+  margin-right: 10px;
+  background-color: rgba(255, 0, 0, 0.0196078431);
+  color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+  border: 1px solid white;
+  transition: all 0.5s;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 27px;
+}
+.carousel-home .content-carousel-home .choice-carousel-home button:hover {
+  background-color: white;
+  color: black;
+}
+
+@media screen and (max-width: 720px) {
+  .carousel-home img {
+    width: 200%;
+    min-height: 400px;
+  }
+  .carousel-home .content-carousel-home {
+    width: 90%;
+  }
+  .carousel-home .content-carousel-home h1 {
+    font-size: 1.5rem;
+  }
+  .carousel-home .choice-carousel-home {
+    display: none;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .carousel-home img {
+    min-height: 500px;
+  }
+  .carousel-home .content-carousel-home {
+    top: 25%;
+  }
+  .carousel-home .content-carousel-home h1 {
+    font-size: 2rem;
+  }
+}
+.brands-home {
+  background-color: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.brands-home div {
+  width: 5%;
+  margin: 0 15px;
+}
+.brands-home div span {
+  color: #c2c2c5;
+}
+.brands-home div img {
+  width: 100%;
+  object-fit: cover;
+}
+
+@media screen and (max-width: 1100px) {
+  .brands-home {
+    justify-content: space-evenly;
+  }
+  .brands-home .content-brands-home {
+    display: none;
+  }
+}
+@media screen and (max-width: 600px) {
+  .brands-home div {
+    width: 8%;
+  }
+}
+.service-home {
+  padding: 20px 8%;
+  margin: 50px 0;
+}
+.service-home .content-swraper {
+  border-radius: 10px;
+  overflow: hidden;
+}
+.service-home img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.slick-slide {
+  padding: 0 7px;
+}
+
+.slick-prev {
+  left: -30px;
+}
+
+.slick-next {
+  right: -30px;
+}
+
+.frelance-home {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+.frelance-home .content-frelance .item-frelance span {
+  vertical-align: text-bottom;
+  margin-right: 7px;
 }/*# sourceMappingURL=style.css.map */
