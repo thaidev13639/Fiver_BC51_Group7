@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { userSvervice } from "../../services/user";
 import { notification } from "antd";
 import { useDispatch } from "react-redux";
 import { EyeOutlined } from "@ant-design/icons";
 import "../../css/style.css";
 import { loginAction } from "../../redux-toolkit/reducer/userReducer";
+import { userService } from "../../services/user";
 
 
 export default function Login() {
@@ -34,7 +34,7 @@ export default function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const user = await userSvervice.fetLoginApi(account);
+      const user = await userService.fetLoginApi(account);
       notification.success({
         message: "Đăng Nhập Thành Công!!",
         placement: "topLeft",
@@ -43,7 +43,15 @@ export default function Login() {
 
       dispatch(loginAction.SET_INFO_USER(user.data.content));
       localStorage.setItem("INFO_ACCOUNT", JSON.stringify(user.data.content));
-      navigate("/");
+      const data = JSON.parse(localStorage.getItem("INFO_ACCOUNT"));
+      if(data.user.role ==="USER") {
+        navigate("/");
+      }else {
+        navigate("/admin");
+      }
+     
+      
+
 
     } catch (error) {
       
@@ -67,7 +75,7 @@ export default function Login() {
               type="text"
               className="input-field-login"
               placeholder="Email"
-              autoComplete="off"
+              autoComplete="on"
             />
           </div>
           <p className="text-success ml-3"> </p>
