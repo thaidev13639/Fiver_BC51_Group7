@@ -24,6 +24,12 @@ class UserService {
     }
   };
 
+  fetchUserDeleteApi(id) {
+    return requestApi({
+      url: `/users?id=${id}`,
+      method: "DELETE",
+    });
+  }
 
 }
 
