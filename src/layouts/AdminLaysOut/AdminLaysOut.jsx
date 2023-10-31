@@ -1,9 +1,10 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import "../../css/style.css";
+import { ThunderboltFilled } from "@ant-design/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import iconavatar from "../../images/img_avatar.png";
-import { faClapperboard } from "@fortawesome/free-solid-svg-icons";
+//import { faClapperboard } from "@fortawesome/free-solid-svg-icons";
 import {
   DesktopOutlined,
   FileOutlined,
@@ -13,6 +14,7 @@ import {
 import { Layout, Menu, notification, theme } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "../../redux-toolkit/reducer/userReducer";
+import { faBolt } from "@fortawesome/free-solid-svg-icons";
 // import { loginAction } from "../../store/actions/loginAction";
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -25,20 +27,17 @@ export default function AdminLaysOut() {
 
   console.log(accountState);
   useEffect(() => {
-   
-      //await accountState
-      if (accountState) {
-        // Sử dụng hình khác
-        setSrc(accountState?.userInfo?.user?.avatar);
-        
-      } else {
-        // Lấy data api tu redux
-        setSrc(iconavatar);
-        // ...
-      }
-  
-   }, [accountState])
-  
+    //await accountState
+    if (accountState) {
+      // Sử dụng hình khác
+      setSrc(accountState?.userInfo?.user?.avatar);
+    } else {
+      // Lấy data api tu redux
+      setSrc(iconavatar);
+      // ...
+    }
+  }, [accountState]);
+
   // const iconAvatar = () =>{
   //   //await accountState
   //   if (accountState === "") {
@@ -73,43 +72,46 @@ export default function AdminLaysOut() {
     getItem("Logout", "logout", <FileOutlined />),
   ];
 
- 
   return (
     <Layout
       style={{
         minHeight: "100vh",
-      }}>
+      }}
+    >
       <Sider
         collapsible
         collapsed={collapsed}
-        onCollapse={(value) => setCollapsed(value)}>
+        onCollapse={(value) => setCollapsed(value)}
+      >
         <div className="demo-logo-vertical" />
         <div className="logo-admin p-3">
-          <span>Cinema</span>{" "}
-          <FontAwesomeIcon className="icon" icon={faClapperboard} />
-        </div>
+          <span>Fiverr</span>{" "}
+          <FontAwesomeIcon  className="icon"  icon={faBolt} />
+          
+        </div> 
+
         <Menu
-         onClick={({ key }) => {
-          if (key === "logout") {
-            const result = window.confirm("Bạn Muốn Đăng Xuất??");
-            if (result) {
-              dispatch(loginAction.SET_INFO_USER(null));
-              localStorage.removeItem("INFO_ACCOUNT");
-              notification.success({
-                message: "Đăng Xuất Thành Công",
-                placement: "topLeft",
-                duration: 2,
-              });
-              navigate("/");
+          onClick={({ key }) => {
+            if (key === "logout") {
+              const result = window.confirm("Bạn Muốn Đăng Xuất??");
+              if (result) {
+                dispatch(loginAction.SET_INFO_USER(null));
+                localStorage.removeItem("INFO_ACCOUNT");
+                notification.success({
+                  message: "Đăng Xuất Thành Công",
+                  placement: "topLeft",
+                  duration: 2,
+                });
+                navigate("/");
+              }
+            } else {
+              navigate(key);
             }
-          } else {
-            navigate(key);
-          }
-        }}
-        theme="dark"
-       defaultSelectedKeys={["1"]}
-        mode="inline"
-        items={items}
+          }}
+          theme="dark"
+          defaultSelectedKeys={["1"]}
+          mode="inline"
+          items={items}
         />
       </Sider>
       <Layout style={{ backgroundColor: "#cbf6e1" }}>
@@ -119,12 +121,35 @@ export default function AdminLaysOut() {
             padding: 0,
             background: colorBgContainer,
             // backgroundColor: "#cbf6e1"
-          }}>
+          }}
+        >
           <div className="header-admin container">
+            <div class="left">
+             
+            <a className="navbar-brand name-home d-flex mr-3" style={{color: "black"}} href="/"><span className='mr-1'>Fiverr</span> <ThunderboltFilled className='logo-home' /></a>
+            </div>
             <div className="user-logo">
-              <div className="chip" style={{ cursor: "pointer" }} onClick={() => navigate(`/admin/user-detail/${accountState?.userInfo?.taiKhoan}`)}>
+              <div
+                className="chip"
+                style={{ cursor: "pointer" }}
+                onClick={() =>
+                  navigate(
+                    `/admin/user-detail/${accountState?.userInfo?.taiKhoan}`
+                  )
+                }
+              >
                 {/* <img src= {accountState.userInfo.user.avatar} alt="Person" width={96} height={96} /> */}
-                <img src={src} alt="Person" width={96} height={96} />
+                <img
+                  src={src}
+                  alt="Person"
+                  width={96}
+                  height={96}
+                  onError={(e) => {
+                    e.target.onError = null;
+                    e.target.src =
+                      "https://www.computerhope.com/jargon/e/error.png";
+                  }}
+                />
                 {accountState?.userInfo?.user?.name}
               </div>
             </div>
@@ -133,23 +158,26 @@ export default function AdminLaysOut() {
         <Content
           style={{
             margin: "6% 16px",
-          }}>
+          }}
+        >
           <div
             style={{
               padding: 24,
               minHeight: 360,
               background: colorBgContainer,
               marginTop: "1%",
-              backgroundColor: "#cbf6e1"
-            }}>
+              backgroundColor: "#cbf6e1",
+            }}
+          >
             <Outlet />
           </div>
         </Content>
         <Footer
           style={{
             textAlign: "center",
-            backgroundColor: "#cbf6e1"
-          }}>
+            backgroundColor: "#cbf6e1",
+          }}
+        >
           Movie ©2023 Created by Hoang Anh and Thai
         </Footer>
       </Layout>
