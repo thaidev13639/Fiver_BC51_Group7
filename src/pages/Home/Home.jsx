@@ -9,10 +9,6 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-
-
-
-
 export default function Home() {
     const [video, setVideo] = useState("")
     const videoRef = useRef()
@@ -31,7 +27,6 @@ export default function Home() {
             />
         );
     }
-
 
     const settingsfouder = {
         dots: false,

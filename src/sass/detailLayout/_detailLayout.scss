@@ -1,0 +1,108 @@
+.layout-detail {
+  .layout-detail-carousel {
+    position: relative;
+    img {
+      width: 100%;
+      object-fit: cover;
+    }
+    .content {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      h2 {
+        font-size: 32px;
+      }
+      p {
+        font-size: 20px;
+        margin: 10px 0;
+      }
+      div {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        padding: 10px 20px;
+        border: 1px solid white;
+        color: white;
+        background-color: initial;
+        margin: 10px 0;
+        transition: all 0.5s;
+        svg {
+          margin: 0 10px;
+          fill: white;
+          transition: all 0.5s;
+        }
+        &:hover {
+          background-color: white;
+          color: #013a12;
+          svg {
+            fill: #013a12;
+          }
+        }
+      }
+    }
+  }
+  .layout-detail-logo {
+    padding: 30px 40px;
+    h1 {
+      margin-left: 10px;
+      margin-bottom: 20px;
+    }
+    .logo-container {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      .logo-item {
+        display: flex;
+        align-items: center;
+        border: 1px solid white;
+        box-shadow: 0 0 9px 0px #d6d3d3;
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        img {
+          width: 50px;
+          height: 50px;
+        }
+        p {
+          margin: 0 10px;
+        }
+      }
+    }
+  }
+  .layout-detail-service {
+    max-width: 1430px;
+    margin: 0 auto;
+    padding: 20px 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    h2 {
+      color: #404145;
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 30px;
+    }
+    ul {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      li {
+        list-style: none;
+        width: max-content;
+        padding: 5px 10px;
+        background-color: #efeff0;
+        margin: 10px;
+        border-radius: 30px;
+        text-align: center;
+        color: #74767e;
+      }
+    }
+  }
+}
