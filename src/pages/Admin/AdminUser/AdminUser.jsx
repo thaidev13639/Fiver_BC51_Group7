@@ -11,6 +11,7 @@ import { userService } from '../../../services/user';
 export default function AdminUser() {
   const navigate = useNavigate()
   const [listUser, setListUser] = useState([])
+  const [search,setSearch] = useState("");
   
 
   useEffect(() => {
@@ -27,7 +28,7 @@ export default function AdminUser() {
   const deleteUser = async (taiKhoan) => {
     if (window.confirm(`Bạn Muốn xóa Người Dùng ${taiKhoan}`)) {
       try {
-       // await userSvervice.fetchUserDeleteApi(taiKhoan)
+        await userService.fetchUserDeleteApi(taiKhoan)
         notification.success({
           message: `Bạn Đã Xóa ${taiKhoan} Thành Công`,
           placement: "topLeft",
@@ -47,12 +48,12 @@ export default function AdminUser() {
 
   const columns = [
     {
-      title: 'Tài Khoản',
-      dataIndex: 'taiKhoan',
+      title: 'ID',
+      dataIndex: 'id',
       sorter: {
         compare: (a, b) => {
-          let taiKhoanA = a.taiKhoan.toLowerCase().trim();
-          let taiKhoanB = b.taiKhoan.toLowerCase().trim();
+          let taiKhoanA = a.id;
+          let taiKhoanB = b.id;
           if (taiKhoanA > taiKhoanB) {
             return 1;
           }
@@ -63,12 +64,26 @@ export default function AdminUser() {
     },
     {
       title: 'Họ Tên',
-      dataIndex: 'hoTen',
+      dataIndex: 'name',
       sorter: {
         compare: (a, b) => {
-          let hoTenA = a.hoTen.toLowerCase().trim();
-          let hotenB = b.hoTen.toLowerCase().trim();
+          let hoTenA = a.name.toLowerCase().trim();
+          let hotenB = b.name.toLowerCase().trim();
           if (hoTenA > hotenB) {
+            return 1;
+          }
+          return -1;
+        }
+      },
+    },
+    {
+      title: 'Loại Người Dùng',
+      dataIndex: 'role',
+      sorter: {
+        compare: (a, b) => {
+          let maLoaiNguoiDungA = a.role.toLowerCase().trim();
+          let maLoaiNguoiDungB = b.role.toLowerCase().trim();
+          if (maLoaiNguoiDungB > maLoaiNguoiDungA) {
             return 1;
           }
           return -1;
@@ -80,23 +95,14 @@ export default function AdminUser() {
       dataIndex: 'email',
     },
     {
-      title: 'Số ĐT',
-      dataIndex: 'soDT',
+      title: 'Certification',
+      dataIndex: 'certification',
     },
     {
-      title: 'Loại Người Dùng',
-      dataIndex: 'maLoaiNguoiDung',
-      sorter: {
-        compare: (a, b) => {
-          let maLoaiNguoiDungA = a.maLoaiNguoiDung.toLowerCase().trim();
-          let maLoaiNguoiDungB = b.maLoaiNguoiDung.toLowerCase().trim();
-          if (maLoaiNguoiDungB > maLoaiNguoiDungA) {
-            return 1;
-          }
-          return -1;
-        }
-      },
+      title: 'skill',
+      dataIndex: 'skill',
     },
+    
     {
       title: 'Action',
       dataIndex: 'action',
@@ -104,7 +110,7 @@ export default function AdminUser() {
         return (
           <Fragment>
             <NavLink key={1} className="mr-2 text-3xl" to={`/admin/user-edit/${user.taiKhoan}`} style={{ color: "blue", fontSize: "20px" }}><EditOutlined /></NavLink>
-            <span key={2} className="text-3xl" to="/" style={{ cursor: 'pointer', color: "red", fontSize: "20px" }} onClick={() => deleteUser(user.taiKhoan)}><DeleteOutlined /></span>
+            <span key={2} className="text-3xl" to="/" style={{ cursor: 'pointer', color: "red", fontSize: "20px" }} onClick={() => deleteUser(user.id)}><DeleteOutlined /></span>
           </Fragment>
         )
       },
@@ -116,12 +122,16 @@ export default function AdminUser() {
     return { ...element, key: `${idx}` }
   })
 
+  const handleChange = (event) => {
+    setSearch(event.target.value);
+  };
+
   const onSearch = async (value) => {
     try {
       // setLoadingState({ isLoading: true });
-     // const findUser = await userSvervice.fetchGetListUserApi(value)
+      const findUser = await userService.fetchGetListUserApi(value)
 
-     // setListUser(findUser.data.content)
+      setListUser(findUser.data.content)
 
       // setLoadingState({ isLoading: false });
 
@@ -134,7 +144,7 @@ export default function AdminUser() {
     <>
       <h3>DANH SÁCH NGƯỜI DÙNG</h3>
       <button className='btn btn-success' onClick={() => navigate("/admin/user-add")}>Thêm người dùng</button>
-      <Search placeholder="Nhập Tài Khoản Cần Tìm" style={{ margin: "20px 0", color: "red" }} onSearch={onSearch} enterButton />
+      <Search placeholder="Nhập Tên Tài Khoản Cần Tìm" style={{ margin: "20px 0", color: "red" }}  onChange={handleChange} onSearch={onSearch(search)} enterButton />
       <Table columns={columns} dataSource={data} style={{ border: "1px solid #00000036" }} />
 
     </>
