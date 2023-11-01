@@ -26,7 +26,7 @@ export default function Router() {
       element: (
         <AdminGuard>
           <AdminLaysOut />
-          </AdminGuard>
+        </AdminGuard>
       ),
       children: [
         {
@@ -38,9 +38,9 @@ export default function Router() {
     {
       path: "/form",
       element: (
-       <NoAuthGuard> 
+        <NoAuthGuard>
           <LoginLayout />
-          </NoAuthGuard>
+        </NoAuthGuard>
       ),
       children: [
         {
