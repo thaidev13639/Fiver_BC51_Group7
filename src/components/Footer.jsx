@@ -8,7 +8,7 @@ export default function Footer() {
                 <div className="footer_warpper-home">
                     <div className="footer_row-home">
                         <div className="footer_top-home row">
-                            <div className="item-home col-xl-2 col-md-4 col-12">
+                            <div className="item-home col-xl-2 col-lg-4 col-md-6 col-sm-12">
                                 <article className="article-home">
                                     <div className="title-home">
                                         <h6>Categories</h6>
@@ -49,7 +49,7 @@ export default function Footer() {
                                     </div>
                                 </article>
                             </div>
-                            <div className="item-home col-xl-2 col-md-4 col-12">
+                            <div className="item-home col-xl-2 col-lg-4 col-md-6 col-sm-12">
                                 <article className="article-home">
                                     <div className="title-home">
                                         <h6>About</h6>
@@ -93,7 +93,7 @@ export default function Footer() {
                                     </div>
                                 </article>
                             </div>
-                            <div className="item-home col-xl-2 col-md-4 col-12">
+                            <div className="item-home col-xl-2 col-lg-4 col-md-6 col-sm-12">
                                 <article className="article-home">
                                     <div className="title-home">
                                         <h6>Support</h6>
@@ -116,7 +116,7 @@ export default function Footer() {
                                     </div>
                                 </article>
                             </div>
-                            <div className="item-home col-xl-2 col-md-4 col-12">
+                            <div className="item-home col-xl-2 col-lg-4 col-md-6 col-sm-12">
                                 <article className="article-home">
                                     <div className="title-home">
                                         <h6>Communlty</h6>
@@ -151,7 +151,7 @@ export default function Footer() {
                                     </div>
                                 </article>
                             </div>
-                            <div className="item-home col-xl-2 col-md-4 col-12">
+                            <div className="item-home col-xl-2 col-lg-4 col-md-6 col-sm-12">
                                 <article className="article-home">
                                     <div className="title-home">
                                         <h6>More From FIverr</h6>

@@ -1,0 +1,42 @@
+.marketplace-home {
+  max-width: 1300px;
+  margin: 20px auto;
+  padding: 20px 3%;
+  h2 {
+    color: rgba(0, 0, 0, 0.85);
+    font-weight: 500;
+    margin-bottom: 0.5em;
+  }
+  .marketplace-container {
+    .market-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      .market-img {
+        img {
+          width: 48px;
+          height: 48px;
+          display: inline-block;
+        }
+        &::after {
+          content: "";
+          display: block;
+          width: 100%;
+          height: 2px;
+          background-color: #c5c6c9;
+          transform: scaleX(0.5);
+          transition: all 0.5s;
+        }
+      }
+      &:hover {
+        .market-img {
+          &::after {
+            transform: scaleX(1.7);
+            background-color: #a1f4c0;
+          }
+        }
+      }
+    }
+  }
+}
