@@ -1,16 +1,16 @@
 import React, { useRef, useState } from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, EffectFade } from 'swiper/modules';
-import Slider from "react-slick";
+import Carousel from './components/Carousel';
+import Brands from './components/Brands';
+import Service from './components/Service';
+import MarketPlace from './components/MarketPlace';
 import { CheckCircleOutlined, PlayCircleOutlined } from '@ant-design/icons';
 
-import 'swiper/css';
-import 'swiper/css/effect-fade';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-
+import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
+
+
 
 
 export default function Home() {
@@ -31,42 +31,7 @@ export default function Home() {
             />
         );
     }
-    const settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 5,
-        slidesToScroll: 3,
-        initialSlide: 0,
-        nextArrow: <Arrow />,
-        prevArrow: <Arrow />,
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                    infinite: true,
-                    dots: true
-                }
-            },
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2,
-                    initialSlide: 2
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
-            }
-        ]
-    };
+
 
     const settingsfouder = {
         dots: false,
@@ -93,96 +58,13 @@ export default function Home() {
     return (
         <>
             <div className='carousel-home'>
-                <Swiper
-                    modules={[Autoplay, EffectFade]}
-                    spaceBetween={50}
-                    effect={'fade'}
-                    autoplay={{
-                        delay: 5000,
-                        disableOnInteraction: false,
-                    }}
-                    className="mySwiper"
-                >
-                    <SwiperSlide>
-                        <img src={require('../../images/imgHome/crs1.png')} alt="logo" className="carousel-logo" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <img src={require('../../images/imgHome/crs2.png')} alt="logo" className="carousel-logo" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <img src={require('../../images/imgHome/crs3.png')} alt="logo" className="carousel-logo" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <img src={require('../../images/imgHome/crs4.png')} alt="logo" className="carousel-logo" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <img src={require('../../images/imgHome/crs5.png')} alt="logo" className="carousel-logo" />
-                    </SwiperSlide>
-                    <div className='content-carousel-home'>
-                        <h1>Find the perfect <i>freelance</i> services for your business</h1>
-                        <form className="form-inline my-lg-0">
-                            <input className="form-control " type="search" placeholder="Try building mobile app" aria-label="Search" />
-                            <button className="btn btn-success my-sm-0 btn-search-home" type="button">Search</button>
-                        </form>
-                        <div className='choice-carousel-home'>
-                            <span>Popular:</span>
-                            <button>Wedsite Design</button>
-                            <button>WordPress</button>
-                            <button>Logo Design</button>
-                            <button>Video Editing</button>
-                        </div>
-                    </div>
-                </Swiper>
+                <Carousel />
             </div>
             <div className='brands-home'>
-                <div className='content-brands-home' style={{ width: "10%", margin: "-36px" }}><span>Trusted by:</span></div>
-                <div>
-                    <img src={require('../../images/imgHome/fb.png')} alt="logo" className="carousel-logo" />
-                </div>
-                <div>
-                    <img src={require('../../images/imgHome/google.png')} alt="logo" className="carousel-logo" />
-                </div>
-                <div>
-                    <img src={require('../../images/imgHome/netflix.png')} alt="logo" className="carousel-logo" />
-                </div>
-                <div>
-                    <img src={require('../../images/imgHome/P&G.png')} alt="logo" className="carousel-logo" />
-                </div>
-                <div>
-                    <img src={require('../../images/imgHome/paypal.png')} alt="logo" className="carousel-logo" />
-                </div>
+                <Brands />
             </div>
             <div className='service-home'>
-                <h2 style={{ marginBottom: "30px" }}>Popular professional services</h2>
-                <Slider {...settings}>
-                    <div className='content-swraper'>
-                        <img src={require('../../images/imgHome/sv1.png')} alt="logo" className="carousel-logo" />
-                    </div>
-                    <div className='content-swraper'>
-                        <img src={require('../../images/imgHome/sv2.png')} alt="logo" className="carousel-logo" />
-                    </div>
-                    <div className='content-swraper'>
-                        <img src={require('../../images/imgHome/sv3.png')} alt="logo" className="carousel-logo" />
-                    </div>
-                    <div className='content-swraper'>
-                        <img src={require('../../images/imgHome/sv4.png')} alt="logo" className="carousel-logo" />
-                    </div>
-                    <div className='content-swraper'>
-                        <img src={require('../../images/imgHome/sv5.png')} alt="logo" className="carousel-logo" />
-                    </div>
-                    <div className='content-swraper'>
-                        <img src={require('../../images/imgHome/sv6.png')} alt="logo" className="carousel-logo" />
-                    </div>
-                    <div className='content-swraper'>
-                        <img src={require('../../images/imgHome/sv7.png')} alt="logo" className="carousel-logo" />
-                    </div>
-                    <div className='content-swraper'>
-                        <img src={require('../../images/imgHome/sv8.png')} alt="logo" className="carousel-logo" />
-                    </div>
-                    <div className='content-swraper'>
-                        <img src={require('../../images/imgHome/sv9.png')} alt="logo" className="carousel-logo" />
-                    </div>
-                </Slider>
+                <Service />
             </div>
             <div className='free-talent-home'>
                 <div className='frelance-home row'>
@@ -327,8 +209,9 @@ export default function Home() {
                 </div>
 
             </div>
-            <div className='marketplace-home'>marketplace-home</div>
-
+            <div className='marketplace-home'>
+                <MarketPlace />
+            </div>
         </>
     )
 }
