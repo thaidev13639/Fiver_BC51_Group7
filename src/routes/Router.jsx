@@ -8,7 +8,6 @@ import Home from "../pages/Home/Home";
 import Login from "../components/Login/Login";
 import NoAuthGuard from "../guards/NoAuthGuard";
 import AdminGuard from "../guards/AdminGuard";
-import DetailLayout from "../layouts/DetailLayout/DetailLayout";
 import JobsTitle from "../pages/JobsTitle/JobsTitle";
 import JobsDetail from "../pages/JobsDetail/JobsDetail";
 
@@ -23,18 +22,12 @@ export default function Router() {
           element: <Home />,
         },
         {
-          path: "/job-title",
-          element: <DetailLayout />,
-          children: [
-            {
-              path: "/job-title/:id",
-              element: <JobsTitle />
-            },
-            {
-              path: "/job-title/job-detail",
-              element: <JobsDetail />
-            }
-          ]
+          path: "/job-title/:id",
+          element: <JobsTitle />
+        },
+        {
+          path: "/job-detail/:id",
+          element: <JobsDetail />
         }
       ]
     },

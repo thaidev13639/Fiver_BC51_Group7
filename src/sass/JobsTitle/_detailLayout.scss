@@ -106,3 +106,13 @@
     }
   }
 }
+
+@media screen and (max-width: 900px) {
+  .layout-detail {
+    .layout-detail-carousel {
+      .content {
+        display: none;
+      }
+    }
+  }
+}
