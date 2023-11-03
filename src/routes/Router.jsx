@@ -43,6 +43,14 @@ export default function Router() {
           path: "/admin",
           element: <AdminUser />,
         },
+        // {
+        //   path: "/editJob",
+        //   element: <AdminUser />,
+        // },
+        // {
+        //   path: "/editJobCategory",
+        //   element: <AdminUser />,
+        // },
       ],
     },
     {

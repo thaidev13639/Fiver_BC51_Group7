@@ -30,6 +30,19 @@ class UserService {
       method: "DELETE",
     });
   }
+  fetchUserDetailApi(id) {
+    return requestApi({
+      url: `/users/${id}`,
+      method: "GET",
+    });
+  }
+  fetchUserUpdateApi(id,data) {
+    return requestApi({
+      url: `/users/${id}`,
+      method: "PUT",
+      data,
+    });
+  }
 
 }
 
