@@ -1,9 +1,11 @@
 import React from 'react'
 
-export default function Service() {
+export default function Service(props) {
     return (
         <>
-            <h2>Services Related To Graphics & Design</h2>
+            {props.jobTitle.map((ele) => {
+                return <h2 key={ele.id}>Services Related To {ele.tenLoaiCongViec}</h2>
+            })}
             <ul>
                 <li>Minimalist logo design</li>
                 <li>Signature logo design</li>

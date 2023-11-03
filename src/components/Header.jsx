@@ -29,7 +29,7 @@ export default function Header() {
                                     <h6 >{group.tenNhom}</h6>
                                     {
                                         group.dsChiTietLoai.map((jd) => {
-                                            return <p key={jd.id} onClick={() => navigate("/job-title/job-detail")} >{jd.tenChiTiet}</p>
+                                            return <p key={jd.id} onClick={() => navigate(`/job-detail/${jd.id}`)} >{jd.tenChiTiet}</p>
                                         })
                                     }
                                 </React.Fragment>
