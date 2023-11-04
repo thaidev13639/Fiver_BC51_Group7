@@ -25,14 +25,14 @@ export default function Header() {
                     <div className='togle-content-nav'>
                         {jobs.dsNhomChiTietLoai.map((group) => {
                             return (
-                                <React.Fragment key={group.id}>
+                                <div className='content-togle' key={group.id}>
                                     <h6 >{group.tenNhom}</h6>
                                     {
                                         group.dsChiTietLoai.map((jd) => {
                                             return <p key={jd.id} onClick={() => navigate(`/job-detail/${jd.id}`)} >{jd.tenChiTiet}</p>
                                         })
                                     }
-                                </React.Fragment>
+                                </div>
                             )
                         })}
                     </div>
