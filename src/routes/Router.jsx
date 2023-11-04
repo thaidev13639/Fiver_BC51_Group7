@@ -10,6 +10,7 @@ import NoAuthGuard from "../guards/NoAuthGuard";
 import AdminGuard from "../guards/AdminGuard";
 import JobsTitle from "../pages/JobsTitle/JobsTitle";
 import JobsDetail from "../pages/JobsDetail/JobsDetail";
+import JobInfo from "../pages/JobInfo/JobInfo";
 
 export default function Router() {
   const routing = useRoutes([
@@ -28,6 +29,10 @@ export default function Router() {
         {
           path: "/job-detail/:id",
           element: <JobsDetail />
+        },
+        {
+          path: "/job-info/:id",
+          element: <JobInfo />
         }
       ]
     },
