@@ -13,5 +13,11 @@ class JobsService {
       method: "GET",
     });
   }
+  fetchListJobsDetailApi(id) {
+    return requestApi({
+      url: `/cong-viec/lay-cong-viec-theo-chi-tiet-loai/${id}`,
+      method: "GET",
+    });
+  }
 }
 export const jobsService = new JobsService();
