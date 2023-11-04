@@ -1324,7 +1324,7 @@ label .input-erorr {
 .jobs-detail-body .jobs-detail-container .content-detail .content-option {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  margin: 20px 0;
   padding: 0 10px;
 }
 .jobs-detail-body .jobs-detail-container .content-detail .content-option .left {
@@ -1351,19 +1351,109 @@ label .input-erorr {
 .jobs-detail-body .jobs-detail-container .content-detail .content-option .right .ant-dropdown .ant-dropdown-menu {
   padding: 10px;
 }
-.jobs-detail-body .jobs-detail-container .content-detail .content-container .card-body {
-  padding: 5px 10px;
+.jobs-detail-body .jobs-detail-container .content-detail .content-container {
+  display: flex;
+  flex-wrap: wrap;
 }
-.jobs-detail-body .jobs-detail-container .content-detail .content-container .card-body .user-info {
+.jobs-detail-body .jobs-detail-container .content-detail .content-container .card {
+  margin-right: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 15px 0 rgba(167, 167, 167, 0.7411764706);
+  border-radius: 15px;
+  overflow: hidden;
+}
+.jobs-detail-body .jobs-detail-container .content-detail .content-container .card .card-body {
+  padding: 10px 15px;
+}
+.jobs-detail-body .jobs-detail-container .content-detail .content-container .card .card-body .card-text {
+  margin-bottom: 10px;
+  color: #222325;
+  display: inline-block;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 22px;
+  letter-spacing: 1px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+}
+.jobs-detail-body .jobs-detail-container .content-detail .content-container .card .card-body .card-text:hover {
+  color: #1dbf73;
+  transform: scale(1.02);
+}
+.jobs-detail-body .jobs-detail-container .content-detail .content-container .card .card-body .user-info {
   display: flex;
   align-items: center;
+  margin-bottom: 10px;
 }
-.jobs-detail-body .jobs-detail-container .content-detail .content-container .card-body .user-info .left img {
+.jobs-detail-body .jobs-detail-container .content-detail .content-container .card .card-body .user-info .left img {
   object-fit: cover;
   width: 100%;
   border-radius: 50%;
 }
-.jobs-detail-body .jobs-detail-container .content-detail .content-container .card-body .user-info .right p {
+.jobs-detail-body .jobs-detail-container .content-detail .content-container .card .card-body .user-info .right {
+  padding-left: 10px;
+}
+.jobs-detail-body .jobs-detail-container .content-detail .content-container .card .card-body .user-info .right h5 {
+  color: #222325;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 18px;
+  margin: 0;
+  text-transform: capitalize;
+}
+.jobs-detail-body .jobs-detail-container .content-detail .content-container .card .card-body .user-info .right p {
+  margin-bottom: 0;
+  color: #74767e;
+  font-weight: 600;
+  font-size: 14px;
+}
+.jobs-detail-body .jobs-detail-container .content-detail .content-container .card .card-body .body-logo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+.jobs-detail-body .jobs-detail-container .content-detail .content-container .card .card-body .body-logo .num-rating {
+  margin: 0 5px;
+  color: #ffbe5b;
+  font-weight: 600;
+}
+.jobs-detail-body .jobs-detail-container .content-detail .content-container .card .card-body .body-logo .total-rating {
+  color: #b5b6ba;
+  font-weight: 500;
+}
+.jobs-detail-body .jobs-detail-container .content-detail .content-container .card .card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid rgba(128, 128, 128, 0.3607843137);
+  padding: 10px 0;
+}
+.jobs-detail-body .jobs-detail-container .content-detail .content-container .card .card-bottom svg {
+  width: 20%;
+}
+.jobs-detail-body .jobs-detail-container .content-detail .content-container .card .card-bottom .right {
+  width: 80%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding-right: 20px;
+}
+.jobs-detail-body .jobs-detail-container .content-detail .content-container .card .card-bottom .right span {
+  margin-right: 5px;
+  color: #74767e;
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.jobs-detail-body .jobs-detail-container .content-detail .content-container .card .card-bottom .right h2 {
+  color: #404145;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 20px;
   margin-bottom: 0;
 }
 
