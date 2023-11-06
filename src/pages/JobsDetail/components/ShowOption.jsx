@@ -25,7 +25,7 @@ export default function ShowOption() {
                 }}
                 trigger={['click']}
             >
-                <a onClick={(e) => e.preventDefault()}>
+                <a href='/' onClick={(e) => e.preventDefault()}>
                     <Space>
                         Relevance
                         <DownOutlined />
