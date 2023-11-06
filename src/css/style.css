@@ -496,6 +496,15 @@ label .input-erorr {
   margin-bottom: 20%;
 }
 
+.ant-modal-root .ant-modal-mask {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+  pointer-events: none;
+}
+
 .navbar-page-home {
   padding: 0.5rem 2.5rem !important;
   border-bottom: 1px solid rgba(0, 0, 0, 0.14);
@@ -1187,6 +1196,11 @@ label .input-erorr {
   color: #74767e;
 }
 
+@media screen and (max-width: 900px) {
+  .layout-detail .layout-detail-carousel .content {
+    display: none;
+  }
+}
 .jobs-title {
   padding: 20px 50px;
 }
@@ -1202,7 +1216,7 @@ label .input-erorr {
   flex-wrap: wrap;
 }
 .jobs-title .item-container .jobs-item {
-  width: 260px;
+  width: 320px;
   padding: 10px 20px;
   box-shadow: 0 0 17px 0px #ccc8c8;
   border-radius: 15px;
