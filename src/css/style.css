@@ -496,6 +496,15 @@ label .input-erorr {
   margin-bottom: 20%;
 }
 
+.ant-modal-root .ant-modal-mask {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+  pointer-events: none;
+}
+
 .navbar-page-home {
   padding: 0.5rem 2.5rem !important;
   border-bottom: 1px solid rgba(0, 0, 0, 0.14);
