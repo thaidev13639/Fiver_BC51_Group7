@@ -124,7 +124,7 @@ export default function AdminLaysOut() {
           }}
         >
           <div className="header-admin container">
-            <div class="left">
+            <div className="left">
              
             <a className="navbar-brand name-home d-flex mr-3" style={{color: "black"}} href="/"><span className='mr-1'>Fiverr</span> <ThunderboltFilled className='logo-home' /></a>
             </div>
