@@ -16,34 +16,34 @@ export default function Footer() {
                                     <div className="content-home">
                                         <ul>
                                             <li>
-                                                <a href="#">Graphics &amp; Design</a>
+                                                <a href="/">Graphics &amp; Design</a>
                                             </li>
                                             <li>
-                                                <a href="#">Digital Marketing</a>
+                                                <a href="/">Digital Marketing</a>
                                             </li>
                                             <li>
-                                                <a href="#">Writing &amp; Translation</a>
+                                                <a href="/">Writing &amp; Translation</a>
                                             </li>
                                             <li>
-                                                <a href="#">Video &amp; Animation</a>
+                                                <a href="/">Video &amp; Animation</a>
                                             </li>
                                             <li>
-                                                <a href="#">Music &amp; Audio</a>
+                                                <a href="/">Music &amp; Audio</a>
                                             </li>
                                             <li>
-                                                <a href="#">Programming &amp; Tech</a>
+                                                <a href="/">Programming &amp; Tech</a>
                                             </li>
                                             <li>
-                                                <a href="#">Data</a>
+                                                <a href="/">Data</a>
                                             </li>
                                             <li>
-                                                <a href="#">Business</a>
+                                                <a href="/">Business</a>
                                             </li>
                                             <li>
-                                                <a href="#">Lifestyle</a>
+                                                <a href="/">Lifestyle</a>
                                             </li>
                                             <li>
-                                                <a href="#">Sitemap</a>
+                                                <a href="/">Sitemap</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -57,37 +57,37 @@ export default function Footer() {
                                     <div className="content-home">
                                         <ul>
                                             <li>
-                                                <a href="#" rel="">
+                                                <a href="/" rel="">
                                                     Careers
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="#" rel="">
+                                                <a href="/" rel="">
                                                     Press &amp; News
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="#" rel="">
+                                                <a href="/" rel="">
                                                     Partnerships
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="#" rel="">
+                                                <a href="/" rel="">
                                                     Privacy Policy
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="#" rel="">
+                                                <a href="/" rel="">
                                                     Terms of Service
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="#" rel="">
+                                                <a href="/" rel="">
                                                     Intellectual Property Claims
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="#">Investor Relations</a>
+                                                <a href="/">Investor Relations</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -101,16 +101,16 @@ export default function Footer() {
                                     <div className="content-home">
                                         <ul>
                                             <li>
-                                                <a href="#">Help &amp; Support</a>
+                                                <a href="/">Help &amp; Support</a>
                                             </li>
                                             <li>
-                                                <a href="#">Trust &amp; Safety</a>
+                                                <a href="/">Trust &amp; Safety</a>
                                             </li>
                                             <li>
-                                                <a href="#">Selling on Fiverr</a>
+                                                <a href="/">Selling on Fiverr</a>
                                             </li>
                                             <li>
-                                                <a href="#">Buying on Fiverr</a>
+                                                <a href="/">Buying on Fiverr</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -124,28 +124,28 @@ export default function Footer() {
                                     <div className="content-home">
                                         <ul>
                                             <li>
-                                                <a href="#">Events</a>
+                                                <a href="/">Events</a>
                                             </li>
                                             <li>
-                                                <a href="#">Blog</a>
+                                                <a href="/">Blog</a>
                                             </li>
                                             <li>
-                                                <a href="#">Forum</a>
+                                                <a href="/">Forum</a>
                                             </li>
                                             <li>
-                                                <a href="#">Community Standards</a>
+                                                <a href="/">Community Standards</a>
                                             </li>
                                             <li>
-                                                <a href="#">Podcast</a>
+                                                <a href="/">Podcast</a>
                                             </li>
                                             <li>
-                                                <a href="#">Affiliates</a>
+                                                <a href="/">Affiliates</a>
                                             </li>
                                             <li>
-                                                <a href="#">Invite a Friend</a>
+                                                <a href="/">Invite a Friend</a>
                                             </li>
                                             <li>
-                                                <a href="#">Become a Seller</a>
+                                                <a href="/">Become a Seller</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -159,40 +159,40 @@ export default function Footer() {
                                     <div className="content-home">
                                         <ul className="ul_5">
                                             <li className="li_5">
-                                                <a href="#">Fiverr Business</a>
+                                                <a href="/">Fiverr Business</a>
                                             </li>
                                             <li>
-                                                <a href="#">Fiverr Pro</a>
+                                                <a href="/">Fiverr Pro</a>
                                             </li>
                                             <li>
-                                                <a href="#">Fiverr Studios</a>
+                                                <a href="/">Fiverr Studios</a>
                                             </li>
                                             <li>
-                                                <a href="#">Fiverr Logo Maker</a>
+                                                <a href="/">Fiverr Logo Maker</a>
                                             </li>
                                             <li>
-                                                <a href="#">Fiverr Guides</a>
+                                                <a href="/">Fiverr Guides</a>
                                             </li>
                                             <li>
-                                                <a href="#">Get Inspired</a>
+                                                <a href="/">Get Inspired</a>
                                             </li>
                                             <li>
-                                                <a href="#">Fiverr Select</a>
+                                                <a href="/">Fiverr Select</a>
                                             </li>
                                             <li style={{ marginTop: "5px" }}>
-                                                <a href="#" >ClearVoice</a>
+                                                <a href="/" >ClearVoice</a>
                                                 <p>Content Marketing</p>
                                             </li>
                                             <li>
-                                                <a href="#">Fiverr Workspace</a>
+                                                <a href="/">Fiverr Workspace</a>
                                                 <p>Invoice Software</p>
                                             </li>
                                             <li>
-                                                <a href="#">Learn</a>
+                                                <a href="/">Learn</a>
                                                 <p>Online Courses</p>
                                             </li>
                                             <li>
-                                                <a href="#">Working Not Working</a>
+                                                <a href="/">Working Not Working</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -202,7 +202,7 @@ export default function Footer() {
                         <div className="footer_bottom-home">
                             <div className="left">
                                 <div>
-                                    <a className="name-footer d-flex mr-5" href="#"><span className='mr-1'>Fiverr</span> <ThunderboltFilled className='logo-footer' /></a>
+                                    <a className="name-footer d-flex mr-5" href="/"><span className='mr-1'>Fiverr</span> <ThunderboltFilled className='logo-footer' /></a>
                                 </div>
                                 <span className="copyright text-trunc">
                                     © Fiverr International Ltd. 2022
@@ -211,35 +211,35 @@ export default function Footer() {
                             <div className="right">
                                 <ul className="social">
                                     <li>
-                                        <a href="#">
+                                        <a href="/">
                                             <span className="icon">
                                                 <TwitterOutlined />
                                             </span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
+                                        <a href="/">
                                             <span className="icon">
                                                 <FacebookOutlined />
                                             </span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
+                                        <a href="/">
                                             <span className="icon">
                                                 <LinkedinOutlined />
                                             </span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
+                                        <a href="/">
                                             <span className="icon">
                                                 <GooglePlusOutlined />
                                             </span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
+                                        <a href="/">
                                             <span className="icon">
                                                 <InstagramOutlined />
                                             </span>

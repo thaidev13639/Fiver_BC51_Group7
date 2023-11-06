@@ -56,22 +56,22 @@ export default function Header() {
                 <div className='right-header-home d-flex align-items-center'>
                     <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
                         <li className="nav-item li-1 active">
-                            <a className="nav-link" href="#">Fiverr Business<span className="sr-only">(current)</span></a>
+                            <a className="nav-link" href="/">Fiverr Business<span className="sr-only">(current)</span></a>
                         </li>
                         <li className="nav-item li-1">
-                            <a className="nav-link" href="#">Explore</a>
+                            <a className="nav-link" href="/">Explore</a>
                         </li>
                         <li className="nav-item li-1">
-                            <a className="nav-link d-flex align-items-center" href="#"> <GlobalOutlined /><span className='ml-1'>English</span></a>
+                            <a className="nav-link d-flex align-items-center" href="/"> <GlobalOutlined /><span className='ml-1'>English</span></a>
                         </li>
                         <li className="nav-item li-1">
-                            <a className="nav-link" href="#">US$ USD</a>
+                            <a className="nav-link" href="/">US$ USD</a>
                         </li>
                         <li className="nav-item li-1">
-                            <a className="nav-link" href="#">Become a Seller</a>
+                            <a className="nav-link" href="/">Become a Seller</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Sign in</a>
+                            <a className="nav-link" href="/">Sign in</a>
                         </li>
                     </ul>
                     <button className="btn btn-outline-success my-sm-0 btn-join-home" type="submit">Join</button>
