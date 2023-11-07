@@ -25,7 +25,7 @@ export default function AdminLaysOut() {
   const [src, setSrc] = useState("");
   const accountState = useSelector((state) => state.userReducer);
 
-  console.log(accountState);
+
   useEffect(() => {
     //await accountState
     if (accountState) {
@@ -64,11 +64,12 @@ export default function AdminLaysOut() {
   }
   const items = [
     getItem("Home", "/", <PieChartOutlined />),
-    getItem("User", "/admin/user", <UserOutlined />),
-    getItem("Firm", "", <DesktopOutlined />, [
-      getItem("Detail Film", "/admin"),
-      getItem("Add Film", "/admin/add-film"),
+    getItem("User", "/admin", <UserOutlined />),
+    getItem("Job", "", <DesktopOutlined />, [
+      getItem("Job", "/admin"),
+      getItem("Job Type", "/admin/add-film"),
     ]),
+    getItem("Service", "/admin", <UserOutlined />),
     getItem("Logout", "logout", <FileOutlined />),
   ];
 
@@ -123,7 +124,8 @@ export default function AdminLaysOut() {
             // backgroundColor: "#cbf6e1"
           }}
         >
-          <div className="header-admin container">
+          
+          <div className="header-admin ">
             <div className="left">
              
             <a className="navbar-brand name-home d-flex mr-3" style={{color: "black"}} href="/"><span className='mr-1'>Fiverr</span> <ThunderboltFilled className='logo-home' /></a>
@@ -178,7 +180,7 @@ export default function AdminLaysOut() {
             backgroundColor: "#cbf6e1",
           }}
         >
-          Movie ©2023 Created by Hoang Anh and Thai
+          Fiver ©2023 Created by Hoang Anh and Thai
         </Footer>
       </Layout>
     </Layout>
