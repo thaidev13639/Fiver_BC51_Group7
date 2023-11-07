@@ -1,51 +1,65 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Button, Modal, Table, notification } from "antd";
+import {  Modal, Table, notification } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Input } from "antd";
 import { NavLink, useNavigate } from "react-router-dom";
 // import { LoadingContext } from "../../../../contexts/LoadingContext/LoadingContext";
 import { userService } from "../../../services/user";
 import AdminAddUser from "./AdminAddUser";
+import AdminUpdateUser from "./AdminUpdateUser";
 
 export default function AdminUser() {
   const navigate = useNavigate();
   const [listUser, setListUser] = useState([]);
-  const [search, setSearch] = useState("");
-   const [ showModal, setShowModal] =useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [showModal2, setShowModal2] = useState(false);
+  const [delUser,setDelUser] = useState(false);
+
+  const [selectedUserId, setSelectedUserId] = useState(null);
 
   useEffect(() => {
     fetchListUser();
-  }, []);
+    //  if (showModal ==="false") {
+    // //   console.log('Modal is closed');
+    //  }
+    
+  }, [showModal,delUser,showModal2]);
 
   const fetchListUser = async () => {
     const userList = await userService.fetchGetListUserApi("");
     setListUser(userList.data.content);
   };
 
-  // const handleOpenModal = () => {
-  //   setShowModal(true);
-  // };
+
+
+  const handleOpenModalUpdate = (data) => {
+    setShowModal2(true);
+    setSelectedUserId(data);
+  };
 
   const deleteUser = async (taiKhoan) => {
     if (window.confirm(`Bạn Muốn xóa Người Dùng ${taiKhoan}`)) {
       try {
         await userService.fetchUserDeleteApi(taiKhoan);
+       
         notification.success({
           message: `Bạn Đã Xóa ${taiKhoan} Thành Công`,
-          placement: "topLeft",
-          duration: 2,
+          placement: "bottomRight",
+          duration: 4,
         });
+        setDelUser(true);
+        navigate("/admin")
       } catch (error) {
         notification.warning({
           message: `Xóa ${taiKhoan} Không Thành Công`,
-          placement: "topLeft",
-          duration: 2,
+          placement: "bottomRight",
+          duration: 4,
         });
       }
     }
-    navigate("/admin");
+   
   };
-  const { Search } = Input;
+   const { Search } = Input;
 
   const columns = [
     {
@@ -113,17 +127,26 @@ export default function AdminUser() {
             <NavLink
               key={1}
               className="mr-2 text-3xl"
-              to={`/admin/user-edit/${user.taiKhoan}`}
+              onClick={() => handleOpenModalUpdate(user.id)}
               style={{ color: "blue", fontSize: "20px" }}
             >
               <EditOutlined />
             </NavLink>
-            <Button onClick={() => setShowModal(true)}>Open Modal</Button>
 
-            <Modal open={showModal} onCancel={() => setShowModal(false)}>
-              <AdminAddUser setShowModal={setShowModal} idtaiKhoan={user.id} />
-              <p>This is the child component.</p>
+            {/* <Button onClick={() => handleOpenModalUpdate(user.id)}>
+              Open Modal
+            </Button> */}
+
+            <Modal
+              open={showModal2}
+              onCancel={() => setShowModal2(false)}
+              okButtonProps={{ hidden: true }}
+            >
               
+               <AdminUpdateUser
+                 setShowModal2={setShowModal2}
+                idtaiKhoan={selectedUserId}
+              /> 
             </Modal>
 
             <span
@@ -146,11 +169,10 @@ export default function AdminUser() {
     return { ...element, key: `${idx}` };
   });
 
-  const handleChange = (event) => {
-    setSearch(event.target.value);
-  };
+ 
 
-  const onSearch = async (value) => {
+  const handleSearch = async (value) => {
+    console.log('Search term:', value);
     try {
       // setLoadingState({ isLoading: true });
       const findUser = await userService.fetchGetListUserApi(value);
@@ -163,21 +185,27 @@ export default function AdminUser() {
     }
   };
 
+
   return (
     <>
       <h3>DANH SÁCH NGƯỜI DÙNG</h3>
 
-      <button
-        className="btn btn-success"
-        onClick={() => navigate("/admin/user-add")}
-      >
+      <button className="btn btn-success" onClick={() => setShowModal(true)}>
         Thêm người dùng
       </button>
+
+      <Modal
+        open={showModal}
+        onCancel={() => setShowModal(false)}
+        okButtonProps={{ hidden: true }}
+      >
+        <AdminAddUser  setShowModal={setShowModal}/>
+      </Modal>
       <Search
         placeholder="Nhập Tên Tài Khoản Cần Tìm"
         style={{ margin: "20px 0", color: "red" }}
-        onChange={handleChange}
-        onSearch={onSearch(search)}
+        onSearch={handleSearch}
+       
         enterButton
       />
       <Table

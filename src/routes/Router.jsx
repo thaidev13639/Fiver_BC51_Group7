@@ -11,6 +11,7 @@ import AdminGuard from "../guards/AdminGuard";
 import JobsTitle from "../pages/JobsTitle/JobsTitle";
 import JobsDetail from "../pages/JobsDetail/JobsDetail";
 import JobInfo from "../pages/JobInfo/JobInfo";
+import Register from "../components/Register/Register";
 
 export default function Router() {
   const routing = useRoutes([
@@ -48,14 +49,14 @@ export default function Router() {
           path: "/admin",
           element: <AdminUser />,
         },
-        // {
-        //   path: "/editJob",
-        //   element: <AdminUser />,
-        // },
-        // {
-        //   path: "/editJobCategory",
-        //   element: <AdminUser />,
-        // },
+         {
+          path: "/admin/job",
+          element: <AdminUser />,
+        },
+        {
+           path: "/admin/service",
+         element: <AdminUser />,
+        },
       ],
     },
     {
@@ -70,6 +71,10 @@ export default function Router() {
           path: "/form/login",
           element: <Login />,
         },
+        {
+          path: "/form/register",
+          element: <Register />,
+        }
       ],
     },
   ]);

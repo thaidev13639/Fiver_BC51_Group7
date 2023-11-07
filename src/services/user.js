@@ -10,6 +10,15 @@ class UserService {
     });
   };
 
+  fetRegisterApi = (data) => {
+    return requestApi({
+      url: "/auth/signup",
+      method: "POST",
+      data,
+    });
+  }; 
+
+
   fetchGetListUserApi = (TenNguoiDung) => {
     if (TenNguoiDung !== "") {
       return requestApi({
@@ -24,10 +33,11 @@ class UserService {
     }
   };
 
-  fetchAddUser() {
+  fetchAddUser(data) {
     return requestApi({
       url: `/users`,
       method: "POST",
+      data,
     });
   }
 
