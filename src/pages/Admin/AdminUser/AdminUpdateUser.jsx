@@ -10,8 +10,7 @@ import moment from 'moment/moment';
 export default function AdminUpdateUser({ setShowModal2,idtaiKhoan}) {
     const navigate = useNavigate();
     const [userDetail, setUserDetail] = useState({})
-
-
+    
     useEffect(() => {
         fetchGetUser(); //get thong tin user
         

@@ -12,6 +12,11 @@ import JobsTitle from "../pages/JobsTitle/JobsTitle";
 import JobsDetail from "../pages/JobsDetail/JobsDetail";
 import JobInfo from "../pages/JobInfo/JobInfo";
 import Register from "../components/Register/Register";
+import AdminJob from "../pages/Admin/AdminJob.jsx/AdminJob";
+import AdminJobType from "../pages/Admin/AdminJobType/AdminJobType";
+import AdminService from "../pages/Admin/AdminService/AdminService";
+import AdminDetailType from "../pages/Admin/AdminDetailType/AdminDetailType";
+import AdminComment from "../pages/Admin/AdminComment/AdminComment";
 
 export default function Router() {
   const routing = useRoutes([
@@ -51,12 +56,24 @@ export default function Router() {
         },
          {
           path: "/admin/job",
-          element: <AdminUser />,
+          element: <AdminJob />,
+        },
+        {
+          path: "/admin/jobtype",
+          element: <AdminJobType />,
+        },
+        {
+          path: "/admin/detailtype",
+          element: <AdminDetailType/>,
         },
         {
            path: "/admin/service",
-         element: <AdminUser />,
+         element: <AdminService />,
         },
+        {
+          path: "/admin/comment",
+        element: <AdminComment />,
+       },
       ],
     },
     {
