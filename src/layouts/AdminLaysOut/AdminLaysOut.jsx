@@ -4,18 +4,22 @@ import "../../css/style.css";
 import { ThunderboltFilled } from "@ant-design/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import iconavatar from "../../images/img_avatar.png";
-//import { faClapperboard } from "@fortawesome/free-solid-svg-icons";
+
 import {
   DesktopOutlined,
   FileOutlined,
   PieChartOutlined,
   UserOutlined,
+  IdcardFilled,
+  MessageFilled,
+ 
 } from "@ant-design/icons";
-import { Layout, Menu, notification, theme } from "antd";
+import { Dropdown, Layout, Menu, Popover, Space, notification, theme } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "../../redux-toolkit/reducer/userReducer";
-import { faBolt } from "@fortawesome/free-solid-svg-icons";
-// import { loginAction } from "../../store/actions/loginAction";
+import {  faBolt, faSquareCaretDown} from "@fortawesome/free-solid-svg-icons";
+
+
 const { Header, Content, Footer, Sider } = Layout;
 
 export default function AdminLaysOut() {
@@ -24,7 +28,6 @@ export default function AdminLaysOut() {
   const [collapsed, setCollapsed] = useState(false);
   const [src, setSrc] = useState("");
   const accountState = useSelector((state) => state.userReducer);
-
 
   useEffect(() => {
     //await accountState
@@ -62,17 +65,29 @@ export default function AdminLaysOut() {
       label,
     };
   }
-  const items = [
+  const items2 = [
     getItem("Home", "/", <PieChartOutlined />),
     getItem("User", "/admin", <UserOutlined />),
     getItem("Job", "", <DesktopOutlined />, [
-      getItem("Job", "/admin"),
-      getItem("Job Type", "/admin/add-film"),
+      getItem("Job", "/admin/job"),
+      getItem("Job Type", "/admin/jobtype"),
+      getItem("Detail Type", "/admin/detailtype"),
     ]),
-    getItem("Service", "/admin", <UserOutlined />),
+    getItem("Service", "/admin/service", <IdcardFilled />),
+    getItem("Comment", "/admin/comment", <MessageFilled />),
     getItem("Logout", "logout", <FileOutlined />),
   ];
 
+  const items = [
+    {
+      key: '1',
+      label: (
+        <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+        Log out
+        </a>
+      ),
+    },
+  ];
   return (
     <Layout
       style={{
@@ -86,10 +101,8 @@ export default function AdminLaysOut() {
       >
         <div className="demo-logo-vertical" />
         <div className="logo-admin p-3">
-          <span>Fiverr</span>{" "}
-          <FontAwesomeIcon  className="icon"  icon={faBolt} />
-          
-        </div> 
+          <span>Fiverr</span> <FontAwesomeIcon className="icon" icon={faBolt} />
+        </div>
 
         <Menu
           onClick={({ key }) => {
@@ -112,7 +125,7 @@ export default function AdminLaysOut() {
           theme="dark"
           defaultSelectedKeys={["1"]}
           mode="inline"
-          items={items}
+          items={items2}
         />
       </Sider>
       <Layout style={{ backgroundColor: "#cbf6e1" }}>
@@ -124,36 +137,50 @@ export default function AdminLaysOut() {
             // backgroundColor: "#cbf6e1"
           }}
         >
-          
           <div className="header-admin ">
             <div className="left">
-             
-            <a className="navbar-brand name-home d-flex mr-3" style={{color: "black"}} href="/"><span className='mr-1'>Fiverr</span> <ThunderboltFilled className='logo-home' /></a>
-            </div>
-            <div className="user-logo">
-              <div
-                className="chip"
-                style={{ cursor: "pointer" }}
-                onClick={() =>
-                  navigate(
-                    `/admin/user-detail/${accountState?.userInfo?.taiKhoan}`
-                  )
-                }
+              <a
+                className="navbar-brand name-home d-flex mr-3"
+                style={{ color: "black" }}
+                href="/"
               >
-                {/* <img src= {accountState.userInfo.user.avatar} alt="Person" width={96} height={96} /> */}
-                <img
+                <span className="mr-1">Fiverr</span>{" "}
+                <ThunderboltFilled className="logo-home" />
+              </a>
+            </div>
+
+            <div className="user-logo">
+            
+               
+                <Dropdown
+                  menu={{
+                    items,
+                  }}
+                  className="ml-2"
+                >
+                 
+                    <Space>
+                    <div className="chip" style={{ cursor: "pointer" }}>
+                    <img
                   src={src}
                   alt="Person"
-                  width={96}
-                  height={96}
+                 
                   onError={(e) => {
                     e.target.onError = null;
                     e.target.src =
-                      "https://www.computerhope.com/jargon/e/error.png";
+                      "https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg";
                   }}
                 />
-                {accountState?.userInfo?.user?.name}
-              </div>
+
+                <p className="mr-2">  {accountState?.userInfo?.user?.name}</p>
+                <FontAwesomeIcon icon={faSquareCaretDown} size="2xl"/>
+                </div>
+                    
+                   
+                    </Space>
+               
+                </Dropdown>
+              
             </div>
           </div>
         </Header>

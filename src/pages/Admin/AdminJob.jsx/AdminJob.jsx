@@ -1,65 +1,77 @@
 import React, { Fragment, useEffect, useState } from "react";
-import {  Modal, Table, notification } from "antd";
+import { Modal, Table, notification } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Input } from "antd";
 import { NavLink, useNavigate } from "react-router-dom";
+import { manageService } from "../../../services/manage";
+import AdminUpdateJob from "./AdminUpdateJob";
+import AdminAddJob from "./AdminAddJob";
 // import { LoadingContext } from "../../../../contexts/LoadingContext/LoadingContext";
-import { userService } from "../../../services/user";
-import AdminAddUser from "./AdminAddUser";
-import AdminUpdateUser from "./AdminUpdateUser";
 
-export default function AdminUser() {
+export default function AdminJob() {
   const navigate = useNavigate();
-  const [listUser, setListUser] = useState([]);
+  const [listJob, setListJob] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
-  const [delUser,setDelUser] = useState(false);
+  const [delJob, setDelJob] = useState(false);
 
-  const [selectedUserId, setSelectedUserId] = useState(null);
+  const [selectedJobId, setSelectedJobId] = useState(null);
 
   useEffect(() => {
-    fetchListUser();
-    //  if (showModal ==="false") {
-    // //   console.log('Modal is closed');
-    //  }
-    
-  }, [showModal,delUser,showModal2]);
+    fetchListJob();
+  }, [showModal, delJob, showModal2]);
 
-  const fetchListUser = async () => {
-    const userList = await userService.fetchGetListUserApi("");
-    setListUser(userList.data.content);
+  const fetchListJob = async () => {
+    const jobList = await manageService.fetchGetListJobS("");
+    setListJob(jobList.data.content);
+    console.log(listJob);
   };
-
-
 
   const handleOpenModalUpdate = (data) => {
     setShowModal2(true);
-    setSelectedUserId(data);
+    setSelectedJobId(data);
   };
 
-  const deleteUser = async (taiKhoan) => {
-    if (window.confirm(`Bạn Muốn xóa Người Dùng ${taiKhoan}`)) {
+  const deleteJob = async (job) => {
+    if (window.confirm(`Bạn muốn xóa công việc này ${job}`)) {
       try {
-        await userService.fetchUserDeleteApi(taiKhoan);
-       
+        await manageService.fetchJobsDeleteApi(job);
+
         notification.success({
-          message: `Bạn Đã Xóa ${taiKhoan} Thành Công`,
+          message: `Bạn Đã Xóa ${job} Thành Công`,
           placement: "bottomRight",
           duration: 4,
         });
-        setDelUser(true);
-        navigate("/admin")
+        setDelJob(true);
+        navigate("/admin/job");
       } catch (error) {
         notification.warning({
-          message: `Xóa ${taiKhoan} Không Thành Công`,
+          message: `Xóa ${job} Không Thành Công`,
           placement: "bottomRight",
           duration: 4,
         });
       }
     }
-   
   };
-   const { Search } = Input;
+
+  const { Search } = Input;
+
+  const handleSearch = async (value) => {
+    console.log("Search term:", value);
+    try {
+      // setLoadingState({ isLoading: true });
+      const findJob = await manageService.fetchGetListJobS(value);
+
+      const resultSearchJob = findJob.data.content;
+      const congViecArr = resultSearchJob.map((object) => object.congViec);
+
+      setListJob(congViecArr);
+
+      // setLoadingState({ isLoading: false });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const columns = [
     {
@@ -78,12 +90,12 @@ export default function AdminUser() {
       width: "15%",
     },
     {
-      title: "Họ Tên",
-      dataIndex: "name",
+      title: "Tên công việc",
+      dataIndex: "tenCongViec",
       sorter: {
         compare: (a, b) => {
-          let hoTenA = a.name.toLowerCase().trim();
-          let hotenB = b.name.toLowerCase().trim();
+          let hoTenA = a.tenCongViec.toLowerCase().trim();
+          let hotenB = b.tenCongViec.toLowerCase().trim();
           if (hoTenA > hotenB) {
             return 1;
           }
@@ -92,42 +104,41 @@ export default function AdminUser() {
       },
     },
     {
-      title: "Loại Người Dùng",
-      dataIndex: "role",
-      sorter: {
-        compare: (a, b) => {
-          let maLoaiNguoiDungA = a.role.toLowerCase().trim();
-          let maLoaiNguoiDungB = b.role.toLowerCase().trim();
-          if (maLoaiNguoiDungB > maLoaiNguoiDungA) {
-            return 1;
-          }
-          return -1;
-        },
+      title: "Hình Ảnh",
+      dataIndex: "hinhAnh",
+      render: (_, film, idx) => {
+        return (
+          <Fragment key={idx}>
+            <img
+              src={film.hinhAnh}
+              alt={film.hinhAnh}
+              style={{ width: 100, height: 100 }}
+            />
+          </Fragment>
+        );
       },
     },
     {
-      title: "Email",
-      dataIndex: "email",
+      title: "Discription",
+      dataIndex: "moTa",
     },
     {
-      title: "Certification",
-      dataIndex: "certification",
+      title: "$Price",
+      dataIndex: "giaTien",
     },
     {
-      title: "skill",
-      dataIndex: "skill",
+      title: "Rate",
+      dataIndex: "saoCongViec",
     },
-
     {
       title: "Action",
       dataIndex: "action",
-      render: (_, user) => {
-        return (
-          <Fragment>
-            <NavLink
+      render: (_, job) => {
+        return <Fragment>
+          <NavLink
               key={1}
               className="mr-2 text-3xl"
-              onClick={() => handleOpenModalUpdate(user.id)}
+              onClick={() => handleOpenModalUpdate(job.id)}
               style={{ color: "blue", fontSize: "20px" }}
             >
               <EditOutlined />
@@ -139,9 +150,9 @@ export default function AdminUser() {
               okButtonProps={{ hidden: true }}
             >
               
-               <AdminUpdateUser
+               <AdminUpdateJob
                  setShowModal2={setShowModal2}
-                idtaiKhoan={selectedUserId}
+                jobId={selectedJobId}
               /> 
             </Modal>
 
@@ -150,44 +161,26 @@ export default function AdminUser() {
               className="text-3xl"
               to="/"
               style={{ cursor: "pointer", color: "red", fontSize: "20px" }}
-              onClick={() => deleteUser(user.id)}
+              onClick={() => deleteJob(job.id)}
             >
               <DeleteOutlined />
             </span>
-          </Fragment>
-        );
+        </Fragment>;
       },
       width: "10%",
     },
   ];
 
-  const data = listUser.map((element, idx) => {
+  const data = listJob.map((element, idx) => {
     return { ...element, key: `${idx}` };
   });
 
- 
-
-  const handleSearch = async (value) => {
-    console.log('Search term:', value);
-    try {
-      // setLoadingState({ isLoading: true });
-      const findUser = await userService.fetchGetListUserApi(value);
-
-      setListUser(findUser.data.content);
-
-      // setLoadingState({ isLoading: false });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-
   return (
     <>
-      <h3>DANH SÁCH NGƯỜI DÙNG</h3>
+      <h3>DANH SÁCH JOB</h3>
 
       <button className="btn btn-success" onClick={() => setShowModal(true)}>
-        Thêm người dùng
+        Thêm Job
       </button>
 
       <Modal
@@ -195,13 +188,14 @@ export default function AdminUser() {
         onCancel={() => setShowModal(false)}
         okButtonProps={{ hidden: true }}
       >
-        <AdminAddUser  setShowModal={setShowModal}/>
+        
+        <AdminAddJob setShowModal={setShowModal}/>
       </Modal>
+
       <Search
-        placeholder="Nhập Tên Tài Khoản Cần Tìm"
+        placeholder="Nhập Tên Job Cần Tìm"
         style={{ margin: "20px 0", color: "red" }}
         onSearch={handleSearch}
-       
         enterButton
       />
       <Table

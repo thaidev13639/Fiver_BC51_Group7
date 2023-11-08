@@ -127,21 +127,22 @@
 }
 
 .chip {
-  display: inline-block;
+  display: flex;
+  color: #000;
+  font-size: 22px;
   padding: 0 25px;
-  height: 30px;
-  font-size: 16px;
-  line-height: 30px;
+  height: 50px;
+  font-weight: bold;
+  line-height: 45px;
   border-radius: 25px;
   background-color: #f1f1f1;
-  margin: 10px;
+  margin-left: -40px;
 }
 
 .chip img {
   float: left;
-  margin: 0 10px 0 -25px;
-  height: 30px;
-  width: 30px;
+  height: 50px;
+  width: 50px;
   border-radius: 50%;
 }
 

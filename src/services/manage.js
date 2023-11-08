@@ -38,7 +38,7 @@ class ManageService {
   }
 
   //loại
-  fetchGetListCategoryJobS = (keyword) => { 
+  fetchGetListJobsType = (keyword) => { 
     if (keyword!== "") {
       return requestApi({
         url: `/loai-cong-viec/phan-trang-tim-kiem?pageIndex=1&pageSize=10&keyword=${keyword}`,
@@ -52,19 +52,19 @@ class ManageService {
     }
   };
 
-  fetchCategoryJobsDeleteApi(id) {
+  fetchJobsTypeDeleteApi(id) {
     return requestApi({
       url: `/loai-cong-viec/${id}`,
       method: "DELETE",
     });
   }
-  fetchCategoryJobsDetailApi(id) {
+  fetchJobsTypeDetailApi(id) {
     return requestApi({
       url: `/loai-cong-viec/${id}`,
       method: "GET",
     });
   }
-  fetchCategoryJobsUpdateApi(id,data) {
+  fetchJobsTypeUpdateApi(id,data) {
     return requestApi({
       url: `/loai-cong-viec/${id}`,
       method: "PUT",
