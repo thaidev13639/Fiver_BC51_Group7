@@ -1,16 +1,36 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Rate } from 'antd';
 import Payment from './components/Payment';
 import ShowOption from '../JobsDetail/components/ShowOption';
 import Star from './components/Star';
 import { SearchOutlined, LikeOutlined, DislikeOutlined } from '@ant-design/icons';
+import { useLocation, useParams } from 'react-router-dom';
 
 
 export default function JobInfo() {
+    const location = useLocation()
+    const param = useParams()
+    
+    window.addEventListener("scroll", () => {
+        if (location.pathname === `/job-info/${param.id}`) {
+            const scrollYYY = window.scrollY
+            if (Math.floor(scrollYYY) >= 3100) {
+                if (document.getElementById("box-service")) {
+                    document.getElementById("box-service").style.display = "none"
+                }
+            } else {
+                if (document.getElementById("box-service")) {
+                    document.getElementById("box-service").style.display = "block"
+                }
+            }
+        }
+    })
+    // useEffect(() => {
 
+    // }, [])
 
     return (
-        <div className='jobInfo-page'>
+        <div className='jobInfo-page' id='page-jobInfo'>
             <div className='jobInfo-container'>
                 <h1>I will setup facebook and instagram ads campaign to boost your business</h1>
                 <div className='jobInfo-user'>
@@ -35,7 +55,7 @@ export default function JobInfo() {
                 <div className='jobInfo-img'>
                     <img src="http://sc04.alicdn.com/kf/Hc3e61591078043e09dba7808a6be5d21n.jpg" alt="..." />
                 </div>
-                <div className='jobInfo-box-service'>
+                <div className='jobInfo-box-service' id='box-service'>
                     <Payment />
                 </div>
                 <div className='jobInfo-about'>
