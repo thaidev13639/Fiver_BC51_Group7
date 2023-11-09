@@ -24,7 +24,7 @@ export default function AdminJob() {
   const fetchListJob = async () => {
     const jobList = await manageService.fetchGetListJobS("");
     setListJob(jobList.data.content);
-    console.log(listJob);
+    // console.log(listJob);
   };
 
   const handleOpenModalUpdate = (data) => {

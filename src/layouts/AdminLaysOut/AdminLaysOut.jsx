@@ -14,7 +14,7 @@ import {
   MessageFilled,
  
 } from "@ant-design/icons";
-import { Dropdown, Layout, Menu, Popover, Space, notification, theme } from "antd";
+import {  Dropdown, Layout, Menu, Popover, Space, notification, theme } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "../../redux-toolkit/reducer/userReducer";
 import {  faBolt, faSquareCaretDown} from "@fortawesome/free-solid-svg-icons";
@@ -41,17 +41,7 @@ export default function AdminLaysOut() {
     }
   }, [accountState]);
 
-  // const iconAvatar = () =>{
-  //   //await accountState
-  //   if (accountState === "") {
-  //     // Sử dụng hình khác
-  //     setSrc(iconavatar);
-  //   } else {
-  //     // Lấy data api
-  //     setSrc(accountState?.userInfo?.user?.avatar);
-  //     // ...
-  //   }
-  // }
+
 
   const {
     token: { colorBgContainer },
@@ -82,11 +72,34 @@ export default function AdminLaysOut() {
     {
       key: '1',
       label: (
-        <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
-        Log out
-        </a>
+  <a onClick={() => console.log('Button clicked')}>Click me</a>
+      )
+
+    },
+    {
+      key: '2',
+      label: (
+       
+        
+          <a target="_blank" 
+          onClick={() => {
+            const result = window.confirm("Bạn Muốn Đăng Xuất??");
+            if (result) {
+              dispatch(loginAction.SET_INFO_USER(null));
+              localStorage.removeItem("INFO_ACCOUNT");
+              notification.success({
+                message: "Đăng Xuất Thành Công",
+                placement: "topLeft",
+                duration: 2,
+              });
+              navigate("/");
+            }}
+          }>
+            Log out
+          </a>
       ),
     },
+    
   ];
   return (
     <Layout
@@ -173,7 +186,7 @@ export default function AdminLaysOut() {
                 />
 
                 <p className="mr-2">  {accountState?.userInfo?.user?.name}</p>
-                <FontAwesomeIcon icon={faSquareCaretDown} size="2xl"/>
+                <FontAwesomeIcon icon={faSquareCaretDown} size="xl" style={{marginTop:"7px"}}/>
                 </div>
                     
                    

@@ -38,7 +38,7 @@ export default function AdminAddUser({ setShowModal }) {
           placement: "bottomRight",
           duration: 5,
         });
-   
+        
         navigate("/admin")
         
          
@@ -61,6 +61,7 @@ export default function AdminAddUser({ setShowModal }) {
     }
   };
 
+  
   return (
     
     <Form
@@ -148,6 +149,9 @@ export default function AdminAddUser({ setShowModal }) {
         </Radio.Group>
       
       </Form.Item>
+
+      
+    
       
       <Form.Item label="Action:"
        style={{ width: "100%" }}>
