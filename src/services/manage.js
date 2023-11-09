@@ -23,12 +23,28 @@ class ManageService {
       method: "DELETE",
     });
   }
+  fetchJobsAddApi(data) {
+    return requestApi({
+      url: `/cong-viec`,
+      method: "POST",
+      data,
+    });
+  }
   fetchJobsDetailApi(id) {
     return requestApi({
       url: `/cong-viec/${id}`,
       method: "GET",
     });
   }
+
+  fetchJobsAddImgApi(id,data) {
+    return requestApi({
+      url: `/cong-viec/upload-hinh-cong-viec/${id}`,
+      method: "POST",
+      data,
+    });
+  }
+
   fetchJobsUpdateApi(id,data) {
     return requestApi({
       url: `/cong-viec/${id}`,
