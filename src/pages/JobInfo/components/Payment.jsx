@@ -1,7 +1,11 @@
 import React from 'react'
 import { Tabs } from 'antd';
+import { useSelector } from 'react-redux';
 
-export default function Payment() {
+export default function Payment(props) {
+    const userState = useSelector((state) => state.userReducer)
+    // console.log(userState.userInfo.user.id)
+    // console.log(props.maCongViec)
     const items = [
         {
             key: '1',

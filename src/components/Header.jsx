@@ -1,38 +1,40 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { ThunderboltFilled, GlobalOutlined } from "@ant-design/icons"
+import { loginAction } from '../redux-toolkit/reducer/userReducer';
 import { jobsService } from '../services/jobs'
 import { useNavigate } from 'react-router';
 import { NavLink } from 'react-router-dom';
-// import { useLocation } from 'react-router-dom';
 import "../css/style.css"
-import { useDispatch, useSelector } from 'react-redux';
-import { loginAction } from '../redux-toolkit/reducer/userReducer';
 
 export default function Header() {
     const [listJobs, setListJobs] = useState([]);
     const navigate = useNavigate();
     const dispatch = useDispatch()
     const accountState = useSelector((state) => state.userReducer);
-    // const location = useLocation()
+    const [scroll, setScroll] = useState(false);
 
-    // window.addEventListener("scroll", () => {
-    //     if (location.pathname === `/`) {
-    //         const scrollYYY = window.scrollY
-    //         if (document.getElementById("header-active")) {
-    //             console.log("123")
+    const handleScroll = () => {
+        if (window.pageYOffset > 50) {
+            setScroll(true);
+            return;
+        }
+        setScroll(false);
+    };
 
-    //         }
-    //         // if (Math.floor(scrollYYY) >= 3100) {
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    });
 
-    //         // }
-    //     }
-    // })
     useEffect(() => {
         fetchGetListJobs()
     }, [])
 
     const fetchGetListJobs = async () => {
-        const data = await jobsService.fetchListJobsNavbar();
+        const data = await jobsService.fetchListJobsNavbarApi();
         setListJobs(data.data.content)
     }
 
@@ -86,7 +88,7 @@ export default function Header() {
                             <a className="nav-link" href="/">{accountState?.userInfo?.user?.name}</a>
                         </li>
                     </ul>
-                    <button className="btn btn-warning my-sm-0" type="submit" onClick={() => logout()}>Logout</button>
+                    <button className="btn btn-warning my-sm-0 btn-logout" type="submit" onClick={() => logout()}>Logout</button>
                 </>
             )
         } else {
@@ -112,52 +114,31 @@ export default function Header() {
                             <NavLink className="nav-link" to="/form/login">Sign in</NavLink>
                         </li>
                     </ul>
-                    <button className="btn btn-outline-success my-sm-0 btn-join-home" type="submit">Join</button>
+                    <button className="btn btn-outline-success my-sm-0 btn-join-home" type="submit" onClick={() => navigate("/form/register")}>Join</button>
                 </>
             )
         }
     }
 
     return (
-        <div className='header-container' id='header-active'>
-            <nav className="navbar navbar-expand-lg navbar-light bg-light justify-content-between navbar-page-home top-header">
+        <div className={scroll ? "header-container header-active" : "header-container"}>
+            <nav className="navbar navbar-expand-lg navbar-light bg-light justify-content-between navbar-page-home">
                 <button className="navbar-toggler" type="button" >
                     <span className="navbar-toggler-icon" />
                 </button>
                 <div className='left-header-home d-flex align-items-center'>
                     <NavLink className="navbar-brand name-home d-flex mr-3" to="/"><span className='mr-1'>Fiverr</span> <ThunderboltFilled className='logo-home' /></NavLink>
-                    <form className="form-inline my-lg-0 top-btn">
+                    <form className="form-inline my-lg-0">
                         <input className="form-control " type="search" placeholder="Find Service" aria-label="Search" />
                         <button className=" my-sm-0 btn-search-home" type="submit">Search</button>
                     </form>
                 </div>
                 <div className='right-header-home d-flex align-items-center'>
                     {renderListUl()}
-                    {/* <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-                        <li className="nav-item li-1 active">
-                            <a className="nav-link" href="/">Fiverr Business<span className="sr-only">(current)</span></a>
-                        </li>
-                        <li className="nav-item li-1">
-                            <a className="nav-link" href="/">Explore</a>
-                        </li>
-                        <li className="nav-item li-1">
-                            <a className="nav-link d-flex align-items-center" href="/"> <GlobalOutlined /><span className='ml-1'>English</span></a>
-                        </li>
-                        <li className="nav-item li-1">
-                            <a className="nav-link" href="/">US$ USD</a>
-                        </li>
-                        <li className="nav-item li-1">
-                            <a className="nav-link" href="/">Become a Seller</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="/">Sign in</a>
-                        </li>
-                    </ul>
-                    <button className="btn btn-outline-success my-sm-0 btn-join-home" type="submit">Join</button> */}
                 </div>
 
             </nav>
-            <div className='content-nav-home top-listJob'>
+            <div className='content-nav-home'>
                 <ul className='listContent-nav-home'>
                     {renderListJobsNavbar()}
                 </ul>
