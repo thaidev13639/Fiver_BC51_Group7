@@ -19,11 +19,13 @@ export default function AdminJob() {
 
   useEffect(() => {
     fetchListJob();
-  }, [showModal, delJob, showModal2]);
+    
+  }, [showModal, showModal2,delJob]);
 
   const fetchListJob = async () => {
     const jobList = await manageService.fetchGetListJobS("");
     setListJob(jobList.data.content);
+    setDelJob(false);
     // console.log(listJob);
   };
 
@@ -44,6 +46,7 @@ export default function AdminJob() {
         });
         setDelJob(true);
         navigate("/admin/job");
+        
       } catch (error) {
         notification.warning({
           message: `Xóa ${job} Không Thành Công`,
@@ -52,6 +55,7 @@ export default function AdminJob() {
         });
       }
     }
+    
   };
 
   const { Search } = Input;

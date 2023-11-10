@@ -38,8 +38,11 @@ export default function AdminAddUser({ setShowModal }) {
           placement: "bottomRight",
           duration: 5,
         });
-        
-        navigate("/admin")
+        setTimeout(() => {
+          // Navigate to the desired page
+          navigate(0);
+        }, 3000);
+       
         
          
       } catch (error) {
