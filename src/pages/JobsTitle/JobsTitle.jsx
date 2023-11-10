@@ -13,7 +13,7 @@ export default function JobsTitle() {
     const navigate = useNavigate()
 
     const fetchListJobTitle = async () => {
-        const data = await jobsService.fetchListJobsTitle(param.id)
+        const data = await jobsService.fetchListJobsTitleApi(param.id)
         setJobTitle(data.data.content)
     }
 
