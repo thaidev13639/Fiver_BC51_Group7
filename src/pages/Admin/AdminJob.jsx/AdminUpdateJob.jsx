@@ -45,6 +45,10 @@ const fetchDetailJob = async () => {
       setImgSrcApi(null)
       setImgSrc(null)
       formik.resetForm();
+      setTimeout(() => {
+        // Navigate to the desired page
+        navigate(0);
+      }, 3000);
      
      
      //document.getElementById("uploadImg").value=null;

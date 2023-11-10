@@ -28,6 +28,7 @@ export default function AdminUser() {
   const fetchListUser = async () => {
     const userList = await userService.fetchGetListUserApi("");
     setListUser(userList.data.content);
+    setDelUser(false)
   };
 
 

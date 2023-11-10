@@ -11,10 +11,11 @@ export default function AdminUpdateUser({ setShowModal2,idtaiKhoan}) {
     const navigate = useNavigate();
     const [userDetail, setUserDetail] = useState({})
     
+    
     useEffect(() => {
         fetchGetUser(); //get thong tin user
         
-    }, [])
+    }, [setShowModal2,idtaiKhoan])
 
     const fetchGetUser = async () => {
         const user = await userService.fetchUserDetailApi(idtaiKhoan)
@@ -22,7 +23,7 @@ export default function AdminUpdateUser({ setShowModal2,idtaiKhoan}) {
         //console.log(userDetail);
     }
 
-    const oldBirthday = userDetail.birthday;
+    const oldBirthday = userDetail?.birthday;
     console.log(oldBirthday);
   
 
@@ -35,7 +36,7 @@ export default function AdminUpdateUser({ setShowModal2,idtaiKhoan}) {
         email:  userDetail?.email,
         password:  userDetail?.password,
         phone:  userDetail?.phone,
-        birthday: "",
+        birthday: userDetail?.birthday,
         gender: true,
         role: userDetail?.role,
         skill: ["string"],
@@ -53,7 +54,10 @@ export default function AdminUpdateUser({ setShowModal2,idtaiKhoan}) {
             placement: "bottomRight",
             duration: 5,
           });
-         
+          setTimeout(() => {
+            // Navigate to the desired page
+            navigate(0);
+          }, 3000);
         } catch (error) {
           console.log(error);
           notification.warning({
@@ -76,7 +80,7 @@ export default function AdminUpdateUser({ setShowModal2,idtaiKhoan}) {
     };
   
     return (
-     
+      <Popover  placement="rightTop"  title={"Birdthday cũ:"+ oldBirthday} >
       <Form
         className="px-4"
         onSubmitCapture={formik.handleSubmit}
@@ -92,7 +96,7 @@ export default function AdminUpdateUser({ setShowModal2,idtaiKhoan}) {
           Cập nhật tài khoản {idtaiKhoan}
         </h3>
 
-  
+      
         <Form.Item label="Họ Tên">
           <Input
             style={{ width: "50%" }}
@@ -142,21 +146,24 @@ export default function AdminUpdateUser({ setShowModal2,idtaiKhoan}) {
             <span className="text-danger">{formik.errors.phone}</span>
           )}
         </Form.Item>
-  
+
+       
         <Form.Item label="Ngày Sinh: ">
-        <Popover placement="bottom"  title={"Birdthday cũ:"+ oldBirthday} >
+       
           <DatePicker
             format={"DD-MM-YYYY"}
             name="birthday"
             onChange={handleChangeDate}
-              
+             
           />
-           </Popover>
-         
+        
+       
           {formik.errors.birthday && formik.touched.birthday && (
             <span className="text-danger">{formik.errors.birthday}</span>
           )}
+              
         </Form.Item>
+       
   
         <Form.Item label="Role" >
           <Radio.Group
@@ -177,8 +184,9 @@ export default function AdminUpdateUser({ setShowModal2,idtaiKhoan}) {
           Cập nhật
         </button>
       </Form.Item>
-
+    
       </Form>
+      </Popover>
     );
   }
   
