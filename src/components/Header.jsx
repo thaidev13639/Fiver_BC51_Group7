@@ -85,7 +85,7 @@ export default function Header() {
                             <a className="nav-link" href="/">Become a Seller</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="/">{accountState?.userInfo?.user?.name}</a>
+                            <NavLink className="nav-link" to={`/home-info-user/${accountState?.userInfo?.user?.id}`}>{accountState?.userInfo?.user?.name}</NavLink>
                         </li>
                     </ul>
                     <button className="btn btn-warning my-sm-0 btn-logout" type="submit" onClick={() => logout()}>Logout</button>

@@ -7,6 +7,9 @@ import { SearchOutlined, LikeOutlined, DislikeOutlined } from '@ant-design/icons
 import { useLocation, useParams } from 'react-router-dom';
 import { jobsService } from '../../services/jobs';
 import LeaveComent from './components/LeaveComent';
+import FAQuestion from './components/FAQuestion';
+import LeftBody from './components/LeftBody';
+import RightBody from './components/RightBody';
 
 
 export default function JobInfo() {
@@ -32,7 +35,6 @@ export default function JobInfo() {
 
     const fecthJobDetail = async () => {
         const data = await jobsService.fetchJobsDetailApi(param.id)
-        // console.log(data.data.content[0])
         setJobDetail(data.data.content[0])
     }
     const fetchListComent = async () => {
@@ -72,7 +74,7 @@ export default function JobInfo() {
                     <img src={jobDetail?.congViec?.hinhAnh} alt="..." />
                 </div>
                 <div className='jobInfo-box-service' id='box-service'>
-                    <Payment maCongViec={jobDetail?.congViec?.id}/>
+                    <Payment maCongViec={jobDetail?.congViec?.id} />
                 </div>
                 <div className='jobInfo-about'>
                     <h2>About This Gig</h2>
@@ -97,58 +99,10 @@ export default function JobInfo() {
                     </div>
                     <div className='FAQ'>
                         <h2>FAQ</h2>
-                        <div className='item'>
-                            <a className="button" data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample1">
-                                <span>
-                                    There are many passages but the majority?
-                                </span>
-                                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z" /></svg>
-                            </a>
-                            <div className="collapse togle" id="collapseExample1">
-                                <div className="card card-body">
-                                    Voluptates amet earum velit nobis aliquam laboriosam nihil debitis facere voluptatibus consectetur quae quasi fuga, ad corrupti libero omnis sapiente non assumenda, incidunt officiis eaque iste minima autem.
-                                </div>
-                            </div>
-                        </div>
-                        <div className='item'>
-                            <a className="button" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">
-                                <span>
-                                    There are many passages but the majority?
-                                </span>
-                                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z" /></svg>
-                            </a>
-                            <div className="collapse togle" id="collapseExample2">
-                                <div className="card card-body">
-                                    Voluptates amet earum velit nobis aliquam laboriosam nihil debitis facere voluptatibus consectetur quae quasi fuga, ad corrupti libero omnis sapiente non assumenda, incidunt officiis eaque iste minima autem.
-                                </div>
-                            </div>
-                        </div>
-                        <div className='item'>
-                            <a className="button" data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample3">
-                                <span>
-                                    There are many passages but the majority?
-                                </span>
-                                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z" /></svg>
-                            </a>
-                            <div className="collapse togle" id="collapseExample3">
-                                <div className="card card-body">
-                                    Voluptates amet earum velit nobis aliquam laboriosam nihil debitis facere voluptatibus consectetur quae quasi fuga, ad corrupti libero omnis sapiente non assumenda, incidunt officiis eaque iste minima autem.
-                                </div>
-                            </div>
-                        </div>
-                        <div className='item'>
-                            <a className="button" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                <span>
-                                    There are many passages but the majority?
-                                </span>
-                                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z" /></svg>
-                            </a>
-                            <div className="collapse togle" id="collapseExample">
-                                <div className="card card-body">
-                                    Voluptates amet earum velit nobis aliquam laboriosam nihil debitis facere voluptatibus consectetur quae quasi fuga, ad corrupti libero omnis sapiente non assumenda, incidunt officiis eaque iste minima autem.
-                                </div>
-                            </div>
-                        </div>
+                        <FAQuestion number={1} />
+                        <FAQuestion number={2} />
+                        <FAQuestion number={3} />
+                        <FAQuestion number={4} />
                     </div>
                     <div className='review'>
                         <div className='top'>
@@ -164,65 +118,10 @@ export default function JobInfo() {
                         </div>
                         <div className='body'>
                             <div className='left'>
-                                <div className='item'>
-                                    <span>5 Stars</span>
-                                    <div className="progress">
-                                        <div className="progress-bar bg-warning" role="progressbar" style={{ width: '90%' }} aria-valuenow={90} aria-valuemin={0} aria-valuemax={100} />
-                                    </div>
-                                    <span>(315)</span>
-                                </div>
-                                <div className='item'>
-                                    <span>4 Stars</span>
-                                    <div className="progress">
-                                        <div className="progress-bar bg-warning" role="progressbar" style={{ width: '20%' }} aria-valuenow={20} aria-valuemin={0} aria-valuemax={100} />
-                                    </div>
-                                    <span>(20)</span>
-                                </div>
-                                <div className='item'>
-                                    <span>3 Stars</span>
-                                    <div className="progress">
-                                        <div className="progress-bar bg-warning" role="progressbar" style={{ width: '10%' }} aria-valuenow={10} aria-valuemin={0} aria-valuemax={100} />
-                                    </div>
-                                    <span>(10)</span>
-                                </div>
-                                <div className='item'>
-                                    <span>2 Stars</span>
-                                    <div className="progress">
-                                        <div className="progress-bar bg-warning" role="progressbar" style={{ width: '0%' }} aria-valuenow={0} aria-valuemin={0} aria-valuemax={100} />
-                                    </div>
-                                    <span>(0)</span>
-                                </div>
-                                <div className='item'>
-                                    <span>1 Stars</span>
-                                    <div className="progress">
-                                        <div className="progress-bar bg-warning" role="progressbar" style={{ width: '5%' }} aria-valuenow={5} aria-valuemin={0} aria-valuemax={100} />
-                                    </div>
-                                    <span>(1)</span>
-                                </div>
+                                <LeftBody />
                             </div>
                             <div className='right'>
-                                <h2>Rating Breakdown</h2>
-                                <div className='item'>
-                                    <span>Seller communication level</span>
-                                    <div className='star'>
-                                        <Star />
-                                        <span>5</span>
-                                    </div>
-                                </div>
-                                <div className='item'>
-                                    <span>Recommend to a friend</span>
-                                    <div className='star'>
-                                        <Star />
-                                        <span>4</span>
-                                    </div>
-                                </div>
-                                <div className='item'>
-                                    <span>Service as described</span>
-                                    <div className='star'>
-                                        <Star />
-                                        <span>3</span>
-                                    </div>
-                                </div>
+                                <RightBody />
                             </div>
                         </div>
                         <div className='bottom'>
@@ -261,7 +160,7 @@ export default function JobInfo() {
                         })}
                     </div>
                     <div className='leave-comment'>
-                        <LeaveComent />
+                        <LeaveComent maCongViec={jobDetail?.congViec?.id} />
                     </div>
                 </div>
             </div>

@@ -31,5 +31,25 @@ class JobsService {
       method: "GET",
     });
   }
+  fetchRentJobApi(data) {
+    return requestApi({
+      url: "/thue-cong-viec",
+      method: "POST",
+      data,
+    });
+  }
+  fetchRentJobListUserApi() {
+    return requestApi({
+      url: "/thue-cong-viec/lay-danh-sach-da-thue",
+      method: "GET",
+    });
+  }
+  fetchCommentApi(data) {
+    return requestApi({
+      url: "/binh-luan",
+      method: "POST",
+      data,
+    });
+  }
 }
 export const jobsService = new JobsService();
