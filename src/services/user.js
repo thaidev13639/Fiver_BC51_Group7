@@ -60,7 +60,12 @@ class UserService {
       data,
     });
   }
-
+  fetchGetInfoUserApi(id) {
+    return requestApi({
+      url: `/users/${id}`,
+      method: "GET",
+    });
+  }
 }
 
 export const userService = new UserService();
