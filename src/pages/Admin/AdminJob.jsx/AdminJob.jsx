@@ -144,6 +144,7 @@ export default function AdminJob() {
     {
       title: "Action",
       dataIndex: "action",
+      fixed: 'right',
       render: (_, job) => {
         return <Fragment>
           <NavLink
@@ -212,6 +213,10 @@ export default function AdminJob() {
       <Table
         columns={columns}
         dataSource={data}
+        scroll={{
+          x: 1100,
+          y: 500,
+        }}
         style={{ border: "1px solid #00000036" }}
       />
     </>
