@@ -1,11 +1,48 @@
 import React from 'react'
-import { Tabs } from 'antd';
+import { Tabs, notification } from 'antd';
 import { useSelector } from 'react-redux';
+import dayjs from 'dayjs';
+import { jobsService } from '../../../services/jobs';
+import { useNavigate } from 'react-router-dom';
 
 export default function Payment(props) {
+    const dataStr = dayjs().format("DD/MM/YYYY")
+    const navigate = useNavigate()
     const userState = useSelector((state) => state.userReducer)
-    // console.log(userState.userInfo.user.id)
-    // console.log(props.maCongViec)
+
+    const rentJob = async () => {
+        if (userState?.userInfo) {
+            const body = {
+                id: 0,
+                maCongViec: props.maCongViec,
+                maNguoiThue: userState?.userInfo?.user?.id,
+                ngayThue: dataStr,
+                hoanThanh: true
+            }
+            try {
+                await jobsService.fetchRentJobApi(body)
+                notification.success({
+                    message: "Rent Job Success",
+                    placement: "bottomLeft",
+                    duration: 3
+                })
+            } catch (error) {
+                notification.warning({
+                    message: "Rent Job Not Success",
+                    placement: "bottomLeft",
+                    duration: 3
+                })
+            }
+        } else {
+            navigate("/form/login")
+            notification.warning({
+                message: "Please Login!!",
+                placement: "bottomRight",
+                duration: 3
+            })
+        }
+
+    }
     const items = [
         {
             key: '1',
@@ -41,7 +78,7 @@ export default function Payment(props) {
                         </p>
                     </div>
                     <div className='service-action'>
-                        <button>Continue (US$25)</button>
+                        <button onClick={() => rentJob()}>Continue (US$25)</button>
                         <p>Compare Packages</p>
                     </div>
                 </>,
@@ -79,7 +116,7 @@ export default function Payment(props) {
                     </p>
                 </div>
                 <div className='service-action'>
-                    <button>Continue (US$100)</button>
+                    <button onClick={() => rentJob()}>Continue (US$100)</button>
                     <p>Compare Packages</p>
                 </div>
             </>,
@@ -117,7 +154,7 @@ export default function Payment(props) {
                     </p>
                 </div>
                 <div className='service-action'>
-                    <button>Continue (US$250)</button>
+                    <button onClick={() => rentJob()}>Continue (US$250)</button>
                     <p>Compare Packages</p>
                 </div>
             </>,

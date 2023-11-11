@@ -17,6 +17,7 @@ import AdminJobType from "../pages/Admin/AdminJobType/AdminJobType";
 import AdminService from "../pages/Admin/AdminService/AdminService";
 import AdminDetailType from "../pages/Admin/AdminDetailType/AdminDetailType";
 import AdminComment from "../pages/Admin/AdminComment/AdminComment";
+import InfoUser from "../pages/InfoUser/InfoUser";
 
 export default function Router() {
   const routing = useRoutes([
@@ -39,6 +40,10 @@ export default function Router() {
         {
           path: "/job-info/:id",
           element: <JobInfo />
+        },
+        {
+          path: "/home-info-user/:id",
+          element: <InfoUser />
         }
       ]
     },
@@ -54,7 +59,7 @@ export default function Router() {
           path: "/admin",
           element: <AdminUser />,
         },
-         {
+        {
           path: "/admin/job",
           element: <AdminJob />,
         },
@@ -64,16 +69,16 @@ export default function Router() {
         },
         {
           path: "/admin/detailtype",
-          element: <AdminDetailType/>,
+          element: <AdminDetailType />,
         },
         {
-           path: "/admin/service",
-         element: <AdminService />,
+          path: "/admin/service",
+          element: <AdminService />,
         },
         {
           path: "/admin/comment",
-        element: <AdminComment />,
-       },
+          element: <AdminComment />,
+        },
       ],
     },
     {
