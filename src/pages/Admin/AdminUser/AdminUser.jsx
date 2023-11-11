@@ -122,6 +122,7 @@ export default function AdminUser() {
     {
       title: "Action",
       dataIndex: "action",
+      fixed: 'right',
       render: (_, user) => {
         return (
           <Fragment>
@@ -208,6 +209,10 @@ export default function AdminUser() {
       <Table
         columns={columns}
         dataSource={data}
+        scroll={{
+          x: 1100,
+          y: 500,
+        }}
         style={{ border: "1px solid #00000036" }}
       />
     </>

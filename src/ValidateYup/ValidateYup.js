@@ -43,33 +43,19 @@ export const validate = yup.object().shape({
 
 export const validationJob = yup.object().shape({
   tenCongViec: yup.string().required(" (*) vui lòng nhập tên công việc"),
-  danhGia: yup.number().min(0).required(" (*) vui lòng không bỏ trống"),
-  giaTien: yup.number().min(0).required(" (*) vui lòng không bỏ trống"),
+  danhGia: yup.number().min(0).max(10).required(" (*) vui lòng không bỏ trống"),
+  giaTien: yup.number().min(0).max(20e6).required(" (*) vui lòng không bỏ trống"),
   nguoiTao: yup.number().min(0).required(" (*) vui lòng không bỏ trống"),
 
-  moTa: yup.string().required(" (*) vui lòng không bỏ trống"),
-  maChiTietLoaiCongViec: yup.string().required(" (*) vui lòng không bỏ trống"),
-  moTaNgan: yup.string().required(" (*) vui lòng không bỏ trống"),
+  
+  moTa:yup.string().required(" (*) vui lòng không bỏ trống"),
+  maChiTietLoaiCongViec: yup.number().min(0).required(" (*) vui lòng không bỏ trống"),
+  moTaNgan:yup.string().required(" (*) vui lòng không bỏ trống"),
+
   saoCongViec: yup.number().min(0).required(" (*) vui lòng không bỏ trống"),
 });
 
-export const validationAddMovie = yup.object().shape({
-  tenPhim: yup.string().required(" (*) vui lòng nhập tên phim"),
-  trailer: yup.string().required(" (*) vui lòng không bỏ trống"),
-  moTa: yup.string().required(" (*) vui lòng nhập mô tả"),
-  ngayKhoiChieu: yup.string().required(" (*) vui lòng không bỏ trống"),
-  danhGia: yup.number().min(0).max(10).required(" (*) vui lòng nhập đánh giá"),
-});
 
-export const validationAddShowTime = yup.object().shape({
-  maRap: yup.string().required(" (*) vui lòng nhập mô tả"),
-  ngayGioChieu: yup.string().required(" (*) vui lòng không bỏ trống"),
-  giaVe: yup
-    .number()
-    .min(75000)
-    .max(150000)
-    .required(" (*) vui lòng nhập đánh giá"),
-});
 
 export const validateInfo = yup.object().shape({
   name: yup
@@ -117,9 +103,11 @@ export const validateInfoAdmin = yup.object().shape({
     .required("(*) Vui lòng nhập họ và tên"),
 });
 
-export const validationComment = yup.object().shape({
-  noiDung: yup
-    .string()
-    .matches(relusComent, { message: "(*) Please enter the correct format" })
-    .required("(*)Please Input Value"),
-});
+export const validateComment = yup.object().shape({
+  maCongViec: yup.number().min(0).required(" (*) vui lòng không bỏ trống") ,
+  maNguoiBinhLuan: yup.number().min(0).required(" (*) vui lòng không bỏ trống"),
+  ngayBinhLuan: yup.string().required(" (*) vui lòng không bỏ trống"),
+  noiDung: yup.string().required(" (*) vui lòng không bỏ trống"),
+  saoBinhLuan: yup.number().min(0).required(" (*) vui lòng không bỏ trống")
+})
+
