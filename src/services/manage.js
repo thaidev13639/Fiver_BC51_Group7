@@ -1,15 +1,15 @@
 import { requestApi } from "../configs/configApi";
 
 class ManageService {
-  
 
-  fetchGetListJobS = (TenCongViec ) => { 
+
+  fetchGetListJobS = (TenCongViec) => {
     if (TenCongViec !== "") {
       return requestApi({
         url: `/cong-viec/lay-danh-sach-cong-viec-theo-ten/${TenCongViec}`,
         method: "GET",
       });
-    }else {
+    } else {
       return requestApi({
         url: `/cong-viec`,
         method: "GET",
@@ -37,7 +37,7 @@ class ManageService {
     });
   }
 
-  fetchJobsAddImgApi(id,data) {
+  fetchJobsAddImgApi(id, data) {
     return requestApi({
       url: `/cong-viec/upload-hinh-cong-viec/${id}`,
       method: "POST",
@@ -45,7 +45,7 @@ class ManageService {
     });
   }
 
-  fetchJobsUpdateApi(id,data) {
+  fetchJobsUpdateApi(id, data) {
     return requestApi({
       url: `/cong-viec/${id}`,
       method: "PUT",
@@ -54,13 +54,13 @@ class ManageService {
   }
 
   //loại
-  fetchGetListJobsType = (keyword) => { 
-    if (keyword!== "") {
+  fetchGetListJobsType = (keyword) => {
+    if (keyword !== "") {
       return requestApi({
         url: `/loai-cong-viec/phan-trang-tim-kiem?pageIndex=1&pageSize=10&keyword=${keyword}`,
         method: "GET",
       });
-    }else{
+    } else {
       return requestApi({
         url: `/loai-cong-viec`,
         method: "GET",
@@ -80,7 +80,7 @@ class ManageService {
       method: "GET",
     });
   }
-  fetchJobsTypeUpdateApi(id,data) {
+  fetchJobsTypeUpdateApi(id, data) {
     return requestApi({
       url: `/loai-cong-viec/${id}`,
       method: "PUT",
@@ -90,20 +90,20 @@ class ManageService {
   //thuecongviec
 
 
-fetchGetListHireJobS = (keyword) => { 
-  if (keyword!== "") {
-    return requestApi({
-      url: `/thue-cong-viec/phan-trang-tim-kiem?pageIndex=1&pageSize=10&keyword=${keyword}`,
-      method: "GET",
-    });
-  }else{
-    return requestApi({
-      url: `/thue-cong-viec`,
-      method: "GET",
-    });
-  }
-     
-    
+  fetchGetListHireJobS = (keyword) => {
+    if (keyword !== "") {
+      return requestApi({
+        url: `/thue-cong-viec/phan-trang-tim-kiem?pageIndex=1&pageSize=10&keyword=${keyword}`,
+        method: "GET",
+      });
+    } else {
+      return requestApi({
+        url: `/thue-cong-viec`,
+        method: "GET",
+      });
+    }
+
+
   };
 
   fetchHireJobsDeleteApi(id) {
@@ -118,15 +118,114 @@ fetchGetListHireJobS = (keyword) => {
       method: "GET",
     });
   }
-  fetchHireJobsUpdateApi(id,data) {
+  fetchHireJobsUpdateApi(id, data) {
     return requestApi({
       url: `/thue-cong-viec/${id}`,
       method: "PUT",
       data,
     });
   }
+  //chitetloai
+  fetchGetListDetailType = (keyword) => {
+    if (keyword !== "") {
+      return requestApi({
+        url: `/chi-tiet-loai-cong-viec/phan-trang-tim-kiem?pageIndex=1&pageSize=9&keyword=${keyword}`,
+        method: "GET",
+      });
+    } else {
+      return requestApi({
+        url: `/chi-tiet-loai-cong-viec`,
+        method: "GET",
+      });
+    }
+  }
+
+  fetchAddDetailTypeApi() {
+    return requestApi({
+      url: `/chi-tiet-loai-cong-viec`,
+      method: "POST",
+    });
+  }
+
+  fetchAddGrpDetailTypeApi() {
+    return requestApi({
+      url: `/chi-tiet-loai-cong-viec/them-nhom-chi-tiet-loai`,
+      method: "POST",
+    });
+  }
+
+
+  fetchDelDetailTypeApi(id) {
+    return requestApi({
+      url: `/chi-tiet-loai-cong-viec/${id}`,
+      method: "DELETE",
+    });
+  }
+
+  fetchGetDetailTypeApi(id) {
+    return requestApi({
+      url: `/chi-tiet-loai-cong-viec/${id}`,
+      method: "GET",
+    });
+  }
+  fetchUpdateDetailTypeApi(id) {
+    return requestApi({
+      url: `/chi-tiet-loai-cong-viec/${id}`,
+      method: "PUT"
+    });
+  }
+
+  fetchUploadDetailTypeApi(MaNhomLoaiCongViec) {
+    return requestApi({
+      url: `/chi-tiet-loai-cong-viec/upload-hinh-nhom-loai-cong-viec/${MaNhomLoaiCongViec}`,
+      method: "POST"
+    });
+  }
+
  
+
+  //comment 
+  fetchGetListComment = (MaCongViec) => {
+    if (MaCongViec !== "") {
+      return requestApi({
+        url: `/binh-luan/lay-binh-luan-theo-cong-viec/${MaCongViec}`,
+        method: "GET",
+      });
+    } else {
+      return requestApi({
+        url: `/binh-luan`,
+        method: "GET",
+      });
+    }
+  }
+
+  fetchGetComment(id) {
+    return requestApi({
+      url: `/loai-cong-viec/${id}`,
+      method: "GET",
+    });
+  }
+
+  fetchAddComment() {
+    return requestApi({
+      url: `/binh-luan`,
+      method: "POST",
+    });
+  }
+  fetchDelComment(id) {
+    return requestApi({
+      url: `/binh-luan/${id}`,
+      method: "DELETE",
+    });
+  }
+
+  fetchUptComment(id) {
+    return requestApi({
+      url: `/binh-luan/${id}`,
+      method: "PUT",
+    });
+  }
 
 }
 
-export const manageService= new ManageService();
+export const manageService = new ManageService();

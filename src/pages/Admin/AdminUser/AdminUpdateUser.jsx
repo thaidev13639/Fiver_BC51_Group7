@@ -78,15 +78,23 @@ export default function AdminUpdateUser({ setShowModal2,idtaiKhoan}) {
         formik.setFieldValue("birthday", dateMoment);
       }
     };
+
+    const content = (
+      <div>
+        <p>{oldBirthday}</p>
+       
+      </div>
+    );
   
     return (
-      <Popover  placement="rightTop"  title={"Birdthday cũ:"+ oldBirthday} >
+      <Popover content={content}  placement="rightTop"  title={"Birdthday cũ:"}>
       <Form
         className="px-4"
         onSubmitCapture={formik.handleSubmit}
         labelCol={{
           span: 4,
         }}
+        
         wrapperCol={{
           span: 14,
         }}

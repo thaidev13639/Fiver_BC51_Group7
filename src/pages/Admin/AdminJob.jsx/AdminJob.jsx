@@ -55,26 +55,33 @@ export default function AdminJob() {
         });
       }
     }
-    
   };
 
   const { Search } = Input;
 
   const handleSearch = async (value) => {
     console.log("Search term:", value);
-    try {
-      // setLoadingState({ isLoading: true });
-      const findJob = await manageService.fetchGetListJobS(value);
-
-      const resultSearchJob = findJob.data.content;
-      const congViecArr = resultSearchJob.map((object) => object.congViec);
-
-      setListJob(congViecArr);
-
-      // setLoadingState({ isLoading: false });
-    } catch (error) {
-      console.log(error);
+    if(value){
+      try {
+        // setLoadingState({ isLoading: true });
+        const findJob = await manageService.fetchGetListJobS(value);
+  
+        const resultSearchJob = findJob.data.content;
+        console.log(resultSearchJob)
+       
+          const congViecArr = resultSearchJob.map((object) => object.congViec);
+          setListJob(congViecArr);
+        
+        
+  
+        // setLoadingState({ isLoading: false });
+      } catch (error) {
+        console.log(error);
+      }
+    }else{
+      fetchListJob()
     }
+  
   };
 
   const columns = [
@@ -174,11 +181,11 @@ export default function AdminJob() {
       width: "10%",
     },
   ];
-
+                                             
   const data = listJob.map((element, idx) => {
     return { ...element, key: `${idx}` };
-  });
-
+  });                                                                                                      
+                                                                                                                                                                                                                                                                                                                                                            
   return (
     <>
       <h3>DANH SÁCH JOB</h3>
