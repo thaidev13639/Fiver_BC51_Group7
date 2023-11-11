@@ -23,6 +23,7 @@ export default function AdminJobType() {
   const fetchListJobType = async () => {
     const jobTypeList = await manageService.fetchGetListJobsType("");
     setListJobType(jobTypeList.data.content);
+    setDelJobType(false)
   };
 
   const handleOpenModalUpdate = (data) => {
@@ -96,7 +97,7 @@ export default function AdminJobType() {
             >
               <AdminUpdateJobType
                 setShowModal2={setShowModal2}
-                idtaiKhoan={selectedJobTypeId}
+                idJobType={selectedJobTypeId}
               />
             </Modal>
 
@@ -122,17 +123,21 @@ export default function AdminJobType() {
 
   const handleSearch = async (value) => {
     console.log("Search term:", value);
-    try {
-      // setLoadingState({ isLoading: true });
-      const findJobType = await manageService.fetchGetListJobsType(value);
-        console.log(findJobType);
-
-      setListJobType(findJobType.data.content.data);
-     
-
-      // setLoadingState({ isLoading: false });
-    } catch (error) {
-      console.log(error);
+    if(value){
+      try {
+        // setLoadingState({ isLoading: true });
+        const findJobType = await manageService.fetchGetListJobsType(value);
+          console.log(findJobType);
+  
+        setListJobType(findJobType.data.content.data);
+       
+  
+        // setLoadingState({ isLoading: false });
+      } catch (error) {
+        console.log(error);
+      }
+    }else{
+      fetchListJobType()
     }
   };
 
