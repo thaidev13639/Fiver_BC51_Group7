@@ -10,12 +10,29 @@ import moment from 'moment/moment';
 export default function AdminUpdateUser({ setShowModal2,idtaiKhoan}) {
     const navigate = useNavigate();
     const [userDetail, setUserDetail] = useState({})
+    const [placement, setPlacement] = useState('rightTop');
     
     
     useEffect(() => {
         fetchGetUser(); //get thong tin user
+
+        handleResize()
+        window.addEventListener('resize', handleResize);
+    
+        // Clean up the event listener when the component unmounts (ko su dung nữa)
+        return () => {
+          window.removeEventListener('resize', handleResize);
+        };
         
-    }, [setShowModal2,idtaiKhoan])
+    }, [setShowModal2,idtaiKhoan,placement])
+
+    const handleResize = () => {
+      if (window.innerWidth < 900) {
+        setPlacement('topRight');
+      } else if(window.innerWidth > 900) {
+        setPlacement('rightTop');
+      }
+    }
 
     const fetchGetUser = async () => {
         const user = await userService.fetchUserDetailApi(idtaiKhoan)
@@ -87,7 +104,7 @@ export default function AdminUpdateUser({ setShowModal2,idtaiKhoan}) {
     );
   
     return (
-      <Popover content={content}  placement="rightTop"  title={"Birdthday cũ:"}>
+      <Popover content={content}  placement={placement} title={"Birdthday cũ:"}>
       <Form
         className="px-4"
         onSubmitCapture={formik.handleSubmit}

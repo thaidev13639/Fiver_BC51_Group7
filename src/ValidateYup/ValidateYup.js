@@ -117,3 +117,14 @@ export const validationComment = yup.object().shape({
     .matches(relusComent, { message: "(*) Please enter the correct format" })
     .required("(*)Please Input Value"),
 });
+
+export const validateTypeJob = yup.object().shape({
+  tenLoaiCongViec:yup.string().required(" (*) vui lòng không bỏ trống"),
+});
+
+export const validateHireJob = yup.object().shape({
+  maCongViec: yup.number().min(0).required(" (*) vui lòng không bỏ trống") ,
+  maNguoiThue:yup.number().min(0).required(" (*) vui lòng không bỏ trống") ,
+  ngayThue: yup.string().required(" (*) vui lòng không bỏ trống"),
+  hoanThanh: yup.boolean().is(true).or(yup.boolean().is(false)),
+});
