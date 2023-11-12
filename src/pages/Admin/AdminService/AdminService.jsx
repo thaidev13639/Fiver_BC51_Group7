@@ -102,6 +102,7 @@ export default function AdminService() {
     {
       title: "Action",
       dataIndex: "action",
+      fixed: 'right',
       render: (_, service) => {
         return <Fragment>
           <NavLink
@@ -170,6 +171,10 @@ export default function AdminService() {
     <Table
       columns={columns}
       dataSource={data}
+      scroll={{
+        x: 1100,
+        y: 500,
+      }}
       style={{ border: "1px solid #00000036" }}
     />
   </>

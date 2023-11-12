@@ -12,6 +12,7 @@ export default function AdminComment() {
   const [showModal, setShowModal] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
   const [delComment, setDelComment] = useState(false);
+  const [search,setSearch] =useState(false);
 
   const [selectedCommentId, setSelectedCommentId] = useState(null);
 
@@ -55,14 +56,16 @@ export default function AdminComment() {
     
   };
   const { Search } = Input;
+  
   const handleSearch = async (value) => {
     console.log("Search term:", value);
     if(value){
       try {
         // setLoadingState({ isLoading: true });
         const findcomment = await manageService.fetchGetListComment(value);
-
+          console.log(findcomment)
           setListComment(findcomment.data.content);
+        setSearch(true)
         
         // setLoadingState({ isLoading: false });
       } catch (error) {
@@ -70,6 +73,7 @@ export default function AdminComment() {
       }
     }else{
       fetchListComment()
+      setSearch(false)
     }
   };
 
@@ -92,15 +96,17 @@ export default function AdminComment() {
     {
       title: "Mã công việc",
       dataIndex: "maCongViec",
+      hidden: search ? true :false,
     
     },
     {
       title: "Mã người bình luận ",
       dataIndex: "maNguoiBinhLuan",
+      hidden: search ? true :false,
     
     },
     {
-      title: "Ngày bình luận   ",
+      title: "Ngày bình luận ",
       dataIndex:"ngayBinhLuan"
     },
     {
@@ -111,10 +117,38 @@ export default function AdminComment() {
       title: "Sao Bình luận ",
       dataIndex:"saoBinhLuan"
     },
+    {
+      title: "avatar",
+      dataIndex:"avatar",
+      hidden: search ? false :true,
+      render: (_, comment, idx) => {
+        return (
+          <Fragment key={idx}>
+            <img
+              src={comment.avatar}
+              alt={comment.avatar}
+              onError={(e) => {
+                e.target.onError = null;
+                e.target.src =
+                  "https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg";
+              }}
+              style={{ width: 100, height: 100 }}
+            />
+          </Fragment>
+        );
+      },
+    },
+
+    {
+      title: "Tên người bình luận ",
+      dataIndex:"tenNguoiBinhLuan",
+      hidden: search ? false :true,                                                    
+    },
   
     {
       title: "Action",
       dataIndex: "action",
+      fixed: 'right',
       render: (_, comment) => {
         return <Fragment>
           <NavLink
@@ -151,7 +185,7 @@ export default function AdminComment() {
       },
       width: "10%",
     },
-  ];
+   ].filter(item => !item.hidden);
   const data = listComment.map((element, idx) => {
     return { ...element, key: `${idx}` };
   });   
@@ -178,11 +212,19 @@ export default function AdminComment() {
         onSearch={handleSearch}
         enterButton
       />
+
       <Table
+      
         columns={columns}
         dataSource={data}
+        scroll={{
+          x: 1100,
+          y: 500,
+        }}     
+        onSearch={handleSearch}
         style={{ border: "1px solid #00000036" }}
       /> 
+      
     </>
   )
 }

@@ -51,7 +51,7 @@ const fetchDetailJob = async () => {
       }, 3000);
      
      
-     //document.getElementById("uploadImg").value=null;
+  
     } catch (error) {
       notification.warning({
         message: error?.response?.data?.message || "Cập nhật Không Thành Công",

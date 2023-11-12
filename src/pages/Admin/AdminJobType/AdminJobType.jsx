@@ -78,6 +78,7 @@ export default function AdminJobType() {
     {
       title: "Action",
       dataIndex: "action",
+      fixed: 'right',
       render: (_, jobType) => {
         return (
           <Fragment>
@@ -165,7 +166,10 @@ export default function AdminJobType() {
       <Table
         columns={columns}
         dataSource={data}
-        
+        scroll={{
+          x: 1100,
+          y: 500,                  
+        }}
         style={{ border: "1px solid #00000036" }}
       />
     </>

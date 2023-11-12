@@ -201,15 +201,16 @@ class ManageService {
 
   fetchGetComment(id) {
     return requestApi({
-      url: `/loai-cong-viec/${id}`,
+      url: `/binh-luan/${id}`,
       method: "GET",
     });
   }
 
-  fetchAddComment() {
+  fetchAddComment(data) {
     return requestApi({
       url: `/binh-luan`,
       method: "POST",
+      data
     });
   }
   fetchDelComment(id) {
@@ -219,10 +220,11 @@ class ManageService {
     });
   }
 
-  fetchUptComment(id) {
+  fetchUptComment(id,data) {
     return requestApi({
       url: `/binh-luan/${id}`,
       method: "PUT",
+      data
     });
   }
 
