@@ -220,10 +220,11 @@ class ManageService {
     });
   }
 
-  fetchUptComment(id) {
+  fetchUptComment(id,data) {
     return requestApi({
       url: `/binh-luan/${id}`,
       method: "PUT",
+      data
     });
   }
 
