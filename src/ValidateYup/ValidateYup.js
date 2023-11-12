@@ -111,3 +111,9 @@ export const validateComment = yup.object().shape({
   saoBinhLuan: yup.number().min(0).required(" (*) vui lòng không bỏ trống")
 })
 
+export const validationComment = yup.object().shape({
+  noiDung: yup
+    .string()
+    .matches(relusComent, { message: "(*) Please enter the correct format" })
+    .required("(*)Please Input Value"),
+});
