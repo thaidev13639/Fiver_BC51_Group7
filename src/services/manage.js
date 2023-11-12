@@ -68,6 +68,14 @@ class ManageService {
     }
   };
 
+  fetchAddJobsTypeApi(data) {
+    return requestApi({
+      url: `/loai-cong-viec`,
+      method: "POST",
+      data
+    });
+  }
+
   fetchJobsTypeDeleteApi(id) {
     return requestApi({
       url: `/loai-cong-viec/${id}`,

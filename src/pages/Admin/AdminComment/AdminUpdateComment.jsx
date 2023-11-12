@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import { DatePicker, Form, Input, Radio, notification } from "antd";
+import { DatePicker, Form, Input, Popover, Radio, notification } from "antd";
 import { useNavigate } from "react-router-dom";
 
 import { useFormik } from "formik";
@@ -14,12 +14,27 @@ export default function AdminUpdateComment({ setShowModal2,commentId}) {
   const [imgSrc, setImgSrc] = useState(null);
   const [imgSrcApi, setImgSrcApi] = useState(null);
   const [infoComment, setinfoComment] = useState({})
-
+  const [placement, setPlacement] = useState('rightTop');
 
   useEffect(() => {
     fetchListComment()
-}, [commentId,setShowModal2,imgSrc,imgSrcApi])
+    handleResize()
+    window.addEventListener('resize', handleResize);
 
+    // Clean up the event listener when the component unmounts (ko su dung nữa)
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+   
+}, [commentId,setShowModal2,imgSrc,imgSrcApi,placement])
+
+const handleResize = () => {
+  if (window.innerWidth < 900) {
+    setPlacement('topRight');
+  } else if(window.innerWidth > 900) {
+    setPlacement('rightTop');
+  }
+}
 
 const fetchListComment = async () => {
   const commentList = await manageService.fetchGetListComment("");
@@ -77,7 +92,7 @@ console.log(filteredData[0]);
     enableReinitialize: true,
     initialValues: {
       id: infoComment?.id,
-      maCongViec:  infoComment.maCongViec,
+      maCongViec:  infoComment?.maCongViec,
       maNguoiBinhLuan: infoComment?.maNguoiBinhLuan,
       ngayBinhLuan: infoComment?.ngayBinhLuan,
       noiDung: infoComment?.noiDung,
@@ -100,8 +115,15 @@ console.log(filteredData[0]);
     }
   };
 
-  return (
+  const content = (
+    <div>
+      <p>{infoComment?.ngayBinhLuan}</p>
+     
+    </div>
+  );
 
+  return (
+    <Popover content={content}  placement={placement}  title={"Birdthday cũ:"}>
     <Form
       className="px-4"
       onSubmitCapture={formik.handleSubmit}
@@ -113,8 +135,9 @@ console.log(filteredData[0]);
       }}
       layout="horizontal"
     >
+     
       <h3 style={{ marginBottom: "5%", textTransform: "uppercase" }}>
-        Cập Nhật Bình Luận + {commentId}
+        Cập Nhật Bình Luận {commentId}
       </h3>
 
       <Form.Item>
@@ -146,11 +169,12 @@ console.log(filteredData[0]);
           <span className="text-danger">{formik.errors.maNguoiBinhLuan}</span>
         )}
       </Form.Item>
-      <Form.Item label="Ngày Bình Luận">
+      <Form.Item >
+      <label htmlFor="">Ngày Bình Luận : </label>
         <DatePicker
           format={"DD-MM-YYYY"}
           name="ngayBinhLuan"
-         
+          style={{ width: "50%" }}
          onChange={handleChangeDate}
         />
         {formik.errors.ngayBinhLuan && formik.touched.ngayBinhLuan && (
@@ -197,6 +221,8 @@ console.log(filteredData[0]);
           Cập nhật bình luận 
         </button>
       </Form.Item>
+    
     </Form>
+    </Popover>
   );
 }

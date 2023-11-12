@@ -101,12 +101,15 @@ export default function AdminAddComment({ setShowModal }) {
           <span className="text-danger">{formik.errors.maNguoiBinhLuan}</span>
         )}
       </Form.Item>
-      <Form.Item label="Ngày Bình Luận">
+      <Form.Item >
+        <label htmlFor="">Ngày Bình Luận : </label>
+
         <DatePicker
           format={"DD-MM-YYYY"}
           name="ngayBinhLuan"
-         
+          style={{ width: "50%" }}
          onChange={handleChangeDate}
+
         />
         {formik.errors.ngayBinhLuan && formik.touched.ngayBinhLuan && (
           <span className="text-danger">{formik.errors.ngayBinhLuan}</span>
