@@ -126,5 +126,5 @@ export const validateHireJob = yup.object().shape({
   maCongViec: yup.number().min(0).required(" (*) vui lòng không bỏ trống") ,
   maNguoiThue:yup.number().min(0).required(" (*) vui lòng không bỏ trống") ,
   ngayThue: yup.string().required(" (*) vui lòng không bỏ trống"),
-  hoanThanh: yup.boolean().is(true).or(yup.boolean().is(false)),
+  hoanThanh: yup.boolean(),
 });
