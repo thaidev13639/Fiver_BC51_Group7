@@ -1,7 +1,141 @@
-import React from 'react'
+import React, { useState } from "react";
+import { DatePicker, Form, Input, Radio, notification } from "antd";
+import { useNavigate } from "react-router-dom";
 
-export default function AdminAddService() {
+import { useFormik } from "formik";
+import { manageService } from "../../../services/manage";
+import moment from "moment/moment";
+import { validateHireJob } from "../../../ValidateYup/ValidateYup";
+export default function AdminAddService({ setShowModal }) {
+  const navigate = useNavigate();
+  
+
+  const formik = useFormik({
+    enableReinitialize: true,
+    initialValues: {
+      id: 0,
+      maCongViec: "",
+      maNguoiThue: "",
+      ngayThue: "",
+      hoanThanh: true,
+    },
+    validationSchema: validateHireJob,
+    onSubmit: async (values) => {
+      console.log(values);
+      try {
+        await manageService.fetchAddHireJobsApi(values);
+        setShowModal(false);
+
+        notification.success({
+          message: "Thêm Thành Công",
+          placement: "bottomRight",
+          duration: 5,
+        });
+        setTimeout(() => {
+          // Navigate to the desired page
+          navigate(0);
+        }, 2000);
+      } catch (error) {
+        console.log(error);
+        notification.warning({
+          message: error?.response?.data?.content || "Dữ liệu không đúng",
+          placement: "bottomRight",
+          duration: 2,
+        });
+      }
+    },
+  });
+
+  const handleChangeDate = (date) => {
+    if (date) {
+      let dateMoment = moment(date.$d).format("DD/MM/YYYY")
+      console.log(dateMoment)
+      formik.setFieldValue("ngayThue", dateMoment);
+    }
+  };
+
+  
+
   return (
-    <div>AdminAddService</div>
-  )
+    
+    <Form
+      className="px-4"
+      onSubmitCapture={formik.handleSubmit}
+      labelCol={{
+        span: 4,
+      }}
+      wrapperCol={{
+        span: 14,
+      }}
+      layout="horizontal"
+    >
+      <h3 style={{ marginBottom: "5%", textTransform: "uppercase" }}>
+        Thêm Thuê Công Việc
+      </h3>
+
+      <Form.Item>
+        <label htmlFor="">Mã công việc : </label>
+        <Input
+        type="number"
+          style={{ width: "50%" }}
+          name="maCongViec"
+          onChange={formik.handleChange}
+        />
+        <br />
+        {formik.errors.maCongViec && formik.touched.maCongViec && (
+          <span className="text-danger">{formik.errors.maCongViec}</span>
+        )}
+      </Form.Item>
+      
+      <Form.Item >
+        <label htmlFor=""> Mã Người Thuê :  </label>
+        <Input
+        type="number"
+          style={{ width: "30%" }}
+          name="maNguoiThue"
+          onChange={formik.handleChange}
+        />
+        <br />
+        {formik.errors. maNguoiThue && formik.touched.maNguoiThue && (
+          <span className="text-danger">{formik.errors.maNguoiThue}</span>
+        )}
+      </Form.Item>
+      <Form.Item >
+        <label htmlFor="">Ngày Thuê: </label>
+
+        <DatePicker
+          format={"DD/MM/YYYY"}
+          name="ngayThue"
+          style={{ width: "50%" }}
+         onChange={handleChangeDate}
+
+        />
+        {formik.errors.ngayThue && formik.touched.ngayThue && (
+          <span className="text-danger">{formik.errors.ngayThue}</span>
+        )}
+      </Form.Item>
+
+     
+      <Form.Item label="Role" >
+        <Radio.Group
+        name="hoanThanh"
+        defaultValue="FALSE"
+        onChange={formik.handleChange}
+        >
+          {/* <Radio.Button value="TRUE">True</Radio.Button> */}
+          <Radio.Button value="FALSE">False</Radio.Button>
+        
+        </Radio.Group>
+      
+      </Form.Item>
+
+      
+      <Form.Item label="Action:"
+       style={{ width: "100%" }}>
+        <button className="btn btn-success ml-3" type="submit">
+          Thêm 
+        </button>
+      </Form.Item>
+    </Form>
+  );
 }

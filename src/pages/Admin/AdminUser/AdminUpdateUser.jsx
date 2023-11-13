@@ -64,7 +64,7 @@ export default function AdminUpdateUser({ setShowModal2,idtaiKhoan}) {
         console.log(values);
         try {
           await userService.fetchUserUpdateApi(idtaiKhoan,values);
-           navigate("/admin");
+         
            setShowModal2(false);
           notification.success({
             message: "Chỉnh Sữa Thành Công",
@@ -74,7 +74,7 @@ export default function AdminUpdateUser({ setShowModal2,idtaiKhoan}) {
           setTimeout(() => {
             // Navigate to the desired page
             navigate(0);
-          }, 3000);
+          }, 2000);
         } catch (error) {
           console.log(error);
           notification.warning({

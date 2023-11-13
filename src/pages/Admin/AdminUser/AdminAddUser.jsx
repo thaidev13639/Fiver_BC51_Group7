@@ -9,7 +9,7 @@ import moment from "moment";
 
 export default function AdminAddUser({ setShowModal }) {
    const navigate = useNavigate();
- 
+  
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -41,7 +41,7 @@ export default function AdminAddUser({ setShowModal }) {
         setTimeout(() => {
           // Navigate to the desired page
           navigate(0);
-        }, 3000);
+        }, 2000);
        
         
          
@@ -63,6 +63,7 @@ export default function AdminAddUser({ setShowModal }) {
       formik.setFieldValue("birthday", dateMoment);
     }
   };
+
 
   
   return (

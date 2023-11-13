@@ -93,6 +93,26 @@ export default function AdminUser() {
       },
     },
     {
+      title: "Hình Ảnh",
+      dataIndex: "avatar",
+      render: (_, user, idx) => {
+        return (
+          <Fragment key={idx}>
+            <img
+              src={user.avatar}
+              alt={user.avatar}
+              onError={(e) => {
+                e.target.onError = null;
+                e.target.src =
+                  "https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg";
+              }}
+              style={{ width: 100, height: 100 }}
+            />
+          </Fragment>
+        );
+      },
+    },
+    {
       title: "Loại Người Dùng",
       dataIndex: "role",
       sorter: {

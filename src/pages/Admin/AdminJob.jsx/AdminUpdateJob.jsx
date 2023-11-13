@@ -48,7 +48,7 @@ const fetchDetailJob = async () => {
       setTimeout(() => {
         // Navigate to the desired page
         navigate(0);
-      }, 3000);
+      }, 2000);
      
      
   

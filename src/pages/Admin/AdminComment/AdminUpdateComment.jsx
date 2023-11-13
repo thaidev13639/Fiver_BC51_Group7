@@ -76,7 +76,7 @@ console.log(filteredData[0]);
       setTimeout(() => {
         // Navigate to the desired page
         navigate(0);
-      }, 3000);
+      }, 2000);
      
      
   
