@@ -114,6 +114,15 @@ class ManageService {
 
   };
 
+
+  fetchAddHireJobsApi(data) {
+    return requestApi({
+      url: `/thue-cong-viec`,
+      method: "POST",
+      data,
+    });
+  }
+
   fetchHireJobsDeleteApi(id) {
     return requestApi({
       url: `/thue-cong-viec/${id}`,

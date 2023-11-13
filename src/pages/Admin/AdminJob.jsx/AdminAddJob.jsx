@@ -42,7 +42,7 @@ export default function AdminAddJob({ setShowModal }) {
         setTimeout(() => {
           // Navigate to the desired page
           navigate(0);
-        }, 3000);
+        }, 2000);
       } catch (error) {
         console.log(error);
         notification.warning({

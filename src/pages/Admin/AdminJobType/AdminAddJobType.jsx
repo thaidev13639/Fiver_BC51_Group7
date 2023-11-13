@@ -33,7 +33,7 @@ export default function AdminAddJobType({setShowModal}) {
         setTimeout(() => {
           // Navigate to the desired page
           navigate(0);
-        }, 3000);
+        }, 2000);
        
         
          
@@ -66,9 +66,9 @@ export default function AdminAddJobType({setShowModal}) {
       </h3>
 
       <Form.Item >
-        <label htmlFor="">Tên loại công việc</label>
+        <label htmlFor="">Tên loại công việc:  </label>
         <Input
-          style={{ width: "50%" }}
+          style={{ width: "40%" }}
           name="tenLoaiCongViec"
           onChange={formik.handleChange}
         />

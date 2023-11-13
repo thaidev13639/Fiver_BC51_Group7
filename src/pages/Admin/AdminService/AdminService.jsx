@@ -24,7 +24,7 @@ export default function AdminService() {
     const serviceList = await manageService.fetchGetListHireJobS("");
     setListService(serviceList.data.content);
     setDelService(false);
-     console.log(listService);
+    
   };
 
   const handleOpenModalUpdate = (data) => {
@@ -149,7 +149,9 @@ export default function AdminService() {
     <>
     <h3>DANH SÁCH THUÊ CÔNG VIỆC</h3>
 
-    <button className="btn btn-success" onClick={() => setShowModal(true)}>
+    <button className="btn btn-success"
+     style={{ margin: "20px 0"}}
+    onClick={() => setShowModal(true)}>
       Thêm Công Việc Thuê
     </button>
 
