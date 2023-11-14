@@ -1,5 +1,5 @@
-import React from "react";
-import { useRoutes } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useLocation, useRoutes } from "react-router-dom";
 import AdminLaysOut from "../layouts/AdminLaysOut/AdminLaysOut";
 import LoginLayout from "../layouts/LoginLayout/LoginLayout";
 import AdminUser from "../pages/Admin/AdminUser/AdminUser";
@@ -20,6 +20,12 @@ import AdminComment from "../pages/Admin/AdminComment/AdminComment";
 import InfoUser from "../pages/InfoUser/InfoUser";
 
 export default function Router() {
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "auto" })
+  }, [pathname])
+  
   const routing = useRoutes([
     {
       path: "/",
