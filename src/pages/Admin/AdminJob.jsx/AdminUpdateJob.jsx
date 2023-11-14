@@ -50,8 +50,6 @@ const fetchDetailJob = async () => {
         navigate(0);
       }, 2000);
      
-     
-  
     } catch (error) {
       notification.warning({
         message: error?.response?.data?.message || "Cập nhật Không Thành Công",
@@ -121,8 +119,6 @@ const fetchDetailJob = async () => {
       setImgSrc(null)
       console.log(imgSrc)
       setImgSrcApi(null)
-      //document.getElementById("uploadImg").value=null;
-      // formik.setFieldValue("hinhAnh", file)
       
     }
   }

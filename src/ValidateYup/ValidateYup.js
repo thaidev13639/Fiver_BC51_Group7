@@ -128,3 +128,16 @@ export const validateHireJob = yup.object().shape({
   ngayThue: yup.string().required(" (*) vui lòng không bỏ trống"),
   hoanThanh: yup.boolean().required(" (*) vui lòng không bỏ trống"),
 });
+
+export const validateTenChiTiet = yup.object().shape({
+  tenChiTiet:yup.string().required(" (*) vui lòng không bỏ trống"),
+});
+
+export const validateNhomChiTiet = yup.object().shape({
+  tenChiTiet:yup.string().required(" (*) vui lòng không bỏ trống"),
+  maLoaiCongViec:yup.number().min(0).required(" (*) vui lòng không bỏ trống"),
+  // danhSachChiTiet:yup.object({
+  //   id:yup.number().min(0).required(" (*) vui lòng không bỏ trống"),
+  //   tenChiTiet:yup.string().required(" (*) vui lòng không bỏ trống"),
+  // })
+});

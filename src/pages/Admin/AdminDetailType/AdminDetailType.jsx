@@ -32,10 +32,10 @@ export default function AdminDetailType() {
     setSlcDetailJobtypeId(data);
   };
 
-  const deleteJobType = async (detailType) => {
+  const deleteDetailJobType = async (detailType) => {
     if (window.confirm(`Bạn Muốn xóa loại công việc ${detailType}`)) {
       try {
-        await manageService.fetchJobsTypeDeleteApi(detailType);
+        await manageService.fetchDelDetailTypeApi(detailType);
 
         notification.success({
           message: `Bạn Đã Xóa ${detailType} Thành Công`,
@@ -112,9 +112,9 @@ export default function AdminDetailType() {
       title: "Danh sách chi tiết loại",
       dataIndex: "dsChiTietLoai",
       render: (_, detail, idx) => {
-        console.log(detail.dsChiTietLoai)
+        // console.log(detail.dsChiTietLoai)
         const data = [...detail.dsChiTietLoai];
-        console.log(data);
+        // console.log(data);
         const items = [];
         data.forEach((item) => {
           items.push({
@@ -188,7 +188,7 @@ export default function AdminDetailType() {
                 className="text-3xl"
                 to="/"
                 style={{ cursor: "pointer", color: "red", fontSize: "20px" }}
-                onClick={() => deleteJobType(detail.id)}
+                onClick={() => deleteDetailJobType(detail.id)}
               >
                 <DeleteOutlined />
               </span>
