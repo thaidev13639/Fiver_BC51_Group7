@@ -163,8 +163,6 @@ export default function AdminLaysOut() {
             </div>
 
             <div className="user-logo">
-            
-               
                 <Dropdown
                   menu={{
                     items,
@@ -175,8 +173,10 @@ export default function AdminLaysOut() {
                     <Space>
                     <div className="chip" style={{ cursor: "pointer" }}>
                     <img
+                    className="mr-2"
                   src={src}
                   alt="Person"
+                 
                  
                   onError={(e) => {
                     e.target.onError = null;

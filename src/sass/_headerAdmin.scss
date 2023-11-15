@@ -1,14 +1,10 @@
 .header-admin {
   display: flex;
   justify-content: space-between;
-  padding-right: 10%;
-  .user-logo {
-    color: red;
-    font-size: 20px;
-    width: 20%;
-      margin-left: auto;
-  }
+  padding-right: 15%;
+ 
 }
+
 .logo-admin {
   color: white;
   font-size: 30px;
@@ -33,4 +29,3 @@
   pointer-events: auto;
   padding: 12px 37px;
 }
-
