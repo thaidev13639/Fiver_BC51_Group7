@@ -220,7 +220,8 @@ export default function AdminComment() {
         scroll={{
           x: 1100,
           y: 500,
-        }}     
+        }}    
+        bordered 
         onSearch={handleSearch}
         style={{ border: "1px solid #00000036" }}
       /> 

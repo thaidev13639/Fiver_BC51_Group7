@@ -217,6 +217,7 @@ export default function AdminJob() {
           x: 1100,
           y: 500,
         }}
+        bordered
         style={{ border: "1px solid #00000036" }}
       />
     </>
