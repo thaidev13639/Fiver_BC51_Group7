@@ -164,10 +164,11 @@ class ManageService {
     });
   }
 
-  fetchAddGrpDetailTypeApi() {
+  fetchAddGrpDetailTypeApi(data) {
     return requestApi({
       url: `/chi-tiet-loai-cong-viec/them-nhom-chi-tiet-loai`,
       method: "POST",
+      data,
     });
   }
 
@@ -185,21 +186,24 @@ class ManageService {
       method: "GET",
     });
   }
-  fetchUpdateDetailTypeApi(id) {
+ 
+
+  fetchGrpUpdateDetailTypeApi(id, data) {
     return requestApi({
-      url: `/chi-tiet-loai-cong-viec/${id}`,
-      method: "PUT"
+      url: `/chi-tiet-loai-cong-viec/sua-nhom-chi-tiet-loai/${id}`,
+      method: "PUT",
+      data
     });
   }
-
-  fetchUploadDetailTypeApi(MaNhomLoaiCongViec) {
+  fetchUploadDetailTypeApi(MaNhomLoaiCongViec, data) {
     return requestApi({
       url: `/chi-tiet-loai-cong-viec/upload-hinh-nhom-loai-cong-viec/${MaNhomLoaiCongViec}`,
-      method: "POST"
+      method: "POST",
+      data,
     });
   }
 
- 
+
 
   //comment 
   fetchGetListComment = (MaCongViec) => {
@@ -237,7 +241,7 @@ class ManageService {
     });
   }
 
-  fetchUptComment(id,data) {
+  fetchUptComment(id, data) {
     return requestApi({
       url: `/binh-luan/${id}`,
       method: "PUT",

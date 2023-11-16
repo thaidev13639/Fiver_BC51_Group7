@@ -1,4 +1,4 @@
-import { Outlet, useNavigate } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import "../../css/style.css";
 import { ThunderboltFilled } from "@ant-design/icons";
@@ -12,13 +12,19 @@ import {
   UserOutlined,
   IdcardFilled,
   MessageFilled,
- 
 } from "@ant-design/icons";
-import {  Dropdown, Layout, Menu, Popover, Space, notification, theme } from "antd";
+import {
+  Dropdown,
+  Layout,
+  Menu,
+  Popover,
+  Space,
+  notification,
+  theme,
+} from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "../../redux-toolkit/reducer/userReducer";
-import {  faBolt, faSquareCaretDown} from "@fortawesome/free-solid-svg-icons";
-
+import { faBolt, faSquareCaretDown } from "@fortawesome/free-solid-svg-icons";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -40,8 +46,6 @@ export default function AdminLaysOut() {
       // ...
     }
   }, [accountState]);
-
-
 
   const {
     token: { colorBgContainer },
@@ -70,18 +74,15 @@ export default function AdminLaysOut() {
 
   const items = [
     {
-      key: '1',
-      label: (
-  <a onClick={() => console.log('Button clicked')}>Click me</a>
-      )
-
+      key: "1",
+      label:  <NavLink className="nav-link" to={`/home-info-user/${accountState?.userInfo?.user?.id}`}>Cập nhật thông tin</NavLink>,
     },
     {
-      key: '2',
+      key: "2",
       label: (
-       
-        
-          <a target="_blank" 
+        <a
+          target="_blank"
+          className="ml-3"
           onClick={() => {
             const result = window.confirm("Bạn Muốn Đăng Xuất??");
             if (result) {
@@ -93,13 +94,13 @@ export default function AdminLaysOut() {
                 duration: 2,
               });
               navigate("/");
-            }}
-          }>
-            Log out
-          </a>
+            }
+          }}
+        >
+          Log out
+        </a>
       ),
     },
-    
   ];
   return (
     <Layout
@@ -114,7 +115,11 @@ export default function AdminLaysOut() {
       >
         <div className="demo-logo-vertical" />
         <div className="logo-admin p-3">
-          <span>Fiverr</span> <FontAwesomeIcon className="icon" icon={faBolt} />
+          <NavLink style={{ color: "white", textDecoration: "none" }} to="/">
+            {" "}
+            <span>Fiverr</span>{" "}
+            <FontAwesomeIcon className="icon" icon={faBolt} />
+          </NavLink>
         </div>
 
         <Menu
@@ -163,37 +168,37 @@ export default function AdminLaysOut() {
             </div>
 
             <div className="user-logo">
-            
-               
-                <Dropdown
-                  menu={{
-                    items,
-                  }}
-                  className="ml-2"
-                >
-                 
-                    <Space>
-                    <div className="chip" style={{ cursor: "pointer" }}>
+              <Dropdown
+                menu={{
+                  items,
+                }}
+                className="ml-2"
+              >
+                <Space>
+                  <div className="chip" style={{ cursor: "pointer" }}>
                     <img
-                  src={src}
-                  alt="Person"
-                 
-                  onError={(e) => {
-                    e.target.onError = null;
-                    e.target.src =
-                      "https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg";
-                  }}
-                />
+                      className="mr-2"
+                      src={src}
+                      alt="Person"
+                      onError={(e) => {
+                        e.target.onError = null;
+                        e.target.src =
+                          "https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg";
+                      }}
+                    />
 
-                <p className="mr-2">  {accountState?.userInfo?.user?.name}</p>
-                <FontAwesomeIcon icon={faSquareCaretDown} size="xl" style={{marginTop:"7px"}}/>
-                </div>
-                    
-                   
-                    </Space>
-               
-                </Dropdown>
-              
+                    <p className="mr-2">
+                      {" "}
+                      {accountState?.userInfo?.user?.name}
+                    </p>
+                    <FontAwesomeIcon
+                      icon={faSquareCaretDown}
+                      size="xl"
+                      style={{ marginTop: "7px" }}
+                    />
+                  </div>
+                </Space>
+              </Dropdown>
             </div>
           </div>
         </Header>

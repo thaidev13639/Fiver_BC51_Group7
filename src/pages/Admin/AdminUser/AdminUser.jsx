@@ -125,6 +125,19 @@ export default function AdminUser() {
           return -1;
         },
       },
+      filters: [
+        {
+          text: 'Admin',
+          value: 'ADMIN',
+        },
+        {
+          text: 'User',
+          value: 'USER',
+        },
+      ],
+      onFilter: (value, record) => record.role.startsWith(value),
+      filterSearch: true,
+      width: '10%',
     },
     {
       title: "Email",
@@ -233,6 +246,8 @@ export default function AdminUser() {
           x: 1100,
           y: 500,
         }}
+        
+       
         style={{ border: "1px solid #00000036" }}
       />
     </>
