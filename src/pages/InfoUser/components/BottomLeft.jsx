@@ -25,7 +25,7 @@ export default function BottomLeft(props) {
                         <span>Phone:</span><span>0{phone}</span>
                     </div>
                     <div className='content'>
-                        <span>Birthday:</span><span>{birthday}</span>
+                        <span>Birthday:</span><span>{props?.convertDateFormat(birthday, "DD-MM-YYYY", "DD-MM-YYYY")}</span>
                     </div>
                 </div>
             </div>

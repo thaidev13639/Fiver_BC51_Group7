@@ -55,34 +55,6 @@ export default function ContentRight(props) {
     return (
         <>
             {renderContent()}
-            {/* <div className="content">
-                <div className='info-job'>
-                    <div className='info-job-left'>
-                        <img src="https://fiverrnew.cybersoft.edu.vn/images/cv18.jpg" alt="...hình job" />
-                    </div>
-                    <div className='info-job-right'>
-                        <h5>I will write surfer SEO friendly article or blog post using jarvis jasper ai</h5>
-                        <p>US$15 Save time and effort with a Subscription 🥉300 WORDS(SEO optimized) Well researched, unique, and SEO Optimized article - 300 words -BOSSMODE & ZERO ERROR. Not Surfer. 5 Days Delivery Topic research SEO keywords References & citations</p>
-                        <div className='start-review'>
-                            <div className='review'>
-                                <Star />
-                                <span>4</span>
-                                <strong>(216)</strong>
-                            </div>
-                            <span className='price'>$15</span>
-                        </div>
-                    </div>
-                </div>
-                <div className='button'>
-                    <p>Job Hire Date: <span>12/12/2023</span></p>
-                    <div>
-                        <button className='btn'>View Detail</button>
-                        <button className='btn btn-delete'>
-                            Delete
-                        </button>
-                    </div>
-                </div>
-            </div> */}
         </>
     )
 }
