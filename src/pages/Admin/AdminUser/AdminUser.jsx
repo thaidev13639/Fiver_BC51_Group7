@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import {  Modal, Table, notification } from "antd";
+
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Input } from "antd";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -19,9 +20,7 @@ export default function AdminUser() {
 
   useEffect(() => {
     fetchListUser();
-    //  if (showModal ==="false") {
-    // //   console.log('Modal is closed');
-    //  }
+  
     
   }, [showModal,delUser,showModal2]);
 
@@ -216,7 +215,6 @@ export default function AdminUser() {
     }
   };
 
-
   return (
     <>
       <h3>DANH SÁCH NGƯỜI DÙNG</h3>
@@ -239,6 +237,7 @@ export default function AdminUser() {
        
         enterButton
       />
+      
       <Table
         columns={columns}
         dataSource={data}
@@ -247,7 +246,6 @@ export default function AdminUser() {
           y: 500,
         }}
         
-       
         style={{ border: "1px solid #00000036" }}
       />
     </>

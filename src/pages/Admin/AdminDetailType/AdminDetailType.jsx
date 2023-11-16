@@ -23,7 +23,6 @@ export default function AdminDetailType() {
   const fetchDetailListJobType = async () => {
     const detailjobTypeList = await manageService.fetchGetListDetailType("");
     setListDetailJobType(detailjobTypeList.data.content);
-    console.log(listDetailJobType);
     setDelDetailJobType(false);
   };
 
@@ -204,7 +203,7 @@ export default function AdminDetailType() {
       try {
         // setLoadingState({ isLoading: true });
         const findDetailType = await manageService.fetchGetListDetailType(value);
-        console.log(findDetailType)
+      
         setListDetailJobType(findDetailType.data.content.data);
   
         // setLoadingState({ isLoading: false });
