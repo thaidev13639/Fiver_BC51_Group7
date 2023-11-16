@@ -63,7 +63,6 @@ export default function AdminComment() {
       try {
         // setLoadingState({ isLoading: true });
         const findcomment = await manageService.fetchGetListComment(value);
-          console.log(findcomment)
           setListComment(findcomment.data.content);
         setSearch(true)
         

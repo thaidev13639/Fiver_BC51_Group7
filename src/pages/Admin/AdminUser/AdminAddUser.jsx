@@ -154,9 +154,6 @@ export default function AdminAddUser({ setShowModal }) {
       
       </Form.Item>
 
-      
-    
-      
       <Form.Item label="Action:"
        style={{ width: "100%" }}>
         <button className="btn btn-success ml-3" type="submit">
