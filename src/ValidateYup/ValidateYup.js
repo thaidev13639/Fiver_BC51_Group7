@@ -13,6 +13,7 @@ const relusComent =
   "^[a-zA-Z0-9_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶ" +
   "ẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợ" +
   "ụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\s]+$";
+const rulesDate = "[0-9]{2}-[0-9]{2}-[0-9]{4}";
 export const validate = yup.object().shape({
   name: yup
     .string()
@@ -44,18 +45,22 @@ export const validate = yup.object().shape({
 export const validationJob = yup.object().shape({
   tenCongViec: yup.string().required(" (*) vui lòng nhập tên công việc"),
   danhGia: yup.number().min(0).max(10).required(" (*) vui lòng không bỏ trống"),
-  giaTien: yup.number().min(0).max(20e6).required(" (*) vui lòng không bỏ trống"),
+  giaTien: yup
+    .number()
+    .min(0)
+    .max(20e6)
+    .required(" (*) vui lòng không bỏ trống"),
   nguoiTao: yup.number().min(0).required(" (*) vui lòng không bỏ trống"),
 
-  
-  moTa:yup.string().required(" (*) vui lòng không bỏ trống"),
-  maChiTietLoaiCongViec: yup.number().min(0).required(" (*) vui lòng không bỏ trống"),
-  moTaNgan:yup.string().required(" (*) vui lòng không bỏ trống"),
+  moTa: yup.string().required(" (*) vui lòng không bỏ trống"),
+  maChiTietLoaiCongViec: yup
+    .number()
+    .min(0)
+    .required(" (*) vui lòng không bỏ trống"),
+  moTaNgan: yup.string().required(" (*) vui lòng không bỏ trống"),
 
   saoCongViec: yup.number().min(0).required(" (*) vui lòng không bỏ trống"),
 });
-
-
 
 export const validateInfo = yup.object().shape({
   name: yup
@@ -104,12 +109,12 @@ export const validateInfoAdmin = yup.object().shape({
 });
 
 export const validateComment = yup.object().shape({
-  maCongViec: yup.number().min(0).required(" (*) vui lòng không bỏ trống") ,
+  maCongViec: yup.number().min(0).required(" (*) vui lòng không bỏ trống"),
   maNguoiBinhLuan: yup.number().min(0).required(" (*) vui lòng không bỏ trống"),
   ngayBinhLuan: yup.string().required(" (*) vui lòng không bỏ trống"),
   noiDung: yup.string().required(" (*) vui lòng không bỏ trống"),
-  saoBinhLuan: yup.number().min(0).required(" (*) vui lòng không bỏ trống")
-})
+  saoBinhLuan: yup.number().min(0).required(" (*) vui lòng không bỏ trống"),
+});
 
 export const validationComment = yup.object().shape({
   noiDung: yup
@@ -119,12 +124,12 @@ export const validationComment = yup.object().shape({
 });
 
 export const validateTypeJob = yup.object().shape({
-  tenLoaiCongViec:yup.string().required(" (*) vui lòng không bỏ trống"),
+  tenLoaiCongViec: yup.string().required(" (*) vui lòng không bỏ trống"),
 });
 
 export const validateHireJob = yup.object().shape({
-  maCongViec: yup.number().min(0).required(" (*) vui lòng không bỏ trống") ,
-  maNguoiThue:yup.number().min(0).required(" (*) vui lòng không bỏ trống") ,
+  maCongViec: yup.number().min(0).required(" (*) vui lòng không bỏ trống"),
+  maNguoiThue: yup.number().min(0).required(" (*) vui lòng không bỏ trống"),
   ngayThue: yup.string().required(" (*) vui lòng không bỏ trống"),
   hoanThanh: yup.boolean().required(" (*) vui lòng không bỏ trống"),
 });
@@ -140,4 +145,21 @@ export const validateNhomChiTiet = yup.object().shape({
   //   id:yup.number().min(0).required(" (*) vui lòng không bỏ trống"),
   //   tenChiTiet:yup.string().required(" (*) vui lòng không bỏ trống"),
   // })
+});
+
+export const validationUserPageHome = yup.object().shape({
+  phone: yup
+    .string()
+    .min(9, "(*) min 9 number")
+    .max(10, "(*) max 10 number")
+    .required("(*) please enter valid!!"),
+  name: yup
+    .string()
+    .matches(rulesName, { message: "(*) Please enter corret valid" })
+    .required("(*) Please enter valid"),
+  birthday: yup
+    .string()
+    .length(10, "(*) Please enter corret valid")
+    .matches(rulesDate, { message: "(*) Please enter DD-MM-YYYY" })
+    .required("(*) Please enter valid"),
 });
