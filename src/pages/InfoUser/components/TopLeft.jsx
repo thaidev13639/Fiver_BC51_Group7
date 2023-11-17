@@ -1,8 +1,12 @@
 import { notification } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { userService } from '../../../services/user'
+import { useDispatch, useSelector } from 'react-redux'
+import { loginAction } from '../../../redux-toolkit/reducer/userReducer'
 
 export default function TopLeft(props) {
+    const stateUserInfo = useSelector((state) => state.userReducer)
+    const dispatch = useDispatch()
     const { avatar, name, email } = props.jobInfo
     const [img, setimg] = useState()
     useEffect(() => {
@@ -16,7 +20,11 @@ export default function TopLeft(props) {
             formData.append("formFile", file, file.name)
 
             try {
-                await userService.fetchUploadAvtarUser(formData)
+                const result = await userService.fetchUploadAvtarUser(formData)
+                console.log(result)
+                dispatch(loginAction.SET_INFO_USER({ user: result.data.content, token: stateUserInfo?.userInfo?.token }))
+                localStorage.setItem("INFO_ACCOUNT", JSON.stringify({ user: result.data.content, token: stateUserInfo?.userInfo?.token }))
+
                 let reader = new FileReader();
                 reader.readAsDataURL(file);
                 reader.onload = (e) => {
