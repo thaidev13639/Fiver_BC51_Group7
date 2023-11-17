@@ -23,6 +23,7 @@
     flex-direction: column;
     align-items: center;
     position: relative;
+    margin-top: 10px;
     input {
       opacity: 0;
       position: absolute;
@@ -307,8 +308,7 @@
     }
   }
 }
-
-.ant-modal {
+.modal-home-user-info {
   width: 60% !important;
   .ant-modal-content {
     .ant-modal-header {
@@ -435,6 +435,7 @@
     }
   }
 }
+
 @media screen and (max-width: 900px) {
   .home-user-info {
     display: flex;
