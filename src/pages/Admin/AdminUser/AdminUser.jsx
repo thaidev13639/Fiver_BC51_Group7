@@ -1,7 +1,11 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Modal, Table, notification } from "antd";
 
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import {
+  EditOutlined,
+  DeleteOutlined,
+  CloseCircleOutlined,
+} from "@ant-design/icons";
 import { Input } from "antd";
 import { NavLink, useNavigate } from "react-router-dom";
 // import { LoadingContext } from "../../../../contexts/LoadingContext/LoadingContext";
@@ -18,8 +22,6 @@ export default function AdminUser() {
   const [showModal2, setShowModal2] = useState(false);
   const [delUser, setDelUser] = useState(false);
   const accountState = useSelector((state) => state.userReducer);
-
-  
 
   const [selectedUserId, setSelectedUserId] = useState(null);
 
@@ -158,6 +160,30 @@ export default function AdminUser() {
       render: (_, user) => {
         return (
           <Fragment>
+            <CloseCircleOutlined
+              style={{
+                display:
+                  accountState?.userInfo?.user?.id === user.id
+                    ? "block"
+                    : "none",
+                fontSize: "33px",
+                marginBottom:"15px",
+               marginRight:"70px",
+                color:"red",
+              }}
+            />
+
+            <CloseCircleOutlined
+              style={{
+                display:
+                  accountState?.userInfo?.user?.id === user.id
+                    ? "block"
+                    : "none",
+                fontSize: "33px",
+                marginRight:"70px",
+                color:"red",
+              }}
+            />
             <NavLink
               key={1}
               className="mr-2 text-3xl"
@@ -255,7 +281,7 @@ export default function AdminUser() {
           x: 1100,
           y: 500,
         }}
-        style={{ border: "1px solid #00000036" }}
+        style={{ border: "1px solid #00000036"}}
       />
     </>
   );
