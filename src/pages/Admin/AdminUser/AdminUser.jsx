@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import {  Modal, Table, notification } from "antd";
+import { Modal, Table, notification } from "antd";
 
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Input } from "antd";
@@ -9,28 +9,29 @@ import { userService } from "../../../services/user";
 import AdminAddUser from "./AdminAddUser";
 import AdminUpdateUser from "./AdminUpdateUser";
 
+import { useSelector } from "react-redux";
+
 export default function AdminUser() {
   const navigate = useNavigate();
   const [listUser, setListUser] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
-  const [delUser,setDelUser] = useState(false);
+  const [delUser, setDelUser] = useState(false);
+  const accountState = useSelector((state) => state.userReducer);
+
+  
 
   const [selectedUserId, setSelectedUserId] = useState(null);
 
   useEffect(() => {
     fetchListUser();
-  
-    
-  }, [showModal,delUser,showModal2]);
+  }, [showModal, delUser, showModal2]);
 
   const fetchListUser = async () => {
     const userList = await userService.fetchGetListUserApi("");
     setListUser(userList.data.content);
-    setDelUser(false)
+    setDelUser(false);
   };
-
-
 
   const handleOpenModalUpdate = (data) => {
     setShowModal2(true);
@@ -41,14 +42,14 @@ export default function AdminUser() {
     if (window.confirm(`Bạn Muốn xóa Người Dùng ${taiKhoan}`)) {
       try {
         await userService.fetchUserDeleteApi(taiKhoan);
-       
+
         notification.success({
           message: `Bạn Đã Xóa ${taiKhoan} Thành Công`,
           placement: "bottomRight",
           duration: 4,
         });
         setDelUser(true);
-        navigate("/admin")
+        navigate("/admin");
       } catch (error) {
         notification.warning({
           message: `Xóa ${taiKhoan} Không Thành Công`,
@@ -57,9 +58,8 @@ export default function AdminUser() {
         });
       }
     }
-   
   };
-   const { Search } = Input;
+  const { Search } = Input;
 
   const columns = [
     {
@@ -126,17 +126,17 @@ export default function AdminUser() {
       },
       filters: [
         {
-          text: 'Admin',
-          value: 'ADMIN',
+          text: "Admin",
+          value: "ADMIN",
         },
         {
-          text: 'User',
-          value: 'USER',
+          text: "User",
+          value: "USER",
         },
       ],
       onFilter: (value, record) => record.role.startsWith(value),
       filterSearch: true,
-      width: '10%',
+      width: "10%",
     },
     {
       title: "Email",
@@ -154,7 +154,7 @@ export default function AdminUser() {
     {
       title: "Action",
       dataIndex: "action",
-      fixed: 'right',
+      fixed: "right",
       render: (_, user) => {
         return (
           <Fragment>
@@ -162,7 +162,14 @@ export default function AdminUser() {
               key={1}
               className="mr-2 text-3xl"
               onClick={() => handleOpenModalUpdate(user.id)}
-              style={{ color: "blue", fontSize: "20px" }}
+              style={{
+                color: "blue",
+                fontSize: "20px",
+                display:
+                  accountState?.userInfo?.user?.id === user.id
+                    ? "none"
+                    : "block",
+              }}
             >
               <EditOutlined />
             </NavLink>
@@ -172,18 +179,25 @@ export default function AdminUser() {
               onCancel={() => setShowModal2(false)}
               okButtonProps={{ hidden: true }}
             >
-              
-               <AdminUpdateUser
-                 setShowModal2={setShowModal2}
+              <AdminUpdateUser
+                setShowModal2={setShowModal2}
                 idtaiKhoan={selectedUserId}
-              /> 
+              />
             </Modal>
 
             <span
               key={2}
               className="text-3xl"
               to="/"
-              style={{ cursor: "pointer", color: "red", fontSize: "20px" }}
+              style={{
+                cursor: "pointer",
+                color: "red",
+                fontSize: "20px",
+                display:
+                  accountState?.userInfo?.user?.id === user.id
+                    ? "none"
+                    : "block",
+              }}
               onClick={() => deleteUser(user.id)}
             >
               <DeleteOutlined />
@@ -199,10 +213,7 @@ export default function AdminUser() {
     return { ...element, key: `${idx}` };
   });
 
- 
-
   const handleSearch = async (value) => {
-    console.log('Search term:', value);
     try {
       // setLoadingState({ isLoading: true });
       const findUser = await userService.fetchGetListUserApi(value);
@@ -228,16 +239,15 @@ export default function AdminUser() {
         onCancel={() => setShowModal(false)}
         okButtonProps={{ hidden: true }}
       >
-        <AdminAddUser  setShowModal={setShowModal}/>
+        <AdminAddUser setShowModal={setShowModal} />
       </Modal>
       <Search
         placeholder="Nhập Tên Tài Khoản Cần Tìm"
         style={{ margin: "20px 0", color: "red" }}
         onSearch={handleSearch}
-       
         enterButton
       />
-      
+
       <Table
         columns={columns}
         dataSource={data}
@@ -245,7 +255,6 @@ export default function AdminUser() {
           x: 1100,
           y: 500,
         }}
-        
         style={{ border: "1px solid #00000036" }}
       />
     </>

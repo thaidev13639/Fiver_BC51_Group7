@@ -25,7 +25,7 @@ export default function AdminComment() {
     const commentList = await manageService.fetchGetListComment("");
     setListComment(commentList.data.content);
     setDelComment(false);
-    // console.log(listJob);
+   
   };
 
   const handleOpenModalUpdate = (data) => {
@@ -58,7 +58,7 @@ export default function AdminComment() {
   const { Search } = Input;
   
   const handleSearch = async (value) => {
-    console.log("Search term:", value);
+   
     if(value){
       try {
         // setLoadingState({ isLoading: true });

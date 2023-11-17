@@ -68,8 +68,6 @@ const fetchDetailJob = async () => {
         duration: 2
       })
        setImgSrcApi(addImg.data.content.hinhAnh);
-       console.log(addImg.data.content.hinhAnh)
-       console.log(imgSrcApi);
        formik.setFieldValue("hinhAnh", imgSrcApi);
   } catch (error) {
       notification.warning({
@@ -94,7 +92,6 @@ const fetchDetailJob = async () => {
     },
     validationSchema: validationJob,
     onSubmit: async (values) => {
-      console.log(values);
 
       UpdateJob(values);
 
@@ -114,10 +111,8 @@ const fetchDetailJob = async () => {
       let formData = new FormData();
        formData.append("formFile",file,file.name);
     
-      // console.log("formdata",formData.get('hinhAnh'))
       AddImg(formData);
       setImgSrc(null)
-      console.log(imgSrc)
       setImgSrcApi(null)
       
     }

@@ -40,11 +40,9 @@ const fetchListComment = async () => {
   const commentList = await manageService.fetchGetListComment("");
   const result = commentList.data.content
   const filteredData = result.filter((item) => item.id === commentId);
-console.log(filteredData[0]);
-  setinfoComment(filteredData[0]);//tim thay vi tri dau tien [0]
-  console.log(infoComment)
 
-  // console.log(listJob);
+  setinfoComment(filteredData[0]);//tim thay vi tri dau tien [0]
+
 };
 
 
@@ -110,7 +108,6 @@ console.log(filteredData[0]);
   const handleChangeDate = (date) => {
     if (date) {
       let dateMoment = moment(date.$d).format("DD-MM-YYYY")
-      console.log(dateMoment)
       formik.setFieldValue("ngayBinhLuan", dateMoment);
     }
   };

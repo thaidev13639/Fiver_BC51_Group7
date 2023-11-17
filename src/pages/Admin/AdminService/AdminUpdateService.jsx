@@ -26,7 +26,7 @@ export default function AdminUpdateService({ setShowModal2, serviceId }) {
   const fetchGetHire = async () => {
     const hire = await manageService.fetchHireJobsDetailApi(serviceId);
     setHireDetail(hire.data.content);
-    console.log(hireDetail);
+    
   };
 
   const handleResize = () => {
@@ -48,7 +48,7 @@ export default function AdminUpdateService({ setShowModal2, serviceId }) {
     },
     validationSchema: validateHireJob,
     onSubmit: async (values) => {
-      console.log(values);
+      
       try {
         await manageService.fetchHireJobsUpdateApi(serviceId, values);
 
@@ -76,7 +76,6 @@ export default function AdminUpdateService({ setShowModal2, serviceId }) {
   const handleChangeDate = (date) => {
     if (date) {
       let dateMoment = moment(date.$d).format("DD/MM/YYYY");
-      console.log(dateMoment);
       formik.setFieldValue("ngayThue", dateMoment);
     }
   };

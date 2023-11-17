@@ -18,7 +18,7 @@ export default function AdminAddDetailType({ setShowModal }) {
     },
     validationSchema: validateNhomChiTiet,
     onSubmit: async (values) => {
-      console.log(values);
+     
       try {
         await manageService.fetchAddGrpDetailTypeApi(values);
         setShowModal(false);

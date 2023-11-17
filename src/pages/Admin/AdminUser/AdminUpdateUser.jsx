@@ -37,11 +37,11 @@ export default function AdminUpdateUser({ setShowModal2,idtaiKhoan}) {
     const fetchGetUser = async () => {
         const user = await userService.fetchUserDetailApi(idtaiKhoan)
         setUserDetail(user.data.content)
-        //console.log(userDetail);
+      
     }
 
     const oldBirthday = userDetail?.birthday;
-    console.log(oldBirthday);
+
   
 
 //  
@@ -61,7 +61,7 @@ export default function AdminUpdateUser({ setShowModal2,idtaiKhoan}) {
       },
       validationSchema: validateInfo,
       onSubmit: async (values) => {
-        console.log(values);
+        
         try {
           await userService.fetchUserUpdateApi(idtaiKhoan,values);
          
@@ -91,7 +91,6 @@ export default function AdminUpdateUser({ setShowModal2,idtaiKhoan}) {
     const handleChangeDate = (date) => {
       if (date) {
         let dateMoment = moment(date.$d).format("DD-MM-YYYY")
-        console.log(dateMoment)
         formik.setFieldValue("birthday", dateMoment);
       }
     };

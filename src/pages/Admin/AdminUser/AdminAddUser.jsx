@@ -27,7 +27,7 @@ export default function AdminAddUser({ setShowModal }) {
     },
     validationSchema: validateInfo,
     onSubmit: async (values) => {
-      console.log(values);
+      
       try {
         await userService.fetchAddUser(values);
         setShowModal(false);
@@ -59,7 +59,6 @@ export default function AdminAddUser({ setShowModal }) {
   const handleChangeDate = (date) => {
     if (date) {
       let dateMoment = moment(date.$d).format("DD-MM-YYYY")
-      console.log(dateMoment)
       formik.setFieldValue("birthday", dateMoment);
     }
   };

@@ -157,12 +157,12 @@ export default function AdminService() {
   });
 
   const handleSearch = (value) => {
-    console.log("Search term:",  value.toString())
+    
   if(value){
     const data = [...listService];
     const filteredData = data.filter((item) => (item.maCongViec).toString() === value);
     setListService(filteredData)
-    console.log(filteredData);
+    
   }else{
     fetchListService()
   }
