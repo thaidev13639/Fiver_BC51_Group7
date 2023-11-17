@@ -137,7 +137,7 @@ export default function InfoUser() {
         <div className='home-user-info'>
             <div className='left'>
                 <div className="top">
-                    <TopLeft jobInfo={userInfo} showModal={showModal} />
+                    <TopLeft jobInfo={userInfo} showModal={showModal} fetchInfoUser={fetchInfoUser} />
                 </div>
                 <div className='bottom'>
                     <BottomLeft jobInfo={userInfo} showModal={showModal} convertDateFormat={convertDateFormat} />

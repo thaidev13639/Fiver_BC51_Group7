@@ -19,6 +19,15 @@
   }
   .camera {
     margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    input {
+      opacity: 0;
+      position: absolute;
+      cursor: pointer;
+    }
     i {
       font-size: 25px;
       transition: all 0.3s;

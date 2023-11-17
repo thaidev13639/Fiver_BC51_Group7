@@ -1,7 +1,6 @@
 import { requestApi } from "../configs/configApi";
 
 class UserService {
-
   fetLoginApi = (data) => {
     return requestApi({
       url: "/auth/signin",
@@ -16,8 +15,7 @@ class UserService {
       method: "POST",
       data,
     });
-  }; 
-
+  };
 
   fetchGetListUserApi = (TenNguoiDung) => {
     if (TenNguoiDung !== "") {
@@ -64,6 +62,13 @@ class UserService {
     return requestApi({
       url: `/users/${id}`,
       method: "GET",
+    });
+  }
+  fetchUploadAvtarUser(file) {
+    return requestApi({
+      url: `/users/upload-avatar`,
+      method: "POST",
+      data: file,
     });
   }
 }
