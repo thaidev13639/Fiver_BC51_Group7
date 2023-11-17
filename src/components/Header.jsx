@@ -63,6 +63,7 @@ export default function Header() {
     const logout = () => {
         dispatch(loginAction.SET_INFO_USER(null));
         localStorage.removeItem("INFO_ACCOUNT");
+        navigate("/")
     }
     const renderListUl = () => {
         if (accountState?.userInfo) {

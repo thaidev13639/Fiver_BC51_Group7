@@ -30,7 +30,7 @@ export default function Login() {
       setPassword("password");
     }
   };
-  
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -40,21 +40,20 @@ export default function Login() {
         placement: "topLeft",
         duration: 2,
       });
-
       dispatch(loginAction.SET_INFO_USER(user.data.content));
       localStorage.setItem("INFO_ACCOUNT", JSON.stringify(user.data.content));
       const data = JSON.parse(localStorage.getItem("INFO_ACCOUNT"));
-      if(data.user.role ==="USER") {
+      if (data.user.role === "USER") {
         navigate("/");
-      }else {
+      } else {
         navigate("/admin");
       }
-     
-      
+
+
 
 
     } catch (error) {
-      
+
       notification.error({
         message: error?.response?.data?.content || "Đăng Nhập Không Thành Công",
         placement: "topLeft",
