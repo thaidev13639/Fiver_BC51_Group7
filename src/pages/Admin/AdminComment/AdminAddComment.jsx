@@ -23,7 +23,7 @@ export default function AdminAddComment({ setShowModal }) {
     },
     validationSchema: validateComment,
     onSubmit: async (values) => {
-      console.log(values);
+     
       try {
         await manageService.fetchAddComment(values);
         setShowModal(false);
@@ -52,7 +52,6 @@ export default function AdminAddComment({ setShowModal }) {
   const handleChangeDate = (date) => {
     if (date) {
       let dateMoment = moment(date.$d).format("DD-MM-YYYY")
-      console.log(dateMoment)
       formik.setFieldValue("ngayBinhLuan", dateMoment);
     }
   };

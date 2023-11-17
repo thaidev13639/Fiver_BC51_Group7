@@ -19,7 +19,7 @@ export default function AdminAddJobType({setShowModal}) {
     },
     validationSchema: validateTypeJob,
     onSubmit: async (values) => {
-      console.log(values);
+  
       try {
         await manageService.fetchAddJobsTypeApi(values);
         setShowModal(false);

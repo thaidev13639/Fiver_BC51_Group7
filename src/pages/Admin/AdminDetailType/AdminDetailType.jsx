@@ -111,9 +111,9 @@ export default function AdminDetailType() {
       title: "Danh sách chi tiết loại",
       dataIndex: "dsChiTietLoai",
       render: (_, detail, idx) => {
-        // console.log(detail.dsChiTietLoai)
+        
         const data = [...detail.dsChiTietLoai];
-        // console.log(data);
+       
         const items = [];
         data.forEach((item) => {
           items.push({
@@ -198,7 +198,7 @@ export default function AdminDetailType() {
       },
   ];
   const handleSearch = async (value) => {
-    console.log("Search term:", value);
+    
     if(value) {
       try {
         // setLoadingState({ isLoading: true });

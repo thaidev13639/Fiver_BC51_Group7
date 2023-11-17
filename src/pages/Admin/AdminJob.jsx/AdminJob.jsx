@@ -60,15 +60,14 @@ export default function AdminJob() {
   const { Search } = Input;
 
   const handleSearch = async (value) => {
-    console.log("Search term:", value);
+    
     if(value){
       try {
         // setLoadingState({ isLoading: true });
         const findJob = await manageService.fetchGetListJobS(value);
   
         const resultSearchJob = findJob.data.content;
-        console.log(resultSearchJob)
-       
+    
           const congViecArr = resultSearchJob.map((object) => object.congViec);
           setListJob(congViecArr);
         

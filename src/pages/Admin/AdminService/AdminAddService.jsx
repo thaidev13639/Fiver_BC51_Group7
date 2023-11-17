@@ -21,7 +21,7 @@ export default function AdminAddService({ setShowModal }) {
     },
     validationSchema: validateHireJob,
     onSubmit: async (values) => {
-      console.log(values);
+      
       try {
         await manageService.fetchAddHireJobsApi(values);
         setShowModal(false);
@@ -49,7 +49,6 @@ export default function AdminAddService({ setShowModal }) {
   const handleChangeDate = (date) => {
     if (date) {
       let dateMoment = moment(date.$d).format("DD/MM/YYYY")
-      console.log(dateMoment)
       formik.setFieldValue("ngayThue", dateMoment);
     }
   };

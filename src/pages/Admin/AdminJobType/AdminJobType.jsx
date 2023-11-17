@@ -123,16 +123,13 @@ export default function AdminJobType() {
   });
 
   const handleSearch = async (value) => {
-    console.log("Search term:", value);
+    
     if(value){
       try {
         // setLoadingState({ isLoading: true });
         const findJobType = await manageService.fetchGetListJobsType(value);
-          console.log(findJobType);
-  
         setListJobType(findJobType.data.content.data);
        
-  
         // setLoadingState({ isLoading: false });
       } catch (error) {
         console.log(error);

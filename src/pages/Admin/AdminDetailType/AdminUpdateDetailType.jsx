@@ -23,9 +23,7 @@ const fetchGrpDetailType = async () => {
 
   try {
       const detailType = await manageService.fetchGetDetailTypeApi(idDetailType);
-      console.log(detailType.data.content)
       setinfoDetailType(detailType.data.content)
-      console.log(infoDetailType)
   } catch (error) {
       notification.warning({
           message: "không thể lấy thông tin"
@@ -91,7 +89,7 @@ const fetchGrpDetailType = async () => {
     },
     validationSchema: validateNhomChiTiet,
     onSubmit: async (values) => {
-      console.log(values);
+    
       UpdateDetailType(values)
     },
   });
@@ -107,14 +105,8 @@ const fetchGrpDetailType = async () => {
       let formData = new FormData();
        formData.append("formFile",file,file.name);
     
-      // console.log("formdata",formData.get('hinhAnh'))
       AddImg(formData);
       setImgSrc(null)
-      console.log(imgSrc)
-      
-      //document.getElementById("uploadImg").value=null;
-      // formik.setFieldValue("hinhAnh", file)
-      
     }
   }
 
