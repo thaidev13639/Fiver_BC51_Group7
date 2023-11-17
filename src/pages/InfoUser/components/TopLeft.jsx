@@ -1,9 +1,42 @@
-import React, { useState } from 'react'
+import { notification } from 'antd'
+import React, { useEffect, useState } from 'react'
+import { userService } from '../../../services/user'
 
 export default function TopLeft(props) {
     const { avatar, name, email } = props.jobInfo
-    const [img, setimg] = useState(avatar)
+    const [img, setimg] = useState()
+    useEffect(() => {
+        setimg(avatar)
+    }, [props])
+    const handleChangeFileImg = async (e) => {
+        const file = e?.target?.files[0]
 
+        if (file.type === "image/png" || file.type === "image/jpeg" || file.type === "image/gif" || file.type === "image/jpg") {
+            const formData = new FormData()
+            formData.append("formFile", file, file.name)
+
+            try {
+                await userService.fetchUploadAvtarUser(formData)
+                let reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = (e) => {
+                    setimg(e.target.result)
+                }
+                notification.success({
+                    message: "SUCCSESS"
+                })
+                props.fetchInfoUser()
+            } catch (error) {
+                console.log(error)
+            }
+        } else {
+            notification.warning({
+                message: "File it's not Picture",
+                placement: "bottomLeft",
+                duration: 3
+            })
+        }
+    }
     return (
         <>
             <div className='online'>
@@ -17,6 +50,7 @@ export default function TopLeft(props) {
             </div>
             <div className='info'>
                 <div className='pencil camera'>
+                    <input type="file" accept='image/png ,image/jpeg, image/gif , image/jpg' onChange={handleChangeFileImg} />
                     <i className="fa-solid fa-camera" />
                 </div>
                 <div className='item'>
