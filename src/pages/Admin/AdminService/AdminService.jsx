@@ -2,29 +2,31 @@ import React, { Fragment, useEffect, useState } from "react";
 import {  Modal, Table, notification } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
-import { NavLink, useNavigate } from "react-router-dom";
+import {  NavLink, useNavigate } from "react-router-dom";
 import { manageService } from "../../../services/manage";
 import AdminAddService from "./AdminAddService";
 import AdminUpdateService from "./AdminUpdateService";
+import Search from "antd/es/input/Search";
+
 
 export default function AdminService() {
   const navigate = useNavigate();
-  const [listService, setListService] = useState([]); 
+  const [listService, setListService] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
   const [delService, setDelService] = useState(false);
 
+
   const [selectedServiceId, setSelectedServiceId] = useState(null);
   useEffect(() => {
     fetchListService();
-    
-  }, [showModal, showModal2,delService]);
+  }, [showModal, showModal2, delService]);
 
   const fetchListService = async () => {
     const serviceList = await manageService.fetchGetListHireJobS("");
     setListService(serviceList.data.content);
+
     setDelService(false);
-    
   };
 
   const handleOpenModalUpdate = (data) => {
@@ -44,7 +46,6 @@ export default function AdminService() {
         });
         setDelService(true);
         navigate("/admin/Service");
-        
       } catch (error) {
         notification.warning({
           message: `Xóa ${Service} Không Thành Công`,
@@ -56,7 +57,6 @@ export default function AdminService() {
   };
 
   // const { Search } = Input;
-
 
   const columns = [
     {
@@ -89,23 +89,34 @@ export default function AdminService() {
     {
       title: "Hoàn Thành",
       dataIndex: "hoanThanh",
-      key: 'hoanThanh',
+      key: "hoanThanh",
       render: (text) => {
         if (text === true) {
-          return <span style={{ color: 'green',fontSize:'15px',fontWeight:'700' }}>Hoàn thành</span>;
+          return (
+            <span
+              style={{ color: "green", fontSize: "15px", fontWeight: "700" }}
+            >
+              Hoàn thành
+            </span>
+          );
         } else {
-          return <span style={{ color: 'red',fontSize:'15px',fontWeight:'700' }}>Chưa thực hiện</span>;
+          return (
+            <span style={{ color: "red", fontSize: "15px", fontWeight: "700" }}>
+              Chưa thực hiện
+            </span>
+          );
         }
       },
     },
-   
+
     {
       title: "Action",
       dataIndex: "action",
-      fixed: 'right',
+      fixed: "right",
       render: (_, service) => {
-        return <Fragment>
-          <NavLink
+        return (
+          <Fragment>
+            <NavLink
               key={1}
               className="mr-2 text-3xl"
               onClick={() => handleOpenModalUpdate(service.id)}
@@ -119,11 +130,10 @@ export default function AdminService() {
               onCancel={() => setShowModal2(false)}
               okButtonProps={{ hidden: true }}
             >
-              
-               <AdminUpdateService
-                 setShowModal2={setShowModal2}
+              <AdminUpdateService
+                setShowModal2={setShowModal2}
                 serviceId={selectedServiceId}
-              /> 
+              />
             </Modal>
 
             <span
@@ -135,7 +145,8 @@ export default function AdminService() {
             >
               <DeleteOutlined />
             </span>
-        </Fragment>;
+          </Fragment>
+        );
       },
       width: "10%",
     },
@@ -143,44 +154,61 @@ export default function AdminService() {
 
   const data = listService.map((element, idx) => {
     return { ...element, key: `${idx}` };
-  });       
+  });
+
+  const handleSearch = (value) => {
+    console.log("Search term:",  value.toString())
+  if(value){
+    const data = [...listService];
+    const filteredData = data.filter((item) => (item.maCongViec).toString() === value);
+    setListService(filteredData)
+    console.log(filteredData);
+  }else{
+    fetchListService()
+  }
+    
+  };
+
+  
+
 
   return (
     <>
-    <h3>DANH SÁCH THUÊ CÔNG VIỆC</h3>
+      <h3>DANH SÁCH THUÊ CÔNG VIỆC</h3>
 
-    <button className="btn btn-success"
-     style={{ margin: "20px 0"}}
-    onClick={() => setShowModal(true)}>
-      Thêm Công Việc Thuê
-    </button>
+      <button
+        className="btn btn-success"
+        style={{ margin: "20px 0" }}
+        onClick={() => setShowModal(true)}
+      >
+        Thêm Công Việc Thuê
+      </button>
 
-    <Modal
-      open={showModal}
-      onCancel={() => setShowModal(false)}
-      okButtonProps={{ hidden: true }}
-    >
-      
-      <AdminAddService setShowModal={setShowModal}/>
-    </Modal>
+      <Modal
+        open={showModal}
+        onCancel={() => setShowModal(false)}
+        okButtonProps={{ hidden: true }}
+      >
+        <AdminAddService setShowModal={setShowModal} />
+      </Modal>
 
-    {/* <Search
-      placeholder="Nhập Tên Service Cần Tìm"
-      style={{ margin: "20px 0", color: "red" }}
-      onSearch={handleSearch}
-      enterButton
-    /> */}
-    
-    <Table
-      columns={columns}
-      dataSource={data}
-      scroll={{
-        x: 1100,
-        y: 500,
-      }}
-      bordered
-      style={{ border: "1px solid #00000036" }}
-    />
-  </>
-  )
+      <Search
+        placeholder="Nhập Mã Công Việc Cần Tìm"
+        style={{ margin: "20px 0", color: "red" }}
+        onSearch={handleSearch}
+        enterButton
+      />
+
+      <Table
+        columns={columns}
+        dataSource={data}
+        scroll={{
+          x: 1100,
+          y: 500,
+        }}
+        bordered
+        style={{ border: "1px solid #00000036" }}
+      />
+    </>
+  );
 }
