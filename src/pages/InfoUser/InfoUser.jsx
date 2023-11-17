@@ -10,9 +10,13 @@ import { Modal, Radio, Select, notification } from 'antd';
 import dayjs from 'dayjs'
 import { useFormik } from 'formik'
 import { validationUserPageHome } from '../../ValidateYup/ValidateYup'
+import { useDispatch, useSelector } from 'react-redux'
+import { loginAction } from '../../redux-toolkit/reducer/userReducer'
 
 export default function InfoUser() {
     const param = useParams()
+    const dispatch = useDispatch()
+    const stateUserInfo = useSelector((state) => state.userReducer)
     const [userInfo, setUserInfo] = useState({})
     const [listRentJob, setlistRentJob] = useState([])
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -27,12 +31,10 @@ export default function InfoUser() {
     };
 
     const convertDateFormat = (dateString, currentFormat, targetFormat) => {
-        // Kiểm tra xem chuỗi ngày có đúng định dạng hay không
         if (!dayjs(dateString, { format: currentFormat, strict: true }).isValid()) {
             return dateString;
         }
 
-        // Chuyển đổi định dạng ngày
         const convertedDate = dayjs(dateString, { format: currentFormat }).format(targetFormat);
 
         return convertedDate;
@@ -67,13 +69,15 @@ export default function InfoUser() {
         validationSchema: validationUserPageHome,
         onSubmit: async (values) => {
             try {
-                await userService.fetchUserUpdateApi(userInfo?.id, values)
+                const result = await userService.fetchUserUpdateApi(userInfo?.id, values)
                 notification.success({
                     message: "Update Info Success",
                     placement: "topLeft",
                     duration: 3
                 })
                 setIsModalOpen(false)
+                dispatch(loginAction.SET_INFO_USER({ user: result.data.content, token: stateUserInfo?.userInfo?.token }))
+                localStorage.setItem("INFO_ACCOUNT", JSON.stringify({ user: result.data.content, token: stateUserInfo?.userInfo?.token }))
             } catch (error) {
                 console.log(error)
             }
@@ -81,7 +85,6 @@ export default function InfoUser() {
     })
 
     const handlChangeGender = (e) => {
-        console.log(e.target.value)
         if (e.target.value === "Male") {
             formik.setFieldValue("gender", true);
         } else {
@@ -89,11 +92,9 @@ export default function InfoUser() {
         }
     }
     const handleChangeSKill = (value) => {
-        console.log(`selected ${value}`);
         formik.setFieldValue("skill", value);
     };
     const handleChangeCertification = (value) => {
-        console.log(`selected ${value}`);
         formik.setFieldValue("certification", value);
     };
     const optionsSkill = [
