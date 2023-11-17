@@ -148,7 +148,7 @@ export default function InfoUser() {
 
                 <ContentRight listRentJob={listRentJob} />
             </div>
-            <Modal okText="Update" footer={null} title="Update User" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+            <Modal className='modal-home-user-info' okText="Update" footer={null} title="Update User" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
                 <form onSubmitCapture={formik?.handleSubmit}>
                     <div className='input-update input-update-email'>
                         <input onChange={formik?.handleChange} name="email" required autoComplete='off' type="text" disabled defaultValue={formik?.values.email} />
