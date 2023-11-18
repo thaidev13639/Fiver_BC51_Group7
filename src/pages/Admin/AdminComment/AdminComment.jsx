@@ -1,36 +1,40 @@
-import React, { Fragment, useEffect, useState } from "react";
-import {  Modal, Table, notification } from "antd";
+import React, { Fragment, useContext, useEffect, useState } from "react";
+import { Modal, Table, notification } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Input } from "antd";
 import { NavLink, useNavigate } from "react-router-dom";
 import AdminAddComment from "./AdminAddComment";
 import { manageService } from "../../../services/manage";
 import AdminUpdateComment from "./AdminUpdateComment";
+import { LoadingContext } from "../../../contexts/LoadingContext";
 export default function AdminComment() {
   const navigate = useNavigate();
   const [listComment, setListComment] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
   const [delComment, setDelComment] = useState(false);
-  const [search,setSearch] =useState(false);
+  const [search, setSearch] = useState(false);
+  const [_, setLoading] = useContext(LoadingContext);
 
   const [selectedCommentId, setSelectedCommentId] = useState(null);
 
   useEffect(() => {
     fetchListComment();
-    
-  }, [showModal, showModal2,delComment]);
+  }, [showModal, showModal2, delComment]);
 
   const fetchListComment = async () => {
+    setLoading({ isLoading: true });
     const commentList = await manageService.fetchGetListComment("");
     setListComment(commentList.data.content);
     setDelComment(false);
-   
+    setLoading({ isLoading: false });
   };
 
   const handleOpenModalUpdate = (data) => {
+    setLoading({ isLoading: true });
     setShowModal2(true);
     setSelectedCommentId(data);
+    setLoading({ isLoading: false });
   };
   const deleteComment = async (comment) => {
     if (window.confirm(`Bạn muốn xóa bình luận này ${comment}`)) {
@@ -44,7 +48,6 @@ export default function AdminComment() {
         });
         setDelComment(true);
         navigate("/admin/comment");
-        
       } catch (error) {
         notification.warning({
           message: `Xóa ${comment} Không Thành Công`,
@@ -53,26 +56,24 @@ export default function AdminComment() {
         });
       }
     }
-    
   };
   const { Search } = Input;
-  
+
   const handleSearch = async (value) => {
-   
-    if(value){
+    if (value) {
       try {
         // setLoadingState({ isLoading: true });
         const findcomment = await manageService.fetchGetListComment(value);
-          setListComment(findcomment.data.content);
-        setSearch(true)
-        
+        setListComment(findcomment.data.content);
+        setSearch(true);
+
         // setLoadingState({ isLoading: false });
       } catch (error) {
         console.log(error);
       }
-    }else{
-      fetchListComment()
-      setSearch(false)
+    } else {
+      fetchListComment();
+      setSearch(false);
     }
   };
 
@@ -95,31 +96,29 @@ export default function AdminComment() {
     {
       title: "Mã công việc",
       dataIndex: "maCongViec",
-      hidden: search ? true :false,
-    
+      hidden: search ? true : false,
     },
     {
       title: "Mã người bình luận ",
       dataIndex: "maNguoiBinhLuan",
-      hidden: search ? true :false,
-    
+      hidden: search ? true : false,
     },
     {
       title: "Ngày bình luận ",
-      dataIndex:"ngayBinhLuan"
+      dataIndex: "ngayBinhLuan",
     },
     {
       title: "Nội dung  ",
-      dataIndex:"noiDung"
+      dataIndex: "noiDung",
     },
     {
       title: "Sao Bình luận ",
-      dataIndex:"saoBinhLuan"
+      dataIndex: "saoBinhLuan",
     },
     {
       title: "avatar",
-      dataIndex:"avatar",
-      hidden: search ? false :true,
+      dataIndex: "avatar",
+      hidden: search ? false : true,
       render: (_, comment, idx) => {
         return (
           <Fragment key={idx}>
@@ -140,17 +139,18 @@ export default function AdminComment() {
 
     {
       title: "Tên người bình luận ",
-      dataIndex:"tenNguoiBinhLuan",
-      hidden: search ? false :true,                                                    
+      dataIndex: "tenNguoiBinhLuan",
+      hidden: search ? false : true,
     },
-  
+
     {
       title: "Action",
       dataIndex: "action",
-      fixed: 'right',
+      fixed: "right",
       render: (_, comment) => {
-        return <Fragment>
-          <NavLink
+        return (
+          <Fragment>
+            <NavLink
               key={1}
               className="mr-2 text-3xl"
               onClick={() => handleOpenModalUpdate(comment.id)}
@@ -161,14 +161,17 @@ export default function AdminComment() {
 
             <Modal
               open={showModal2}
-              onCancel={() => setShowModal2(false)}
+              onCancel={() => {
+                setLoading({ isLoading: true });
+                setShowModal2(false);
+                setLoading({ isLoading: false });
+              }}
               okButtonProps={{ hidden: true }}
             >
-              
-               <AdminUpdateComment
-                 setShowModal2={setShowModal2}
+              <AdminUpdateComment
+                setShowModal2={setShowModal2}
                 commentId={selectedCommentId}
-              /> 
+              />
             </Modal>
 
             <span
@@ -180,14 +183,15 @@ export default function AdminComment() {
             >
               <DeleteOutlined />
             </span>
-        </Fragment>;
+          </Fragment>
+        );
       },
       width: "10%",
     },
-   ].filter(item => !item.hidden);
+  ].filter((item) => !item.hidden);
   const data = listComment.map((element, idx) => {
     return { ...element, key: `${idx}` };
-  });   
+  });
   return (
     <>
       <h3>DANH SÁCH COMMENT </h3>
@@ -201,11 +205,10 @@ export default function AdminComment() {
         onCancel={() => setShowModal(false)}
         okButtonProps={{ hidden: true }}
       >
-        
-        <AdminAddComment setShowModal={setShowModal}/>
+        <AdminAddComment setShowModal={setShowModal} />
       </Modal>
 
-       <Search
+      <Search
         placeholder="Nhập Mã Công Việc Comment Cần Tìm"
         style={{ margin: "20px 0", color: "red" }}
         onSearch={handleSearch}
@@ -213,18 +216,16 @@ export default function AdminComment() {
       />
 
       <Table
-      
         columns={columns}
         dataSource={data}
         scroll={{
           x: 1100,
           y: 500,
-        }}    
-        bordered 
+        }}
+        bordered
         onSearch={handleSearch}
         style={{ border: "1px solid #00000036" }}
-      /> 
-      
+      />
     </>
-  )
+  );
 }

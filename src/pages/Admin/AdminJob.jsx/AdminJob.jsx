@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Modal, Table, notification } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Input } from "antd";
@@ -6,6 +6,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { manageService } from "../../../services/manage";
 import AdminUpdateJob from "./AdminUpdateJob";
 import AdminAddJob from "./AdminAddJob";
+import { LoadingContext } from "../../../contexts/LoadingContext";
 // import { LoadingContext } from "../../../../contexts/LoadingContext/LoadingContext";
 
 export default function AdminJob() {
@@ -14,24 +15,27 @@ export default function AdminJob() {
   const [showModal, setShowModal] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
   const [delJob, setDelJob] = useState(false);
+  const [_, setLoading] = useContext(LoadingContext);
 
   const [selectedJobId, setSelectedJobId] = useState(null);
 
   useEffect(() => {
     fetchListJob();
-    
-  }, [showModal, showModal2,delJob]);
+  }, [showModal, showModal2, delJob]);
 
   const fetchListJob = async () => {
+    setLoading({ isLoading: true });
     const jobList = await manageService.fetchGetListJobS("");
     setListJob(jobList.data.content);
     setDelJob(false);
-    // console.log(listJob);
+    setLoading({ isLoading: false });
   };
 
   const handleOpenModalUpdate = (data) => {
+    setLoading({ isLoading: true });
     setShowModal2(true);
     setSelectedJobId(data);
+    setLoading({ isLoading: false });
   };
 
   const deleteJob = async (job) => {
@@ -46,7 +50,6 @@ export default function AdminJob() {
         });
         setDelJob(true);
         navigate("/admin/job");
-        
       } catch (error) {
         notification.warning({
           message: `Xóa ${job} Không Thành Công`,
@@ -60,27 +63,23 @@ export default function AdminJob() {
   const { Search } = Input;
 
   const handleSearch = async (value) => {
-    
-    if(value){
+    if (value) {
       try {
         // setLoadingState({ isLoading: true });
         const findJob = await manageService.fetchGetListJobS(value);
-  
+
         const resultSearchJob = findJob.data.content;
-    
-          const congViecArr = resultSearchJob.map((object) => object.congViec);
-          setListJob(congViecArr);
-        
-        
-  
+
+        const congViecArr = resultSearchJob.map((object) => object.congViec);
+        setListJob(congViecArr);
+
         // setLoadingState({ isLoading: false });
       } catch (error) {
         console.log(error);
       }
-    }else{
-      fetchListJob()
+    } else {
+      fetchListJob();
     }
-  
   };
 
   const columns = [
@@ -143,10 +142,11 @@ export default function AdminJob() {
     {
       title: "Action",
       dataIndex: "action",
-      fixed: 'right',
+      fixed: "right",
       render: (_, job) => {
-        return <Fragment>
-          <NavLink
+        return (
+          <Fragment>
+            <NavLink
               key={1}
               className="mr-2 text-3xl"
               onClick={() => handleOpenModalUpdate(job.id)}
@@ -160,11 +160,10 @@ export default function AdminJob() {
               onCancel={() => setShowModal2(false)}
               okButtonProps={{ hidden: true }}
             >
-              
-               <AdminUpdateJob
-                 setShowModal2={setShowModal2}
+              <AdminUpdateJob
+                setShowModal2={setShowModal2}
                 jobId={selectedJobId}
-              /> 
+              />
             </Modal>
 
             <span
@@ -176,21 +175,29 @@ export default function AdminJob() {
             >
               <DeleteOutlined />
             </span>
-        </Fragment>;
+          </Fragment>
+        );
       },
       width: "10%",
     },
   ];
-                                             
+
   const data = listJob.map((element, idx) => {
     return { ...element, key: `${idx}` };
-  });                                                                                                      
-                                                                                                                                                                                                                                                                                                                                                            
+  });
+
   return (
     <>
       <h3>DANH SÁCH JOB</h3>
 
-      <button className="btn btn-success" onClick={() => setShowModal(true)}>
+      <button
+        className="btn btn-success"
+        onClick={() => {
+          setLoading({ isLoading: true });
+          setShowModal(true);
+          setLoading({ isLoading: false });
+        }}
+      >
         Thêm Job
       </button>
 
@@ -199,8 +206,7 @@ export default function AdminJob() {
         onCancel={() => setShowModal(false)}
         okButtonProps={{ hidden: true }}
       >
-        
-        <AdminAddJob setShowModal={setShowModal}/>
+        <AdminAddJob setShowModal={setShowModal} />
       </Modal>
 
       <Search

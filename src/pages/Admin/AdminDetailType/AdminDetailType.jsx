@@ -1,11 +1,20 @@
-import React, { Fragment, useEffect, useState } from "react";
-import { Button, Dropdown, Menu, Modal, Space, Table, notification } from "antd";
-import { EditOutlined, DeleteOutlined ,DownOutlined} from "@ant-design/icons";
+import React, { Fragment, useContext, useEffect, useState } from "react";
+import {
+  Button,
+  Dropdown,
+  Menu,
+  Modal,
+  Space,
+  Table,
+  notification,
+} from "antd";
+import { EditOutlined, DeleteOutlined, DownOutlined } from "@ant-design/icons";
 import { Input } from "antd";
 import { NavLink, useNavigate } from "react-router-dom";
 import { manageService } from "../../../services/manage";
 import AdminAddDetailType from "./AdminAddDetailType";
 import AdminUpdateDetailType from "./AdminUpdateDetailType";
+import { LoadingContext } from "../../../contexts/LoadingContext";
 
 export default function AdminDetailType() {
   const navigate = useNavigate();
@@ -13,6 +22,7 @@ export default function AdminDetailType() {
   const [showModal, setShowModal] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
   const [deldetailJobType, setDelDetailJobType] = useState(false);
+  const [_, setLoading] = useContext(LoadingContext);
 
   const [slcJobDetailTypeId, setSlcDetailJobtypeId] = useState(null);
 
@@ -21,14 +31,18 @@ export default function AdminDetailType() {
   }, [showModal, deldetailJobType, showModal2]);
 
   const fetchDetailListJobType = async () => {
+    setLoading({ isLoading: true });
     const detailjobTypeList = await manageService.fetchGetListDetailType("");
     setListDetailJobType(detailjobTypeList.data.content);
     setDelDetailJobType(false);
+    setLoading({ isLoading: false });
   };
 
   const handleOpenModalUpdate = (data) => {
+    setLoading({ isLoading: true });
     setShowModal2(true);
     setSlcDetailJobtypeId(data);
+    setLoading({ isLoading: false });
   };
 
   const deleteDetailJobType = async (detailType) => {
@@ -111,109 +125,103 @@ export default function AdminDetailType() {
       title: "Danh sách chi tiết loại",
       dataIndex: "dsChiTietLoai",
       render: (_, detail, idx) => {
-        
         const data = [...detail.dsChiTietLoai];
-       
+
         const items = [];
         data.forEach((item) => {
           items.push({
             key: item.id,
-            label:( <p>{item.tenChiTiet} </p>)
+            label: <p>{item.tenChiTiet} </p>,
           });
         });
-        
-          return (
-            <Fragment key={idx}>
-              <Dropdown
+
+        return (
+          <Fragment key={idx}>
+            <Dropdown
               size="large"
-             
-              
-                menu={{
-                  items,
-                }}
-                placement="bottom" arrow
-              >
-                {/* <a onClick={(e) => e.preventDefault()}>
+              menu={{
+                items,
+              }}
+              placement="bottom"
+              arrow
+            >
+              {/* <a onClick={(e) => e.preventDefault()}>
                   <Space>
                     {detail.tenNhom}
                    
                   </Space>
                 </a> */}
-                <Button>
-        <Space>
-        {detail.tenNhom} |
-          <DownOutlined />
-        </Space>
-      </Button>
-              </Dropdown>
-              
-            </Fragment>
-          );
-        },
-
+              <Button>
+                <Space>
+                  {detail.tenNhom} |
+                  <DownOutlined />
+                </Space>
+              </Button>
+            </Dropdown>
+          </Fragment>
+        );
       },
-    
+    },
 
-      {
-        title: "Action",
-        dataIndex: "action",
-        fixed: 'right',
-        render: (_, detail) => {
-          return (
-            <Fragment>
-              <NavLink
-                key={1}
-                className="mr-2 text-3xl"
-                onClick={() => handleOpenModalUpdate(detail.id)}
-                style={{ color: "blue", fontSize: "20px" }}
-              >
-                <EditOutlined />
-              </NavLink>
+    {
+      title: "Action",
+      dataIndex: "action",
+      fixed: "right",
+      render: (_, detail) => {
+        return (
+          <Fragment>
+            <NavLink
+              key={1}
+              className="mr-2 text-3xl"
+              onClick={() => handleOpenModalUpdate(detail.id)}
+              style={{ color: "blue", fontSize: "20px" }}
+            >
+              <EditOutlined />
+            </NavLink>
 
-              <Modal
-                open={showModal2}
-                onCancel={() => setShowModal2(false)}
-                okButtonProps={{ hidden: true }}
-              >
+            <Modal
+              open={showModal2}
+              onCancel={() => setShowModal2(false)}
+              okButtonProps={{ hidden: true }}
+            >
+              <AdminUpdateDetailType
+                setShowModal2={setShowModal2}
+                idDetailType={slcJobDetailTypeId}
+              />
+            </Modal>
 
-                 <AdminUpdateDetailType
-                   setShowModal2={setShowModal2}
-                  idDetailType={slcJobDetailTypeId}
-                />
-              </Modal>
-
-              <span
-                key={2}
-                className="text-3xl"
-                to="/"
-                style={{ cursor: "pointer", color: "red", fontSize: "20px" }}
-                onClick={() => deleteDetailJobType(detail.id)}
-              >
-                <DeleteOutlined />
-              </span>
-            </Fragment>
-          );
-        },
-        width: "10%",
+            <span
+              key={2}
+              className="text-3xl"
+              to="/"
+              style={{ cursor: "pointer", color: "red", fontSize: "20px" }}
+              onClick={() => deleteDetailJobType(detail.id)}
+            >
+              <DeleteOutlined />
+            </span>
+          </Fragment>
+        );
       },
+      width: "10%",
+    },
   ];
   const handleSearch = async (value) => {
-    
-    if(value) {
+    if (value) {
       try {
         // setLoadingState({ isLoading: true });
-        const findDetailType = await manageService.fetchGetListDetailType(value);
-      
+        const findDetailType = await manageService.fetchGetListDetailType(
+          value
+        );
+
         setListDetailJobType(findDetailType.data.content.data);
-  
+
         // setLoadingState({ isLoading: false });
       } catch (error) {
         console.log(error);
       }
-    }else{
-      fetchDetailListJobType()
+    } else {
+      fetchDetailListJobType();
     }
-   
   };
 
   const data = listDetailJobType.map((element, idx) => {
@@ -223,7 +231,14 @@ export default function AdminDetailType() {
     <>
       <h3>DANH SÁCH CHI TIẾT LOẠI</h3>
 
-      <button className="btn btn-success" onClick={() => setShowModal(true)}>
+      <button
+        className="btn btn-success"
+        onClick={() => {
+          setLoading({ isLoading: true });
+          setShowModal(true);
+          setLoading({ isLoading: false});
+        }}
+      >
         Thêm Chi Tiết Loại
       </button>
 
@@ -247,7 +262,7 @@ export default function AdminDetailType() {
         scroll={{
           x: 1100,
           y: 500,
-        }}    
+        }}
         bordered
         style={{ border: "1px solid #00000036" }}
       />

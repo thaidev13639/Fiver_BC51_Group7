@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Modal, Table, notification } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Input } from "antd";
@@ -6,6 +6,8 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { manageService } from "../../../services/manage";
 import AdminAddJobType from "./AdminAddJobType";
 import AdminUpdateJobType from "./AdminUpdateJobType";
+import { LoadingContext } from "../../../contexts/LoadingContext";
+import { faL } from "@fortawesome/free-solid-svg-icons";
 
 export default function AdminJobType() {
   const navigate = useNavigate();
@@ -13,6 +15,7 @@ export default function AdminJobType() {
   const [showModal, setShowModal] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
   const [delJobType, setDelJobType] = useState(false);
+  const [_, setLoading] = useContext(LoadingContext);
 
   const [selectedJobTypeId, setSelectedJobtypeId] = useState(null);
 
@@ -21,14 +24,18 @@ export default function AdminJobType() {
   }, [showModal, delJobType, showModal2]);
 
   const fetchListJobType = async () => {
+    setLoading({ isLoading: true });
     const jobTypeList = await manageService.fetchGetListJobsType("");
     setListJobType(jobTypeList.data.content);
-    setDelJobType(false)
+    setDelJobType(false);
+    setLoading({ isLoading: false });
   };
 
   const handleOpenModalUpdate = (data) => {
+    setLoading({ isLoading: true });
     setShowModal2(true);
     setSelectedJobtypeId(data);
+    setLoading({ isLoading: false });
   };
 
   const deleteJobType = async (jobType) => {
@@ -71,14 +78,14 @@ export default function AdminJobType() {
       width: "15%",
     },
     {
-        title: "Jobtype",
-        dataIndex: "tenLoaiCongViec",
+      title: "Jobtype",
+      dataIndex: "tenLoaiCongViec",
     },
 
     {
       title: "Action",
       dataIndex: "action",
-      fixed: 'right',
+      fixed: "right",
       render: (_, jobType) => {
         return (
           <Fragment>
@@ -123,19 +130,18 @@ export default function AdminJobType() {
   });
 
   const handleSearch = async (value) => {
-    
-    if(value){
+    if (value) {
       try {
         // setLoadingState({ isLoading: true });
         const findJobType = await manageService.fetchGetListJobsType(value);
         setListJobType(findJobType.data.content.data);
-       
+
         // setLoadingState({ isLoading: false });
       } catch (error) {
         console.log(error);
       }
-    }else{
-      fetchListJobType()
+    } else {
+      fetchListJobType();
     }
   };
 
@@ -143,7 +149,14 @@ export default function AdminJobType() {
     <>
       <h3>DANH SÁCH LOẠI CÔNG VIỆC</h3>
 
-      <button className="btn btn-success" onClick={() => setShowModal(true)}>
+      <button
+        className="btn btn-success"
+        onClick={() => {
+          setLoading({ isLoading: true });
+          setShowModal(true);
+          setLoading({ isLoading: false });
+        }}
+      >
         Thêm Loại công việc
       </button>
 
@@ -165,7 +178,7 @@ export default function AdminJobType() {
         dataSource={data}
         scroll={{
           x: 1100,
-          y: 500,                  
+          y: 500,
         }}
         bordered
         style={{ border: "1px solid #00000036" }}
