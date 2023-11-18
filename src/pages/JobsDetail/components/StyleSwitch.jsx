@@ -3,7 +3,7 @@ import { Switch } from 'antd';
 
 export default function StyleSwitch(props) {
     const onChange = (checked) => {
-        console.log(`switch to ${checked}`);
+        // console.log(`switch to ${checked}`);
     };
     return (
         <div className='switch-style'>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { ThunderboltFilled, GlobalOutlined } from "@ant-design/icons"
 import { loginAction } from '../redux-toolkit/reducer/userReducer';
@@ -6,13 +6,15 @@ import { jobsService } from '../services/jobs'
 import { useNavigate } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import "../css/style.css"
+import { LoadingContext } from '../contexts/LoadingContext';
 
 export default function Header() {
-    const [listJobs, setListJobs] = useState([]);
     const navigate = useNavigate();
     const dispatch = useDispatch()
-    const accountState = useSelector((state) => state.userReducer);
     const [scroll, setScroll] = useState(false);
+    const [listJobs, setListJobs] = useState([]);
+    const [_, setLoading] = useContext(LoadingContext)
+    const accountState = useSelector((state) => state.userReducer);
 
     const handleScroll = () => {
         if (window.pageYOffset > 50) {
@@ -34,8 +36,12 @@ export default function Header() {
     }, [])
 
     const fetchGetListJobs = async () => {
+        setLoading({ isLoading: true })
+
         const data = await jobsService.fetchListJobsNavbarApi();
         setListJobs(data.data.content)
+
+        setLoading({ isLoading: false })
     }
 
     const renderListJobsNavbar = () => {
