@@ -200,6 +200,9 @@ export default function AdminUpdateUser({ setShowModal2,idtaiKhoan}) {
             <Radio.Button value="ADMIN">Admin</Radio.Button>
           
           </Radio.Group>
+          {formik.errors.role && formik.touched.role && (
+          <span className="text-danger">{formik.errors.role}</span>
+        )}
         </Form.Item>
   
         <Form.Item label="Action:"

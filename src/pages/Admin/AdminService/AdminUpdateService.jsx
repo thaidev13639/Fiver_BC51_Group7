@@ -6,10 +6,14 @@ import { useFormik } from "formik";
 import { manageService } from "../../../services/manage";
 import moment from "moment/moment";
 import { validateHireJob } from "../../../ValidateYup/ValidateYup";
+
+
+
 export default function AdminUpdateService({ setShowModal2, serviceId }) {
   const navigate = useNavigate();
   const [hireDetail, setHireDetail] = useState({});
   const [placement, setPlacement] = useState("rightTop");
+  
 
   useEffect(() => {
     fetchGetHire(); //get thong tin user
@@ -26,7 +30,7 @@ export default function AdminUpdateService({ setShowModal2, serviceId }) {
   const fetchGetHire = async () => {
     const hire = await manageService.fetchHireJobsDetailApi(serviceId);
     setHireDetail(hire.data.content);
-    
+   
   };
 
   const handleResize = () => {
@@ -36,7 +40,7 @@ export default function AdminUpdateService({ setShowModal2, serviceId }) {
       setPlacement("rightTop");
     }
   };
-
+ 
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
@@ -151,13 +155,16 @@ export default function AdminUpdateService({ setShowModal2, serviceId }) {
         <Form.Item label="Role">
           <Radio.Group
             name="hoanThanh"
-            defaultValue={formik.values?.hoanThanh === true ? "TRUE" : "FALSE" }
-            
+          
+            value={formik.values?.hoanThanh  }
             onChange={formik.handleChange}
           >
-            <Radio.Button value="TRUE">True</Radio.Button> 
-            <Radio.Button value="FALSE">False</Radio.Button>
+            <Radio.Button value={true}>True</Radio.Button> 
+            <Radio.Button value={false}>False</Radio.Button>
           </Radio.Group>
+          {formik.errors.hoanThanh && formik.touched.hoanThanh && (
+          <span className="text-danger">{formik.errors.hoanThanh}</span>
+        )}
         </Form.Item>
 
         <Form.Item label="Action:" style={{ width: "100%" }}>

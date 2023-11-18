@@ -118,14 +118,16 @@ export default function AdminAddService({ setShowModal }) {
       <Form.Item label="Role" >
         <Radio.Group
         name="hoanThanh"
-        defaultValue="FALSE"
+        value={false}
         onChange={formik.handleChange}
         >
           {/* <Radio.Button value="TRUE">True</Radio.Button> */}
-          <Radio.Button value="FALSE">False</Radio.Button>
+          <Radio.Button value={false}>False</Radio.Button>
         
         </Radio.Group>
-      
+        {formik.errors.hoanThanh && formik.touched.hoanThanh && (
+          <span className="text-danger">{formik.errors.hoanThanh}</span>
+        )}
       </Form.Item>
 
       

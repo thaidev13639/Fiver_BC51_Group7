@@ -77,6 +77,9 @@ export const validateInfo = yup.object().shape({
     .min(5, "(*) Mật khẩu tối thiểu 5 ký tự")
     .matches(rulesPass, { message: "Mật Khẩu còn yếu: Name@123" })
     .required("(*) Vui lòng nhập mật khẩu"),
+    role: yup 
+    .string()
+    .required("(*) Vui lòng chọn Role"),
   phone: yup
     .string()
     .min(9, "(*) Tối thiểu 9 số")
