@@ -17,7 +17,6 @@ export default function AdminUpdateJobType({ setShowModal2, idJobType }) {
   const fetchGetType = async () => {
     const type = await manageService.fetchJobsTypeDetailApi(idJobType);
     setTypeDetail(type.data.content);
-    console.log(typeDetail);
   };
 
   const UpdateType= async (data) => {

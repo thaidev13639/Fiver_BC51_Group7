@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Button, Form, Input, notification } from "antd";
+import React from "react";
+import { Form, Input, notification } from "antd";
 import { useNavigate } from "react-router-dom";
 
 import { useFormik } from "formik";
@@ -26,7 +26,6 @@ export default function AdminAddJob({ setShowModal }) {
     },
     validationSchema: validationJob,
     onSubmit: async (values) => {
-      
       try {
         await manageService.fetchJobsAddApi(values);
 
@@ -38,7 +37,7 @@ export default function AdminAddJob({ setShowModal }) {
           duration: 5,
         });
         formik.resetForm();
-        
+
         setTimeout(() => {
           // Navigate to the desired page
           navigate(0);
@@ -126,6 +125,8 @@ export default function AdminAddJob({ setShowModal }) {
           style={{ width: "50%" }}
           name="moTa"
           onChange={formik.handleChange}
+          rows={4}
+          maxLength={150}
         ></TextArea>
         <br />
         {formik.errors.moTa && formik.touched.moTa && (
@@ -158,6 +159,8 @@ export default function AdminAddJob({ setShowModal }) {
           style={{ width: "50%" }}
           name="moTaNgan"
           onChange={formik.handleChange}
+          rows={4}
+          maxLength={150}
         ></TextArea>
         <br />
         {formik.errors.moTaNgan && formik.touched.moTaNgan && (

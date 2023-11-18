@@ -143,14 +143,16 @@ export default function AdminAddUser({ setShowModal }) {
       <Form.Item label="Role" >
         <Radio.Group
         name="role"
-        defaultValue="USER"
         onChange={formik.handleChange}
+        
         >
           <Radio.Button value="USER">User</Radio.Button>
           <Radio.Button value="ADMIN">Admin</Radio.Button>
         
         </Radio.Group>
-      
+        {formik.errors.role && formik.touched.role && (
+          <span className="text-danger">{formik.errors.role}</span>
+        )}
       </Form.Item>
 
       <Form.Item label="Action:"
