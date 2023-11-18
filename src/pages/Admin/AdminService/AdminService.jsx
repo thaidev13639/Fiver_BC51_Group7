@@ -1,13 +1,13 @@
-import React, { Fragment, useEffect, useState } from "react";
-import {  Modal, Table, notification } from "antd";
+import React, { Fragment, useContext, useEffect, useState } from "react";
+import { Modal, Table, notification } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
-import {  NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { manageService } from "../../../services/manage";
 import AdminAddService from "./AdminAddService";
 import AdminUpdateService from "./AdminUpdateService";
 import Search from "antd/es/input/Search";
-
+import { LoadingContext } from "../../../contexts/LoadingContext";
 
 export default function AdminService() {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ export default function AdminService() {
   const [showModal, setShowModal] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
   const [delService, setDelService] = useState(false);
-
+  const [_, setLoading] = useContext(LoadingContext);
 
   const [selectedServiceId, setSelectedServiceId] = useState(null);
   useEffect(() => {
@@ -23,15 +23,19 @@ export default function AdminService() {
   }, [showModal, showModal2, delService]);
 
   const fetchListService = async () => {
+    setLoading({ isLoading: true });
     const serviceList = await manageService.fetchGetListHireJobS("");
     setListService(serviceList.data.content);
 
     setDelService(false);
+    setLoading({ isLoading: false });
   };
 
   const handleOpenModalUpdate = (data) => {
+    setLoading({ isLoading: true });
     setShowModal2(true);
     setSelectedServiceId(data);
+    setLoading({ isLoading: false });
   };
 
   const deleteService = async (Service) => {
@@ -157,20 +161,16 @@ export default function AdminService() {
   });
 
   const handleSearch = (value) => {
-    
-  if(value){
-    const data = [...listService];
-    const filteredData = data.filter((item) => (item.maCongViec).toString() === value);
-    setListService(filteredData)
-    
-  }else{
-    fetchListService()
-  }
-    
+    if (value) {
+      const data = [...listService];
+      const filteredData = data.filter(
+        (item) => item.maCongViec.toString() === value
+      );
+      setListService(filteredData);
+    } else {
+      fetchListService();
+    }
   };
-
-  
-
 
   return (
     <>
@@ -179,7 +179,11 @@ export default function AdminService() {
       <button
         className="btn btn-success"
         style={{ margin: "20px 0" }}
-        onClick={() => setShowModal(true)}
+        onClick={() => {
+          setLoading({ isLoading: true });
+          setShowModal(true);
+          setLoading({ isLoading: false });
+        }}
       >
         Thêm Công Việc Thuê
       </button>

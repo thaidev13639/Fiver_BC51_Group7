@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Modal, Table, notification } from "antd";
 
 import {
@@ -8,12 +8,13 @@ import {
 } from "@ant-design/icons";
 import { Input } from "antd";
 import { NavLink, useNavigate } from "react-router-dom";
-// import { LoadingContext } from "../../../../contexts/LoadingContext/LoadingContext";
+
 import { userService } from "../../../services/user";
 import AdminAddUser from "./AdminAddUser";
 import AdminUpdateUser from "./AdminUpdateUser";
 
 import { useSelector } from "react-redux";
+import { LoadingContext } from "../../../contexts/LoadingContext";
 
 export default function AdminUser() {
   const navigate = useNavigate();
@@ -24,20 +25,25 @@ export default function AdminUser() {
   const accountState = useSelector((state) => state.userReducer);
 
   const [selectedUserId, setSelectedUserId] = useState(null);
+  const [_, setLoading] = useContext(LoadingContext);
 
   useEffect(() => {
     fetchListUser();
   }, [showModal, delUser, showModal2]);
 
   const fetchListUser = async () => {
+    setLoading({ isLoading: true });
     const userList = await userService.fetchGetListUserApi("");
     setListUser(userList.data.content);
     setDelUser(false);
+    setLoading({ isLoading: false });
   };
 
   const handleOpenModalUpdate = (data) => {
+    setLoading({ isLoading: true });
     setShowModal2(true);
     setSelectedUserId(data);
+    setLoading({ isLoading: false });
   };
 
   const deleteUser = async (taiKhoan) => {
@@ -167,9 +173,9 @@ export default function AdminUser() {
                     ? "block"
                     : "none",
                 fontSize: "33px",
-                marginBottom:"15px",
-               marginRight:"70px",
-                color:"red",
+                marginBottom: "15px",
+                marginRight: "70px",
+                color: "red",
               }}
             />
 
@@ -180,8 +186,8 @@ export default function AdminUser() {
                     ? "block"
                     : "none",
                 fontSize: "33px",
-                marginRight:"70px",
-                color:"red",
+                marginRight: "70px",
+                color: "red",
               }}
             />
             <NavLink
@@ -241,12 +247,9 @@ export default function AdminUser() {
 
   const handleSearch = async (value) => {
     try {
-      // setLoadingState({ isLoading: true });
       const findUser = await userService.fetchGetListUserApi(value);
 
       setListUser(findUser.data.content);
-
-      // setLoadingState({ isLoading: false });
     } catch (error) {
       console.log(error);
     }
@@ -256,7 +259,14 @@ export default function AdminUser() {
     <>
       <h3>DANH SÁCH NGƯỜI DÙNG</h3>
 
-      <button className="btn btn-success" onClick={() => setShowModal(true)}>
+      <button
+        className="btn btn-success"
+        onClick={() => {
+          setLoading({ isLoading: true });
+          setShowModal(true);
+          setLoading({ isLoading: false });
+        }}
+      >
         Thêm người dùng
       </button>
 
@@ -281,7 +291,7 @@ export default function AdminUser() {
           x: 1100,
           y: 500,
         }}
-        style={{ border: "1px solid #00000036"}}
+        style={{ border: "1px solid #00000036" }}
       />
     </>
   );
