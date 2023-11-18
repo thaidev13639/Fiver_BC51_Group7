@@ -1,22 +1,29 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Button from './components/Button'
 import StyleSwitch from './components/StyleSwitch'
 import ShowOption from './components/ShowOption'
 import { useNavigate, useParams } from 'react-router-dom'
 import { jobsService } from '../../services/jobs'
+import { LoadingContext } from '../../contexts/LoadingContext'
 
 export default function JobsDetail() {
   const param = useParams()
-  const [detailJob, setDetailJob] = useState()
   const navigate = useNavigate()
+  const [detailJob, setDetailJob] = useState()
+  const [_, setLoading] = useContext(LoadingContext)
+
+  const fetchListJobDetail = async () => {
+    setLoading({ isLoading: true })
+
+    const data = await jobsService.fetchListJobsDetailApi(param.id)
+    setDetailJob(data.data.content)
+
+    setLoading({ isLoading: false })
+  }
 
   useEffect(() => {
     fetchListJobDetail()
   }, [param.id])
-  const fetchListJobDetail = async () => {
-    const data = await jobsService.fetchListJobsDetailApi(param.id)
-    setDetailJob(data.data.content)
-  }
 
   const renderCard = () => {
     return detailJob?.map((ele) => {

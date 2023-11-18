@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { userService } from '../../services/user'
 import { jobsService } from '../../services/jobs'
@@ -12,14 +12,16 @@ import { useFormik } from 'formik'
 import { validationUserPageHome } from '../../ValidateYup/ValidateYup'
 import { useDispatch, useSelector } from 'react-redux'
 import { loginAction } from '../../redux-toolkit/reducer/userReducer'
+import { LoadingContext } from '../../contexts/LoadingContext'
 
 export default function InfoUser() {
     const param = useParams()
     const dispatch = useDispatch()
-    const stateUserInfo = useSelector((state) => state.userReducer)
     const [userInfo, setUserInfo] = useState({})
     const [listRentJob, setlistRentJob] = useState([])
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [_, setLoading] = useContext(LoadingContext)
+    const stateUserInfo = useSelector((state) => state.userReducer)
     const showModal = () => {
         setIsModalOpen(true);
     };
@@ -40,12 +42,21 @@ export default function InfoUser() {
         return convertedDate;
     }
     const fetchInfoUser = async () => {
+        setLoading({ isLoading: true })
+
         const data = await userService.fetchGetInfoUserApi(param.id)
         setUserInfo(data.data.content)
+
+        setLoading({ isLoading: false })
     }
+
     const fetchListRentUser = async () => {
+        setLoading({ isLoading: true })
+
         const data = await jobsService.fetchRentJobListUserApi()
         setlistRentJob(data.data.content)
+
+        setLoading({ isLoading: false })
     }
     useEffect(() => {
         fetchInfoUser()
@@ -69,7 +80,11 @@ export default function InfoUser() {
         validationSchema: validationUserPageHome,
         onSubmit: async (values) => {
             try {
+                setLoading({ isLoading: true })
+
                 const result = await userService.fetchUserUpdateApi(userInfo?.id, values)
+
+                setLoading({ isLoading: false })
                 notification.success({
                     message: "Update Info Success",
                     placement: "topLeft",

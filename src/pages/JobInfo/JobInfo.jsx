@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Rate } from 'antd';
 import Payment from './components/Payment';
 import ShowOption from '../JobsDetail/components/ShowOption';
@@ -10,13 +10,15 @@ import LeaveComent from './components/LeaveComent';
 import FAQuestion from './components/FAQuestion';
 import LeftBody from './components/LeftBody';
 import RightBody from './components/RightBody';
+import { LoadingContext } from '../../contexts/LoadingContext';
 
 
 export default function JobInfo() {
+    const param = useParams()
+    const location = useLocation()
     const [jobDetail, setJobDetail] = useState({})
     const [listComent, setListComent] = useState([])
-    const location = useLocation()
-    const param = useParams()
+    const [_, setLoading] = useContext(LoadingContext)
 
     window.addEventListener("scroll", () => {
         if (location.pathname === `/job-info/${param.id}`) {
@@ -34,12 +36,20 @@ export default function JobInfo() {
     })
 
     const fecthJobDetail = async () => {
+        setLoading({ isLoading: true })
+
         const data = await jobsService.fetchJobsDetailApi(param.id)
         setJobDetail(data.data.content[0])
+
+        setLoading({ isLoading: false })
     }
     const fetchListComent = async () => {
+        setLoading({ isLoading: true })
+
         const datacoment = await jobsService.fetchListComentApi(param.id)
         setListComent(datacoment.data.content)
+
+        setLoading({ isLoading: false })
     }
 
     useEffect(() => {
