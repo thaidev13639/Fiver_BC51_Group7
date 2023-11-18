@@ -21,7 +21,6 @@ export default function TopLeft(props) {
 
             try {
                 const result = await userService.fetchUploadAvtarUser(formData)
-                console.log(result)
                 dispatch(loginAction.SET_INFO_USER({ user: result.data.content, token: stateUserInfo?.userInfo?.token }))
                 localStorage.setItem("INFO_ACCOUNT", JSON.stringify({ user: result.data.content, token: stateUserInfo?.userInfo?.token }))
 
