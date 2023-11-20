@@ -9,7 +9,7 @@ import 'swiper/css/navigation';
 
 import { useFormik } from 'formik';
 import { notification } from 'antd';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function Carousel() {
     const navigate = useNavigate()
@@ -19,7 +19,6 @@ export default function Carousel() {
             keyword: "",
         },
         onSubmit: (values) => {
-            console.log(values)
             if (values.keyword) {
                 navigate(`/research-job/${values.keyword}`)
             } else {

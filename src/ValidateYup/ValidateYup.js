@@ -1,8 +1,5 @@
 import * as yup from "yup";
 
-//const rulesUser = /^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z0-9]{7,}$/;
-
-// /^[a-zA-Z0-9]+([_ -]?[a-zA-Z0-9])*$/;
 const rulesPass =
   /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{0,}$/;
 const rulesName =

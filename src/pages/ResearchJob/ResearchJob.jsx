@@ -17,7 +17,6 @@ export default function ResearchJob() {
 
         try {
             const data = await jobsService.fetchResearchJobApi(param.keyword)
-            console.log(data)
             setLoading({ isLoading: false })
             setDetailJob(data.data.content)
 
@@ -32,7 +31,6 @@ export default function ResearchJob() {
     }, [param.keyword])
 
     const renderCard = () => {
-        console.log(detailJob)
         if (detailJob[0]) {
             return detailJob?.map((ele) => {
                 const { id, danhGia, giaTien, hinhAnh, tenCongViec, saoCongViec } = ele.congViec;

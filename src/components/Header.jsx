@@ -135,7 +135,6 @@ export default function Header() {
         },
         onSubmit: (values) => {
             if (values.keyword) {
-                console.log(location.pathname)
                 if (location.pathname === `/research-job/${values.keyword}`) {
                     window.location.reload()
                 } else {

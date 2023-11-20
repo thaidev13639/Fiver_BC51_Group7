@@ -9,16 +9,14 @@ const requestApi = axios.create({
   },
 });
 
-// const state = store.getState();
-// console.log(state);
 
 requestApi.interceptors.request.use((config) => {
-  let accessToken = null; //accesstoken
+  let accessToken = null; 
   const state = store.getState();
   if (state.userReducer.userInfo) {
     accessToken = state.userReducer.userInfo.token;
 
-    config.headers.token = accessToken; // truyen them thuoctinh có ten token , và TokenCybersoft vào header:{}
+    config.headers.token = accessToken; 
 
   }
 
