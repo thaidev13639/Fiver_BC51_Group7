@@ -45,7 +45,6 @@ export default function LeaveComent(props) {
                 } catch (error) {
                     console.log(error)
                 }
-                console.log(body)
             } else {
                 navigate("/form/login")
                 notification.warning({

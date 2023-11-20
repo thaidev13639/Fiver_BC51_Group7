@@ -51,5 +51,11 @@ class JobsService {
       data,
     });
   }
+  fetchResearchJobApi(keyword) {
+    return requestApi({
+      url: `/cong-viec/lay-danh-sach-cong-viec-theo-ten/${keyword}`,
+      method: "GET",
+    });
+  }
 }
 export const jobsService = new JobsService();
