@@ -4,13 +4,16 @@ import { ThunderboltFilled, GlobalOutlined } from "@ant-design/icons"
 import { loginAction } from '../redux-toolkit/reducer/userReducer';
 import { jobsService } from '../services/jobs'
 import { useNavigate } from 'react-router';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import "../css/style.css"
 import { LoadingContext } from '../contexts/LoadingContext';
+import { useFormik } from 'formik';
+import { notification } from 'antd';
 
 export default function Header() {
     const navigate = useNavigate();
     const dispatch = useDispatch()
+    const location = useLocation()
     const [scroll, setScroll] = useState(false);
     const [listJobs, setListJobs] = useState([]);
     const [_, setLoading] = useContext(LoadingContext)
@@ -126,7 +129,27 @@ export default function Header() {
             )
         }
     }
-
+    const formik = useFormik({
+        initialValues: {
+            keyword: "",
+        },
+        onSubmit: (values) => {
+            if (values.keyword) {
+                console.log(location.pathname)
+                if (location.pathname === `/research-job/${values.keyword}`) {
+                    window.location.reload()
+                } else {
+                    navigate(`/research-job/${values.keyword}`)
+                }
+            } else {
+                notification.warning({
+                    message: "Please enter keyword for search Job",
+                    placement: "bottomRight",
+                    duration: 3
+                })
+            }
+        }
+    })
     return (
         <div className={scroll ? "header-container header-active" : "header-container"}>
             <nav className="navbar navbar-expand-lg navbar-light bg-light justify-content-between navbar-page-home">
@@ -135,8 +158,8 @@ export default function Header() {
                 </button>
                 <div className='left-header-home d-flex align-items-center'>
                     <NavLink className="navbar-brand name-home d-flex mr-3" to="/"><span className='mr-1'>Fiverr</span> <ThunderboltFilled className='logo-home' /></NavLink>
-                    <form className="form-inline my-lg-0">
-                        <input className="form-control " type="search" placeholder="Find Service" aria-label="Search" />
+                    <form className="form-inline my-lg-0" onSubmitCapture={formik.handleSubmit}>
+                        <input className="form-control" type="search" placeholder="Find Service" aria-label="Search" name='keyword' onChange={formik.handleChange} />
                         <button className=" my-sm-0 btn-search-home" type="submit">Search</button>
                     </form>
                 </div>

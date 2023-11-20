@@ -18,14 +18,15 @@ import AdminService from "../pages/Admin/AdminService/AdminService";
 import AdminDetailType from "../pages/Admin/AdminDetailType/AdminDetailType";
 import AdminComment from "../pages/Admin/AdminComment/AdminComment";
 import InfoUser from "../pages/InfoUser/InfoUser";
-
+import ResearchJob from "../pages/ResearchJob/ResearchJob"
+import PageNotFound from "../pages/PageNotFound/PageNotFound";
 export default function Router() {
   const { pathname } = useLocation()
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" })
   }, [pathname])
-  
+
   const routing = useRoutes([
     {
       path: "/",
@@ -34,6 +35,10 @@ export default function Router() {
         {
           path: "/",
           element: <Home />,
+        },
+        {
+          path: "/research-job/:keyword",
+          element: <ResearchJob />
         },
         {
           path: "/job-title/:id",
@@ -50,6 +55,10 @@ export default function Router() {
         {
           path: "/home-info-user/:id",
           element: <InfoUser />
+        },
+        {
+          path: "*",
+          element: <PageNotFound />
         }
       ]
     },
