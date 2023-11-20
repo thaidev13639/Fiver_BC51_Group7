@@ -15,7 +15,7 @@ export default function TopLeft(props) {
     const handleChangeFileImg = async (e) => {
         const file = e?.target?.files[0]
 
-        if (file.type === "image/png" || file.type === "image/jpeg" || file.type === "image/gif" || file.type === "image/jpg") {
+        if (file?.type === "image/png" || file?.type === "image/jpeg" || file?.type === "image/gif" || file?.type === "image/jpg") {
             const formData = new FormData()
             formData.append("formFile", file, file.name)
 
