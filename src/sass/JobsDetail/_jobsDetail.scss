@@ -234,6 +234,7 @@
 }
 @media screen and (max-width: 700px) {
   .jobs-detail-body {
+    padding-top: 13%;
     .jobs-detail-container {
       .choice-detail {
         .offtion-detail {
@@ -241,5 +242,10 @@
         }
       }
     }
+  }
+}
+@media screen and (max-width: 700px) {
+  .jobs-detail-body {
+    padding-top: 16%;
   }
 }

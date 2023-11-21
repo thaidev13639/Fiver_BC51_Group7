@@ -451,3 +451,13 @@
     }
   }
 }
+@media screen and (max-width: 800px) {
+  .home-user-info {
+    padding-top: 13%;
+  }
+}
+@media screen and (max-width: 450px) {
+  .home-user-info {
+    padding-top: 16%;
+  }
+}
