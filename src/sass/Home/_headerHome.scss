@@ -6,6 +6,11 @@
     padding: 0.5rem 2.5rem !important ;
     background-color: initial !important;
     border: none;
+    .navbar-toggler {
+      .color-button-toggle {
+        filter: invert(1);
+      }
+    }
     .left-header-home {
       .name-home {
         font-size: 30px;
@@ -13,6 +18,9 @@
         line-height: 1.5;
         position: relative;
         font-family: cursive;
+        .color-name-menu {
+          color: white;
+        }
       }
       .logo-home {
         font-size: 15px;
@@ -69,6 +77,13 @@
         &:hover {
           background-color: #28a745;
           color: white;
+        }
+      }
+      .color-menu {
+        li {
+          a {
+            color: white;
+          }
         }
       }
     }
@@ -154,19 +169,39 @@
       }
     }
   }
+  .toggle-button {
+    @extend .content-nav-home;
+  }
 }
 #root {
   .header-active {
     .navbar-page-home {
       background-color: #f8f9fa !important;
       border-bottom: 1px solid rgb(0 0 0 / 14%);
+      .navbar-toggler {
+        .color-button-toggle {
+          filter: none;
+        }
+      }
       .left-header-home {
+        .name-home {
+          .color-name-menu {
+            color: black;
+          }
+        }
         .form-inline {
           display: flex;
           flex-wrap: nowrap;
         }
       }
       .right-header-home {
+        .color-menu {
+          li {
+            a {
+              color: rgba(0, 0, 0, 0.5);
+            }
+          }
+        }
         .btn-join-home {
           display: block;
         }
@@ -197,14 +232,74 @@
       }
     }
   }
+  .layout-detail {
+    padding-top: 10% !important;
+  }
+  #root {
+    .header-active {
+      .content-nav-home {
+        display: none;
+      }
+    }
+  }
+  .header-container {
+    .toggle-button {
+      display: block;
+      width: 60%;
+      height: 100vh;
+      padding: 1rem 2rem !important;
+      transform: translateX(-120%);
+      transition: all 0.5s ease-in-out;
+      .icon-close-toggle {
+        display: flex;
+        justify-content: end;
+        margin-bottom: 20px;
+        cursor: pointer;
+      }
+      .listContent-nav-home {
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 20px;
+        li {
+          .nav-link {
+            padding: 0;
+          }
+        }
+        .nav-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+          &::after {
+            content: none;
+          }
+        }
+      }
+    }
+  }
+  .header-container {
+    .active-toggle-button {
+      transform: translateX(0%);
+    }
+  }
 }
 @media screen and (max-width: 719px) {
   .content-nav-home {
     display: none;
   }
+  .layout-detail {
+    padding-top: 13% !important;
+  }
   .navbar {
     .right-header-home {
       display: none !important;
+    }
+  }
+  .header-container {
+    .toggle-button {
+      display: block;
+      width: 100%;
     }
   }
 }
@@ -212,9 +307,12 @@
   .navbar-page-home {
     flex-wrap: nowrap !important;
     .left-header-home {
-      button {
+      .form-inline {
         display: none !important;
       }
     }
+  }
+  .layout-detail {
+    padding-top: 18% !important;
   }
 }

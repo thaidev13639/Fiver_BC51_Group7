@@ -520,3 +520,19 @@
     }
   }
 }
+@media screen and (max-width: 900px) {
+  .jobInfo-page {
+    padding-top: 10%;
+    .jobInfo-container {
+      padding: 20px 30px;
+    }
+  }
+}
+@media screen and (max-width: 450px) {
+  .jobInfo-page {
+    padding-top: 13%;
+    .jobInfo-container {
+      padding: 40px 15px;
+    }
+  }
+}
