@@ -91,9 +91,9 @@ export default function Login() {
           </div>
           <p className="text-success ml-3"></p>
           <div className="btn-login">
-            <button className="button1-login btn-login-total">Login</button>
+            <button className="button1-login btn-login-total ">Login</button>
             <button
-              className="button2-login btn-login-total"
+              className="button2-login btn-login-total "
               onClick={() => navigate("/form/register")}>
               Sign Up
             </button>
